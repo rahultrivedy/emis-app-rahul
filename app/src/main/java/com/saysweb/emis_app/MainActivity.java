@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Temporary helper method to display information in the onscreen TextView about the state of
-     * the pets database.
+     * the emis database.
      */
     private void displayDatabaseInfo() {
         // To access our database, we instantiate our subclass of SQLiteOpenHelper
@@ -39,14 +39,14 @@ public class MainActivity extends AppCompatActivity {
         // Create and/or open a database to read from it
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
-        // Perform this raw SQL query "SELECT * FROM pets"
-        // to get a Cursor that contains all rows from the pets table.
+        // Perform this raw SQL query "SELECT * FROM emis"
+        // to get a Cursor that contains all rows from the emis table.
         Cursor cursor = db.rawQuery("SELECT * FROM " + UserEntry.TABLE_NAME, null);
         try {
             // Display the number of rows in the Cursor (which reflects the number of rows in the
-            // pets table in the database).
-            TextView displayView = (TextView) findViewById(R.id.text_view_pet);
-            displayView.setText("Number of rows in SCHL database table: " + cursor.getCount());
+            // emis table in the database).
+            TextView displayView = (TextView) findViewById(R.id.text_view_emis);
+            displayView.setText("Number of rows in EMIS database table: " + cursor.getCount());
         } finally {
             // Always close the cursor when you're done reading from it. This releases all its
             // resources and makes it invalid.
