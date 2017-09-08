@@ -31,7 +31,7 @@ public class emisDBHelper extends SQLiteOpenHelper{
         //Create string that contains the sql statement to create user table
         String SQL_CREATE_USER_TABLE = "CREATE TABLE " + UserEntry.TABLE_NAME + " ("
                 + UserEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + UserEntry.COLUMN_NAME_USER_ID + " INTEGER NOT NULL, "
+                + UserEntry.COLUMN_NAME_USER_ID + " TEXT NOT NULL UNIQUE, "
                 + UserEntry.COLUMN_NAME_USER_NAME + " TEXT NOT NULL, "
                 + UserEntry.COLUMN_NAME_PASSWORD + " TEXT NOT NULL, "
                 + UserEntry.COLUMN_NAME_EMP_CODE + " TEXT, "

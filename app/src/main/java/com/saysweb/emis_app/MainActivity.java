@@ -1,10 +1,12 @@
 package com.saysweb.emis_app;
 
+import android.content.ContentValues;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.saysweb.emis_app.data.emisContract.UserEntry;
@@ -18,12 +20,18 @@ import com.saysweb.emis_app.data.emisDBHelper;
 
 public class MainActivity extends AppCompatActivity {
 
+    private emisDBHelper mDbHelper;
+
     @Override
     //--This is the main activity
+
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mDbHelper = new emisDBHelper(this);
 
+        insertUser();
         displayDatabaseInfo();
     }
 
@@ -34,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private void displayDatabaseInfo() {
         // To access our database, we instantiate our subclass of SQLiteOpenHelper
         // and pass the context, which is the current activity.
-        emisDBHelper mDbHelper = new emisDBHelper(this);
+
 
         // Create and/or open a database to read from it
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
@@ -52,5 +60,32 @@ public class MainActivity extends AppCompatActivity {
             // resources and makes it invalid.
             cursor.close();
         }
+
+
+        // Inserting Dummy data in user table.
+        // Create and/or open a database to write on it
+
+
+    }
+
+    public void insertUser(){
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(UserEntry.COLUMN_NAME_USER_ID, "1");
+        values.put(UserEntry.COLUMN_NAME_USER_NAME, "user1");
+        values.put(UserEntry.COLUMN_NAME_PASSWORD, "password1");
+        values.put(UserEntry.COLUMN_NAME_EMP_CODE, "Emp1");
+        values.put(UserEntry.COLUMN_NAME_EMP_NAME, "Rahul");
+        values.put(UserEntry.COLUMN_NAME_EMAIL, "rahultrivedy@gmail.com");
+        values.put(UserEntry.COLUMN_NAME_MOBILE_NO, "7544960673");
+
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId = db.insert(UserEntry.TABLE_NAME, null, values);
+
+        Log.v("MainActivity","New Row Id " + newRowId);
+
+
     }
 }
