@@ -1,8 +1,10 @@
 package com.saysweb.emis_app.data;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import com.saysweb.emis_app.data.emisContract.UserEntry;
 import com.saysweb.emis_app.data.emisContract.ProvinceEntry;
@@ -14,6 +16,8 @@ import com.saysweb.emis_app.data.emisContract.SchoolEntry;
  * This class extends SQLiteOpenHelper which is used to create database.
  */
 public class emisDBHelper extends SQLiteOpenHelper{
+
+    private emisDBHelper mDbHelper;
 
     /** Name of the database file. */
     private static final String DATABASE_NAME = "emis.db";
@@ -100,6 +104,32 @@ public class emisDBHelper extends SQLiteOpenHelper{
         db.execSQL(SQL_CREATE_SCHOOLS_TABLE);
     }
 
+//    public String searchPass(String uName) {
+//        // Create and/or open a database to read from it
+//        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+//
+//        String[] projection = {UserEntry.COLUMN_NAME_USER_NAME,
+//                UserEntry.COLUMN_NAME_PASSWORD};
+////                String selection = UserEntry.COLUMN_PET_GENDER + “=?”;
+////                String selectionArgs = new String[] { UserEntry.GENDER_FEMALE };
+//
+//        Cursor cursor = db.query(UserEntry.TABLE_NAME, projection,
+//                null, null, null, null, null);
+//
+//        String returnPass = "not found";
+//        if (cursor.moveToFirst()){
+//            do {
+//                String userName = cursor.getString(0);
+//
+//                if (userName.equals(uName)){
+//                    returnPass = cursor.getString(1);
+//                    break;
+//                }
+//
+//            }while (cursor.moveToNext());
+//        }
+//        return (returnPass);
+//    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
