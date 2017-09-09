@@ -22,21 +22,22 @@
         android:text="@string/instn"
         android:textAllCaps="true"
         android:textColor="#ffffff"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
 
-    <AutoCompleteTextView
+    <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/prompt_email" />
+        android:maxLines="1"
+        android:hint="@string/prompt_email"
+        android:layout_marginBottom="16dp"/>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/prompt_password"
-        android:imeActionId="@+id/login"
-        android:imeOptions="actionUnspecified"
         android:inputType="textPassword"
         android:maxLines="1"
         android:layout_marginBottom="16dp"/>
@@ -50,15 +51,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Census Year"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:padding="8dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"/>
+               />
+
             <Spinner
                 android:id="@+id/census_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp">
+                android:layout_gravity="center_vertical"
+               >
 
             </Spinner>
         </LinearLayout>
@@ -66,7 +70,7 @@
         android:id="@+id/button_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:layout_marginTop="24dp"
         android:onClick="onButtonClick"
         android:text="@string/action_sign_in" />
 

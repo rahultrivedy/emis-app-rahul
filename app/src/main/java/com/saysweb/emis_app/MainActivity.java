@@ -1,6 +1,7 @@
 package com.saysweb.emis_app;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -32,9 +33,12 @@ public class MainActivity extends AppCompatActivity {
 
     //use CursorAdapter to add data from DB.
     private emisDBHelper mDbHelper;
+    String censusYear;
 
     @Override
     //--This is the main activity
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i) + " is selected", Toast.LENGTH_LONG).show();
+                censusYear = adapterView.getItemAtPosition(i).toString();
             }
 
             @Override
@@ -86,7 +91,13 @@ public class MainActivity extends AppCompatActivity {
             // Check if password matches the username
 
             if (password.equals(entered_password)) {
-                //            Create Intent Here
+
+                Intent intent = new Intent(MainActivity.this, SchoolSelectActivity.class);
+                intent.putExtra("UserName", userName);
+                intent.putExtra("CensusYear", censusYear);
+                startActivity(intent);
+
+
                 Toast toast_success = Toast.makeText(this, "Move on to Next Page", Toast.LENGTH_SHORT);
                 toast_success.show();
             } else {
