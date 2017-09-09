@@ -38,15 +38,37 @@
         android:imeActionId="@+id/login"
         android:imeOptions="actionUnspecified"
         android:inputType="textPassword"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:layout_marginBottom="16dp"/>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Census Year"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"/>
+            <Spinner
+                android:id="@+id/census_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp">
+
+            </Spinner>
+        </LinearLayout>
     <Button
         android:id="@+id/button_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/action_sign_in"
-        android:onClick="onButtonClick"/>
+
+        android:onClick="onButtonClick"
+        android:text="@string/action_sign_in" />
 
 
     <!--Rahul Branch-->

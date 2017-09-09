@@ -8,7 +8,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,9 +25,12 @@ import com.saysweb.emis_app.data.emisDBHelper;
 
 import static android.R.attr.duration;
 
-
 public class MainActivity extends AppCompatActivity {
 
+    Spinner spinner;
+    ArrayAdapter<CharSequence> adapter;
+
+    //use CursorAdapter to add data from DB.
     private emisDBHelper mDbHelper;
 
     @Override
@@ -32,14 +39,41 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         mDbHelper = new emisDBHelper(this);
+
+    /* Census Spinner Code*/
+
+        spinner = (Spinner) findViewById(R.id.census_year);
+        adapter = ArrayAdapter.createFromResource(this, R.array.census_year, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getBaseContext(), adapterView.getItemAtPosition(i) + " is selected", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    /* Census Spinner Code End */
+
 //        displayDatabaseInfo();
     }
 
+
+    /*
+    * Method invoked when Login button is clicked
+    * take user inputs in a variable and call function to return password for the username - searchPass
+    */
     public void onButtonClick(View v) {
         if (v.getId() == R.id.button_login) {
-
 
             EditText user = (EditText) findViewById(R.id.username);
             String userName = user.getText().toString();
@@ -47,18 +81,22 @@ public class MainActivity extends AppCompatActivity {
             EditText pwd = (EditText) findViewById(R.id.password);
             String password = pwd.getText().toString();
 
-            String entered_password = searchPass(userName);
+            String entered_password = searchPass(userName); // Method call to return password for the username provided
+
+            // Check if password matches the username
 
             if (password.equals(entered_password)) {
                 //            Create Intent Here
                 Toast toast_success = Toast.makeText(this, "Move on to Next Page", Toast.LENGTH_SHORT);
                 toast_success.show();
-            }else{
+            } else {
                 Toast toast_fail = Toast.makeText(this, "User Name and Password do not match", Toast.LENGTH_SHORT);
-                        toast_fail.show();
+                toast_fail.show();
             }
         }
     }
+
+    // Method to Search password for the username provided by user
 
     public String searchPass(String uName) {
         // Create and/or open a database to read from it
@@ -73,16 +111,16 @@ public class MainActivity extends AppCompatActivity {
                 null, null, null, null, null);
 
         String returnPass = "not found";
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 String userName = cursor.getString(0);
 
-                if (userName.equals(uName)){
+                if (userName.equals(uName)) {
                     returnPass = cursor.getString(1);
                     break;
                 }
 
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return (returnPass);
