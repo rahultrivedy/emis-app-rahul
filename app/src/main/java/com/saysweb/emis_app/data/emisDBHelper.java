@@ -16,7 +16,7 @@ import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 public class emisDBHelper extends SQLiteOpenHelper{
 
     /** Name of the database file. */
-    private static final String DATABASE_NAME = "emis.db";
+    private static final String DATABASE_NAME = "emis_suk_db.db";
 
     /** DATABASE Version. Change the version in case you update the schema. */
     private static final int DATABASE_VERSION = 1;

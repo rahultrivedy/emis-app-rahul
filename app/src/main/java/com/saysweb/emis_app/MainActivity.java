@@ -15,12 +15,14 @@ import com.saysweb.emis_app.data.emisContract.DistrictEntry;
 import com.saysweb.emis_app.data.emisContract.LlgvEntry;
 import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 import com.saysweb.emis_app.data.emisDBHelper;
+import com.saysweb.emis_app.data.emisDBEntry;
 
 
 
 public class MainActivity extends AppCompatActivity {
 
     private emisDBHelper mDbHelper;
+    private emisDBEntry mDBEntry;
 
     @Override
     //--This is the main activity
@@ -31,8 +33,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mDbHelper = new emisDBHelper(this);
+        mDBEntry = new emisDBEntry();
 
-        insertUser();
+
+        mDBEntry.insertUser();
         displayDatabaseInfo();
     }
 
@@ -65,27 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Inserting Dummy data in user table.
         // Create and/or open a database to write on it
-
-
-    }
-
-    public void insertUser(){
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
-        // Create a new map of values, where column names are the keys
-        ContentValues values = new ContentValues();
-        values.put(UserEntry.COLUMN_NAME_USER_ID, "1");
-        values.put(UserEntry.COLUMN_NAME_USER_NAME, "user1");
-        values.put(UserEntry.COLUMN_NAME_PASSWORD, "password1");
-        values.put(UserEntry.COLUMN_NAME_EMP_CODE, "Emp1");
-        values.put(UserEntry.COLUMN_NAME_EMP_NAME, "Rahul");
-        values.put(UserEntry.COLUMN_NAME_EMAIL, "rahultrivedy@gmail.com");
-        values.put(UserEntry.COLUMN_NAME_MOBILE_NO, "7544960673");
-
-        // Insert the new row, returning the primary key value of the new row
-        long newRowId = db.insert(UserEntry.TABLE_NAME, null, values);
-
-        Log.v("MainActivity","New Row Id " + newRowId);
 
 
     }
