@@ -4,18 +4,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.annotation.Nullable;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.saysweb.emis_app.data.emisContract.UserEntry;
 import com.saysweb.emis_app.data.emisContract.ProvinceEntry;
 import com.saysweb.emis_app.data.emisContract.DistrictEntry;
 import com.saysweb.emis_app.data.emisContract.LlgvEntry;
 import com.saysweb.emis_app.data.emisContract.SchoolEntry;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static android.os.Build.VERSION_CODES.N;
 
 /**
  * Created by sukant on 05/09/17.
@@ -34,6 +28,7 @@ public class emisDBHelper extends SQLiteOpenHelper{
     /** Setting up the constructor. */
     public emisDBHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
     }
 
     @Override

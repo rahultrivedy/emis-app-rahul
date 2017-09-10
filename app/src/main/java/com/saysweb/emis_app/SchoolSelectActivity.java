@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import com.saysweb.emis_app.data.emisContract.UserEntry;
 import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 import com.saysweb.emis_app.data.emisDBHelper;
+import com.saysweb.emis_app.MainActivity;
 
 import static android.R.id.message;
 import static com.saysweb.emis_app.R.id.school_code;
@@ -40,7 +43,25 @@ public class SchoolSelectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_select);
+
+        /* Actionbar*/
+        /*Set the new toolbar as the Actionbar*/
+        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar2);
+        setSupportActionBar(myToolbar);
+        ActionBar actionBar1 = getSupportActionBar();
+        actionBar1.setCustomView(R.layout.action_bar);
+        actionBar1.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
+                | ActionBar.DISPLAY_SHOW_HOME);
+
+//        actionBar1.setTitle("EMIS");
+//        actionBar1.setSubtitle("Education Management Information System");
+
+
         helper = new emisDBHelper(this);
+
+
+//
+
 
 
         /*GETTING THE INTENT from Main Activity*/
@@ -61,6 +82,8 @@ public class SchoolSelectActivity extends AppCompatActivity {
         userTextView.setText("Welcome " + userName);
 
         // -------------------
+
+
 
 
     /*Implementing AutoComplete through ArrayAdapter*/

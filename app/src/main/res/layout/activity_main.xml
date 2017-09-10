@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
     <!--<TextView-->
@@ -11,19 +11,37 @@
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"-->
     <!--android:padding="100dp"/>-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <TextView
         android:id="@+id/doe_title_view"
+        android:layout_below="@id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FF7F50"
         android:gravity="center"
         android:padding="8dp"
         android:text="@string/instn"
         android:textAllCaps="true"
-        android:textColor="#ffffff"
+        android:textColor="#00838F"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/doe_title_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/logo"
+        />
 
     <EditText
         android:id="@+id/username"
@@ -31,26 +49,39 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:hint="@string/prompt_email"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="72dp"
+        android:layout_below="@id/logo"
         android:layout_marginBottom="16dp"/>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:hint="@string/prompt_password"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/username"
         android:inputType="textPassword"
-        android:maxLines="1"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="72dp"
+        android:maxLines="1" />
 
-        <LinearLayout
+    <LinearLayout
+            android:id="@+id/census"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/password"
+            android:layout_centerHorizontal="true"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Census Year"
+                android:textSize="16sp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_horizontal"
                 android:padding="8dp"
@@ -65,15 +96,19 @@
                />
 
         </LinearLayout>
+
     <Button
         android:id="@+id/button_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:onClick="onButtonClick"
-        android:text="@string/action_sign_in" />
+        android:text="@string/action_sign_in"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="72dp"
+        android:layout_below="@id/census"/>
 
 
     <!--Rahul Branch-->
 
-</LinearLayout>
+</RelativeLayout>
