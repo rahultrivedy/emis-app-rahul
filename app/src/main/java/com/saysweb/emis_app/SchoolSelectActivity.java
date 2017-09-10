@@ -35,17 +35,8 @@ public class SchoolSelectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_select);
-        helper = new emisDBHelper(this);
-        schoolCodes = valueOfCursor();
 
-        TextView textView2 = (TextView) findViewById(R.id.sample_text);
-        textView2.setText("school code " + schoolCodes[1]);
-
-        textView = (AutoCompleteTextView) findViewById(school_code);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, schoolCodes);
-        textView.setThreshold(2);
-        textView.setAdapter(adapter);
-
+        /*GETTING THE INTENT from Main Activity*/
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
@@ -59,31 +50,46 @@ public class SchoolSelectActivity extends AppCompatActivity {
         // Capture the layout's TextView and set the string as its text
         TextView userTextView = (TextView) findViewById(R.id.user_id);
         userTextView.setText(message);
+
+        // -------------------
+
+        /*Implementing AutoComplete through ArrayAdapter*/
+
+        helper = new emisDBHelper(this);
+        schoolCodes = helper.valueOfCursor();
+
+        textView = (AutoCompleteTextView) findViewById(school_code);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, schoolCodes);
+        textView.setThreshold(2);
+        textView.setAdapter(adapter);
+
+
+
     }
 
-    public String[] valueOfCursor(){
-
-        SQLiteDatabase db = helper.getReadableDatabase();
-
-        String[] projection = {SchoolEntry.COLUMN_NAME_SCHOOL_CODE,
-                SchoolEntry.COLUMN_NAME_SCHOOL_NAME};
-//                String selection = UserEntry.COLUMN_PET_GENDER + “=?”;
-//                String selectionArgs = new String[] { UserEntry.GENDER_FEMALE };
-
-//      Cursor with all the rows from Columns - School Code and School Name
-        Cursor cursor = db.query(SchoolEntry.TABLE_NAME, projection,
-                null, null, null, null, null);
-
-        int i = 0;
-        if (cursor.moveToFirst()) {
-            do {
-                schoolCodes[i] = cursor.getString(0);
-                i++;
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-
-        return schoolCodes;
-    }
+//    public String[] valueOfCursor(){
+//
+//        SQLiteDatabase db = helper.getReadableDatabase();
+//
+//        String[] projection = {SchoolEntry.COLUMN_NAME_SCHOOL_CODE,
+//                SchoolEntry.COLUMN_NAME_SCHOOL_NAME};
+////                String selection = UserEntry.COLUMN_PET_GENDER + “=?”;
+////                String selectionArgs = new String[] { UserEntry.GENDER_FEMALE };
+//
+////      Cursor with all the rows from Columns - School Code and School Name
+//        Cursor cursor = db.query(SchoolEntry.TABLE_NAME, projection,
+//                null, null, null, null, null);
+//
+//        int i = 0;
+//        if (cursor.moveToFirst()) {
+//            do {
+//                schoolCodes[i] = cursor.getString(0);
+//                i++;
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//
+//        return schoolCodes;
+//    }
 
 }
