@@ -67,29 +67,4 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
     }
 
-//    public String[] valueOfCursor(){
-//
-//        SQLiteDatabase db = helper.getReadableDatabase();
-//
-//        String[] projection = {SchoolEntry.COLUMN_NAME_SCHOOL_CODE,
-//                SchoolEntry.COLUMN_NAME_SCHOOL_NAME};
-////                String selection = UserEntry.COLUMN_PET_GENDER + “=?”;
-////                String selectionArgs = new String[] { UserEntry.GENDER_FEMALE };
-//
-////      Cursor with all the rows from Columns - School Code and School Name
-//        Cursor cursor = db.query(SchoolEntry.TABLE_NAME, projection,
-//                null, null, null, null, null);
-//
-//        int i = 0;
-//        if (cursor.moveToFirst()) {
-//            do {
-//                schoolCodes[i] = cursor.getString(0);
-//                i++;
-//            } while (cursor.moveToNext());
-//        }
-//        cursor.close();
-//
-//        return schoolCodes;
-//    }
-
 }
