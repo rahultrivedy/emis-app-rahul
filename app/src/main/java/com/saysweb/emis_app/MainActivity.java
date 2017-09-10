@@ -50,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
     /* Census Spinner Code*/
 
-        spinner = (Spinner) findViewById(R.id.census_year);
+        spinner = (Spinner)findViewById(R.id.census_year);
+
         adapter = ArrayAdapter.createFromResource(this, R.array.census_year, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
