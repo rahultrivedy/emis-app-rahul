@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             EditText pwd = (EditText) findViewById(R.id.password);
             String password = pwd.getText().toString();
 
-            String entered_password = searchPass(userName); // Method call to return password for the username provided
+            String entered_password = mDbHelper.searchPass(userName); // Method call to return password for the username provided
 
             // Check if password matches the username
 
@@ -97,9 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("CensusYear", censusYear);
                 startActivity(intent);
 
-
-                Toast toast_success = Toast.makeText(this, "Move on to Next Page", Toast.LENGTH_SHORT);
-                toast_success.show();
             } else {
                 Toast toast_fail = Toast.makeText(this, "User Name and Password do not match", Toast.LENGTH_SHORT);
                 toast_fail.show();
@@ -107,35 +104,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Method to Search password for the username provided by user
 
-    public String searchPass(String uName) {
-        // Create and/or open a database to read from it
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-
-        String[] projection = {UserEntry.COLUMN_NAME_USER_NAME,
-                UserEntry.COLUMN_NAME_PASSWORD};
-//                String selection = UserEntry.COLUMN_PET_GENDER + “=?”;
-//                String selectionArgs = new String[] { UserEntry.GENDER_FEMALE };
-
-        Cursor cursor = db.query(UserEntry.TABLE_NAME, projection,
-                null, null, null, null, null);
-
-        String returnPass = "not found";
-        if (cursor.moveToFirst()) {
-            do {
-                String userName = cursor.getString(0);
-
-                if (userName.equals(uName)) {
-                    returnPass = cursor.getString(1);
-                    break;
-                }
-
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return (returnPass);
-    }
 
 
 //    /**

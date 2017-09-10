@@ -17,7 +17,7 @@ import com.saysweb.emis_app.data.emisContract.SchoolEntry;
  */
 public class emisDBHelper extends SQLiteOpenHelper{
 
-    private emisDBHelper mDbHelper;
+//    private emisDBHelper mDbHelper;
 
     /** Name of the database file. */
     private static final String DATABASE_NAME = "emis.db";
@@ -104,32 +104,33 @@ public class emisDBHelper extends SQLiteOpenHelper{
         db.execSQL(SQL_CREATE_SCHOOLS_TABLE);
     }
 
-//    public String searchPass(String uName) {
-//        // Create and/or open a database to read from it
-//        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-//
-//        String[] projection = {UserEntry.COLUMN_NAME_USER_NAME,
-//                UserEntry.COLUMN_NAME_PASSWORD};
-////                String selection = UserEntry.COLUMN_PET_GENDER + “=?”;
-////                String selectionArgs = new String[] { UserEntry.GENDER_FEMALE };
-//
-//        Cursor cursor = db.query(UserEntry.TABLE_NAME, projection,
-//                null, null, null, null, null);
-//
-//        String returnPass = "not found";
-//        if (cursor.moveToFirst()){
-//            do {
-//                String userName = cursor.getString(0);
-//
-//                if (userName.equals(uName)){
-//                    returnPass = cursor.getString(1);
-//                    break;
-//                }
-//
-//            }while (cursor.moveToNext());
-//        }
-//        return (returnPass);
-//    }
+    public String searchPass(String uName) {
+        // Create and/or open a database to read from it
+        SQLiteDatabase db = getReadableDatabase();
+
+        String[] projection = {UserEntry.COLUMN_NAME_USER_NAME,
+                UserEntry.COLUMN_NAME_PASSWORD};
+//                String selection = UserEntry.COLUMN_PET_GENDER + “=?”;
+//                String selectionArgs = new String[] { UserEntry.GENDER_FEMALE };
+
+        Cursor cursor = db.query(UserEntry.TABLE_NAME, projection,
+                null, null, null, null, null);
+
+        String returnPass = "not found";
+        if (cursor.moveToFirst()){
+            do {
+                String userName = cursor.getString(0);
+
+                if (userName.equals(uName)){
+                    returnPass = cursor.getString(1);
+                    break;
+                }
+
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return (returnPass);
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

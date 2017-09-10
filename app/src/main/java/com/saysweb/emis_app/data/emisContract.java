@@ -9,6 +9,7 @@ import android.provider.BaseColumns;
 
 public final class emisContract {
     /* Inner class that defines the table contents */
+
     public static abstract class UserEntry implements BaseColumns {
         public static final String TABLE_NAME = "USER_TABLE";
         public static final String COLUMN_NAME_USER_ID = "USER_ID";
