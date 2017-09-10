@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.saysweb.emis_app.data.emisContract.UserEntry;
@@ -13,6 +14,7 @@ import com.saysweb.emis_app.data.emisContract.DistrictEntry;
 import com.saysweb.emis_app.data.emisContract.LlgvEntry;
 import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static android.os.Build.VERSION_CODES.N;
 
 /**
@@ -141,12 +143,35 @@ public class emisDBHelper extends SQLiteOpenHelper{
     }
 
     /*
+     * METHOD Call from SchoolSelectActivity for getting the UserName
+     * */
+
+    public String getUserName(String uid){
+        SQLiteDatabase db1 = getReadableDatabase();
+        String user = "Not Found";
+        String[] projection = {UserEntry.COLUMN_NAME_EMP_NAME};
+        String selection = UserEntry.COLUMN_NAME_USER_NAME + " = ?";
+        String[] selectionArgs = { uid };
+
+        Cursor cursor = db1.query(UserEntry.TABLE_NAME, projection,
+                selection, selectionArgs, null, null, null);
+
+        while(cursor.moveToNext()) {
+            user = cursor.getString(0);
+        }
+
+        cursor.close();
+        return (user);
+    }
+
+
+    /*
      * METHOD Call from SchoolSelectActivity for getting school codes in autoComplete
      * */
 
     public String[] valueOfCursor(){
 
-        SQLiteDatabase db1 = getReadableDatabase();
+        SQLiteDatabase db2 = getReadableDatabase();
 
         String[] projection = {SchoolEntry.COLUMN_NAME_SCHOOL_CODE,
                 SchoolEntry.COLUMN_NAME_SCHOOL_NAME};
@@ -154,14 +179,14 @@ public class emisDBHelper extends SQLiteOpenHelper{
 //                String selectionArgs = new String[] { UserEntry.GENDER_FEMALE };
 
 //      Cursor with all the rows from Columns - School Code and School Name
-        Cursor cursor = db1.query(SchoolEntry.TABLE_NAME, projection,
+        Cursor cursor = db2.query(SchoolEntry.TABLE_NAME, projection,
                 null, null, null, null, null);
 
         String[] school_codes = new String[] {"a", "b","c","d"};
         int i = 0;
         if (cursor.moveToFirst()) {
             do {
-                school_codes[i] = cursor.getString(0);
+                school_codes[i] = cursor.getString(0) + "(" + cursor.getString(1) + ")";
                 i++;
             } while (cursor.moveToNext());
         }
