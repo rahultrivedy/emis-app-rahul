@@ -36,9 +36,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="right"
-            android:gravity="right"
+            android:layout_gravity="end"
+            android:gravity="end"
             android:text="Census Year"
+            android:shadowColor="#ff6cc450"
+            android:shadowRadius="5"
+            android:shadowDy="-5"
             android:textSize="24sp"
             android:padding="8dp"/>
 
@@ -59,7 +62,7 @@
             android:textStyle="bold" />
 
 
-        <AutoCompleteTextView
+        <MultiAutoCompleteTextView
             android:id="@+id/school_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,6 +90,7 @@
         android:layout_marginRight="32dp"
         android:layout_marginTop="64dp"
         android:text="ENROLLMENT BY GRADE"
+        android:backgroundTint="?attr/colorPrimary"
         android:onClick="onFormSelect"
         android:visibility="gone"
         />
@@ -99,6 +103,7 @@
         android:layout_marginRight="32dp"
         android:layout_marginTop="16dp"
         android:text="GRADE CLASS COUNT"
+        android:backgroundTint="?attr/colorPrimary"
         android:onClick="onFormSelect"
         android:visibility="gone"
 
@@ -112,6 +117,7 @@
         android:layout_marginRight="32dp"
         android:layout_marginTop="16dp"
         android:text="Boarding Enrollment"
+        android:backgroundTint="?attr/colorPrimary"
         android:onClick="onFormSelect"
         android:visibility="gone"
         />

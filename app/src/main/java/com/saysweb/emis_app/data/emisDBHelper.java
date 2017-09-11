@@ -181,7 +181,7 @@ public class emisDBHelper extends SQLiteOpenHelper{
         int i = 0;
         if (cursor.moveToFirst()) {
             do {
-                school_codes[i] = cursor.getString(0) + "(" + cursor.getString(1) + ")";
+                school_codes[i] = cursor.getString(1) + "," + " " + cursor.getString(0);
                 i++;
             } while (cursor.moveToNext());
         }

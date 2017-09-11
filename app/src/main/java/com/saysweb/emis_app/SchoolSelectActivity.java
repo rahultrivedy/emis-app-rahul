@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +32,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
     String[] schoolCodes = new String[] {"a", "b","c","d"};
 
-    AutoCompleteTextView textView;
+    MultiAutoCompleteTextView textView;
 
     /* Code for Auto Complete - END*/
 
@@ -61,9 +62,6 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
 
 //
-
-
-
         /*GETTING THE INTENT from Main Activity*/
 
         // Get the Intent that started this activity and extract the string
@@ -71,7 +69,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
         String userId = intent.getStringExtra("UserName");
         String year = intent.getStringExtra("CensusYear");
 
-        String userName = helper.getUserName(userId);
+        String userName = helper.getUserName(userId); // Goes to emisDBHelper.java
 
         // Capture the layout's TextView and set the string as its text
         TextView censusTextView = (TextView) findViewById(R.id.census_year);
@@ -89,12 +87,13 @@ public class SchoolSelectActivity extends AppCompatActivity {
     /*Implementing AutoComplete through ArrayAdapter*/
 
 
-        schoolCodes = helper.valueOfCursor();
+        schoolCodes = helper.valueOfCursor(); //Getting school codes in array. Goes to emisDBHelper.java
 
-        textView = (AutoCompleteTextView) findViewById(school_code);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, schoolCodes);
+        textView = (MultiAutoCompleteTextView) findViewById(school_code);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, schoolCodes);
         textView.setThreshold(2);
         textView.setAdapter(adapter);
+        textView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
     }
 

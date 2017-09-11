@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             EditText pwd = (EditText) findViewById(R.id.password);
             String password = pwd.getText().toString();
 
-            String entered_password = mDbHelper.searchPass(userName); // Method call to return password for the username provided
+            String entered_password = mDbHelper.searchPass(userName); // Method call to return password for the username provided -Goes to emisDBHelper.java
 
             // Check if password matches the username
 
