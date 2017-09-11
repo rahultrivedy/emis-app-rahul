@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("UserName", userName);
                 intent.putExtra("CensusYear", censusYear);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
             } else {
                 Toast toast_fail = Toast.makeText(this, "User Name and Password do not match", Toast.LENGTH_SHORT);

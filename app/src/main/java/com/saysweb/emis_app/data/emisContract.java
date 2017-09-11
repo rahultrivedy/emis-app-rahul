@@ -71,4 +71,44 @@ public final class emisContract {
         public static final String COLUMN_NAME_POSITION_EAST_LONG = "POSITION_EAST_LONG";
         public static final String COLUMN_NAME_CENSUS_YEAR = "CENSUS_YEAR";
     }
+
+
+    public static abstract class EnrollmentByGradesEntry implements BaseColumns {
+        public static final String TABLE_NAME = "ENROLLMENT_BY_GRADE";
+        public static final String COLUMN_NAME_GRADE_ID = "GRADE_ID";
+        public static final String COLUMN_NAME_GRADE_CODE = "GRADE_CODE";
+        public static final String COLUMN_NAME_CENSUS_YEAR = "CENSUS_YEAR";
+        public static final String COLUMN_NAME_BIRTH_YEAR = "BIRTH_YEAR";
+        public static final String COLUMN_NAME_AGE = "AGE";
+        public static final String COLUMN_NAME_MALE_COUNT = "MALE_COUNT";
+        public static final String COLUMN_NAME_FEMALE_COUNT = "FEMALE_COUNT";
+        public static final String COLUMN_NAME_SCHL_ID = "SCHL_ID";
+    }
+
+    public static abstract class GradeClassCountEntry implements BaseColumns {
+        public static final String TABLE_NAME = "GRADE_CLASS_COUNT";
+        public static final String COLUMN_NAME_GCC_ID = "GCC ID";
+        public static final String COLUMN_NAME_CENSUS_YEAR = "CENSUS_YEAR";
+        public static final String COLUMN_NAME_GRADE_CODE = "GRADE_CODE";
+        public static final String COLUMN_NAME_CLASS_COUNT = "CLASS_COUNT";
+        public static final String COLUMN_NAME_SCHL_ID = "SCHL_ID";
+        public static final String COLUMN_NAME_STUDENT_MALE_COUNT = "STUDENT_MALE_COUNT";
+        public static final String COLUMN_NAME_STUDENT_FEMALE_COUNT = "STUDENT_FEMALE_COUNT";
+        public static final String COLUMN_NAME_TEACHER_MALE_COUNT = "TEACHER_MALE_COUNT";
+        public static final String COLUMN_NAME_TEACHER_FEMALE_COUNT = "TEACHER_FEMALE_COUNT";
+        public static final String COLUMN_NAME_QTR = "QTR";
+    }
+
+
+    public static abstract class EnrollmentByBoardingEntry implements BaseColumns {
+        public static final String TABLE_NAME = "ENROLLMENT_BY_BOARDING";
+        public static final String COLUMN_NAME_ENROLLMENT_BOARDING_ID = "ENROLLMENT_BOARDING_ID";
+        public static final String COLUMN_NAME_GRADE_CODE = "GRADE_CODE";
+        public static final String COLUMN_NAME_CENSUS_YEAR = "CENSUS_YEAR";
+        public static final String COLUMN_NAME_MALE_BOARDING_COUNT = "MALE_BOARDING_COUNT";
+        public static final String COLUMN_NAME_MALE_DAY_COUNT = "MALE_DAY_COUNT";
+        public static final String COLUMN_NAME_FEMALE_BOARDING_COUNT = "FEMALE_BOARDING_COUNT";
+        public static final String COLUMN_NAME_FEMALE_DAY_COUNT = "FEMALE_DAY_COUNT";
+        public static final String COLUMN_NAME_SCHL_ID = "SCHL_ID";
+    }
 }

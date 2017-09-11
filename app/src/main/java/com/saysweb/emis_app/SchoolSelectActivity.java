@@ -79,6 +79,8 @@ public class SchoolSelectActivity extends AppCompatActivity {
         TextView userTextView = (TextView) findViewById(R.id.user_id);
         userTextView.setText("Welcome " + userName);
 
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
         // -------------------
 
 

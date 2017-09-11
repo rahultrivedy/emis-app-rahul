@@ -10,6 +10,7 @@ public class EnrollmentByGrade extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enrollment_by_grade);
+        overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
 
 
         /*Getting Intent from School Select Activity*/

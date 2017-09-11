@@ -10,6 +10,7 @@ public class BoardingEnrollment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boarding_enrollment);
+        overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
 
 
         /*Getting Intent from School Select Activity*/

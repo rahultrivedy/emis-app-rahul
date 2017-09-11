@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.saysweb.emis_app">
 
     <application
@@ -20,28 +21,32 @@
         </activity>
         <activity
             android:name=".SchoolSelectActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".EnrollmentByGrade"
-            android:parentActivityName=".SchoolSelectActivity">
+            android:parentActivityName=".SchoolSelectActivity"
+            tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SchoolSelectActivity" />
         </activity>
         <activity
             android:name=".GradeClassCount"
-            android:parentActivityName=".SchoolSelectActivity">
+            android:parentActivityName=".SchoolSelectActivity"
+            tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SchoolSelectActivity" />
         </activity>
         <activity
             android:name=".BoardingEnrollment"
-            android:parentActivityName=".SchoolSelectActivity">
+            android:parentActivityName=".SchoolSelectActivity"
+            tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SchoolSelectActivity" />
