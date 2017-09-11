@@ -20,7 +20,7 @@ public class emisDBHelper extends SQLiteOpenHelper{
 //    private emisDBHelper mDbHelper;
 
     /** Name of the database file. */
-    private static final String DATABASE_NAME = "emis_suk_db.db";
+    private static final String DATABASE_NAME = "emis_db.db";
 
     /** DATABASE Version. Change the version in case you update the schema. */
     private static final int DATABASE_VERSION = 1;
@@ -94,12 +94,12 @@ public class emisDBHelper extends SQLiteOpenHelper{
                 + SchoolEntry.COLUMN_NAME_EMAIL + " TEXT, "
                 + SchoolEntry.COLUMN_NAME_SECTOR_CODE + " TEXT, "
                 + SchoolEntry.COLUMN_NAME_WARD_CODE + " TEXT, "
-                + SchoolEntry.COLUMN_NAME_LLGV_CODE + " TEXT);"
-                + SchoolEntry.COLUMN_NAME_DISTRICT_CODE + " TEXT);"
-                + SchoolEntry.COLUMN_NAME_PROVINCE_CODE + " TEXT);"
-                + SchoolEntry.COLUMN_NAME_SCHOOL_REGISTERED + " TEXT);"
-                + SchoolEntry.COLUMN_NAME_POSITION_NORTH_LAT + " TEXT);"
-                + SchoolEntry.COLUMN_NAME_POSITION_EAST_LONG + " TEXT);"
+                + SchoolEntry.COLUMN_NAME_LLGV_CODE + " TEXT,"
+                + SchoolEntry.COLUMN_NAME_DISTRICT_CODE + " TEXT,"
+                + SchoolEntry.COLUMN_NAME_PROVINCE_CODE + " TEXT,"
+                + SchoolEntry.COLUMN_NAME_SCHOOL_REGISTERED + " TEXT,"
+                + SchoolEntry.COLUMN_NAME_POSITION_NORTH_LAT + " TEXT,"
+                + SchoolEntry.COLUMN_NAME_POSITION_EAST_LONG + " TEXT,"
                 + SchoolEntry.COLUMN_NAME_CENSUS_YEAR + " TEXT);";
 
         db.execSQL(SQL_CREATE_SCHOOLS_TABLE);
