@@ -30,7 +30,6 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
     /* Code for Auto Complete - Start*/
 
-    String[] schoolCodes = new String[] {"a", "b","c","d"};
 
     MultiAutoCompleteTextView textView;
 
@@ -38,7 +37,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
 
     private emisDBHelper helper;
-    private emisDBHelper helper2;
+//    private emisDBHelper helper2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +88,9 @@ public class SchoolSelectActivity extends AppCompatActivity {
     /*Implementing AutoComplete through ArrayAdapter*/
 
 
-        schoolCodes = helper.valueOfCursor(); //Getting school codes in array. Goes to emisDBHelper.java
+        String[] schoolCodes;
 
+        schoolCodes = helper.valueOfCursor(); //Getting school codes in array. Goes to emisDBHelper.java
         textView = (MultiAutoCompleteTextView) findViewById(school_code);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, schoolCodes);
         textView.setThreshold(2);

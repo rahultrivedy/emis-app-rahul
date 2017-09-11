@@ -224,44 +224,28 @@ public class emisDBHelper extends SQLiteOpenHelper {
         // INSERT DATA INTO SCHOOLS
 
         int i3;
-        int Low = 1;
-        int High = 15;
-        final String[] census_yr = {"2015", "2016", "2017"};
-        final String[] boarding_status = {"Yes", "No"};
-
-        for(i3 = 1; i3 <= 15; i++){
+//
+        for(i3 = 1; i3 <= 15; i3++){
             ContentValues values = new ContentValues();
             values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, i3);
-//            Random prov = new Random();
-//            int provResult = prov.nextInt(High-Low) + Low;
+            values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, "code" + i3);
+            values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "School - " + i3);
+            values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address - " + i3);
+            values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
+            values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
+            values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "Dis-code" + i3);
+            values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "Prov-code" + i3);
+            values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, "llgv-code" + i3);
+            values.put(SchoolEntry.COLUMN_NAME_EMAIL, "school." + i3 + "@emis.com");
+            values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454" + i3);
+            values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality" + i3);
+            values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509"+i3);
+            values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "sector-code" + i3);
+            values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code" + i3);
 
-//            Random dist = new Random();
-//            int distResult = dist.nextInt(High-Low) + Low;
-//            values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, "" + provResult +  distResult + i3);
-//            values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "School - " + i3);
-//            values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address - " + provResult +  distResult + i3);
+//             Insert the new row, returning the primary key value of the new row
+           long newRowId = db.insert(SchoolEntry.TABLE_NAME, null, values);
 //
-//
-//            Random random = new Random();
-//            int index = random.nextInt(boarding_status.length);
-//            values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, boarding_status[index]);
-////
-//            Random censusRandom = new Random();
-//            int censusIndex = censusRandom.nextInt(census_yr.length);
-//            values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, census_yr[censusIndex]);
-//            values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, distResult);
-//            values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, provResult);
-//            values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, distResult);
-//            values.put(SchoolEntry.COLUMN_NAME_EMAIL, "school." + i3 + "@emis.com");
-//            values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454" + i3);
-//            values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality" + i3);
-//            values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-725097" + distResult);
-//            values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, distResult);
-//            values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, provResult);;
-
-            // Insert the new row, returning the primary key value of the new row
-           db.insert(SchoolEntry.TABLE_NAME, null, values);
-
         }
     }
 
@@ -338,13 +322,12 @@ public class emisDBHelper extends SQLiteOpenHelper {
         Cursor cursor = db2.query(SchoolEntry.TABLE_NAME, projection,
                 null, null, null, null, null);
 
-        String[] school_codes = new String[] {"a", "b","c","d"};
-        int i = 0;
-        if (cursor.moveToFirst()) {
-            do {
-                school_codes[i] = cursor.getString(1) + "," + " " + cursor.getString(0);
-                i++;
-            } while (cursor.moveToNext());
+        String[] school_codes = new String[cursor.getCount()];
+
+        int i4 = 0;
+        while (cursor.moveToNext()) {
+            school_codes[i4] = cursor.getString(1) + " , " + cursor.getString(0);
+            i4++;
         }
         cursor.close();
         return school_codes;
