@@ -1,8 +1,13 @@
 <resources>
-    <string name="app_name">EMIS - Education Management Information System</string>
+    <string name="app_name">EMIS</string>
     <string name="prompt_email">Username</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Log In</string>
+    <string name="action_sign_in">Sign In</string>
     <string name="instn">DEPARTMENT OF EDUCATION, PAPUA NEW GUINEA</string>
+    <string-array name="census_year">
+        <item>2015</item>
+        <item>2016</item>
+        <item>2017</item>
+    </string-array>
 </resources>
 

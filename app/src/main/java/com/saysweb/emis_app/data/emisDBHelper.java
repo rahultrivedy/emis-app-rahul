@@ -1,6 +1,7 @@
 package com.saysweb.emis_app.data;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -9,11 +10,14 @@ import com.saysweb.emis_app.data.emisContract.ProvinceEntry;
 import com.saysweb.emis_app.data.emisContract.DistrictEntry;
 import com.saysweb.emis_app.data.emisContract.LlgvEntry;
 import com.saysweb.emis_app.data.emisContract.SchoolEntry;
+
 /**
  * Created by sukant on 05/09/17.
  * This class extends SQLiteOpenHelper which is used to create database.
  */
 public class emisDBHelper extends SQLiteOpenHelper{
+
+//    private emisDBHelper mDbHelper;
 
     /** Name of the database file. */
     private static final String DATABASE_NAME = "emis_suk_db.db";
@@ -24,6 +28,7 @@ public class emisDBHelper extends SQLiteOpenHelper{
     /** Setting up the constructor. */
     public emisDBHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
     }
 
     @Override
@@ -100,7 +105,92 @@ public class emisDBHelper extends SQLiteOpenHelper{
         db.execSQL(SQL_CREATE_SCHOOLS_TABLE);
     }
 
+     /*
+     * METHOD Call from MainActivity for returning password for Login check
+     * */
 
+    public String searchPass(String uName) {
+        // Create and/or open a database to read from it
+        SQLiteDatabase db = getReadableDatabase();
+
+        String[] projection = {UserEntry.COLUMN_NAME_USER_NAME,
+                UserEntry.COLUMN_NAME_PASSWORD};
+//                String selection = UserEntry.COLUMN_PET_GENDER + “=?”;
+//                String selectionArgs = new String[] { UserEntry.GENDER_FEMALE };
+
+        Cursor cursor = db.query(UserEntry.TABLE_NAME, projection,
+                null, null, null, null, null);
+
+        String returnPass = "not found";
+        if (cursor.moveToFirst()){
+            do {
+                String userName = cursor.getString(0);
+
+                if (userName.equals(uName)){
+                    returnPass = cursor.getString(1);
+                    break;
+                }
+
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return (returnPass);
+    }
+
+    /*
+     * METHOD Call from SchoolSelectActivity for getting the UserName
+     * */
+
+    public String getUserName(String uid){
+        SQLiteDatabase db1 = getReadableDatabase();
+        String user = "Not Found";
+        String[] projection = {UserEntry.COLUMN_NAME_EMP_NAME};
+        String selection = UserEntry.COLUMN_NAME_USER_NAME + " = ?";
+        String[] selectionArgs = { uid };
+
+        Cursor cursor = db1.query(UserEntry.TABLE_NAME, projection,
+                selection, selectionArgs, null, null, null);
+
+        while(cursor.moveToNext()) {
+            user = cursor.getString(0);
+        }
+
+        cursor.close();
+        return (user);
+    }
+
+
+    /*
+     * METHOD Call from SchoolSelectActivity for getting school codes in autoComplete
+     * */
+
+    public String[] valueOfCursor(){
+
+        SQLiteDatabase db2 = getReadableDatabase();
+
+        String[] projection = {SchoolEntry.COLUMN_NAME_SCHOOL_CODE,
+                SchoolEntry.COLUMN_NAME_SCHOOL_NAME};
+//                String selection = UserEntry.COLUMN_PET_GENDER + “=?”;
+//                String selectionArgs = new String[] { UserEntry.GENDER_FEMALE };
+
+//      Cursor with all the rows from Columns - School Code and School Name
+        Cursor cursor = db2.query(SchoolEntry.TABLE_NAME, projection,
+                null, null, null, null, null);
+
+        String[] school_codes = new String[] {"a", "b","c","d"};
+        int i = 0;
+        if (cursor.moveToFirst()) {
+            do {
+                school_codes[i] = cursor.getString(1) + "," + " " + cursor.getString(0);
+                i++;
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return school_codes;
+    }
+
+
+/* DATABASE VERSION UPGRADE*/
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
