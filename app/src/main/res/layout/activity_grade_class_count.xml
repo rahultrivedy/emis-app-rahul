@@ -4,16 +4,326 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.saysweb.emis_app.GradeClassCount">
 
-    <TextView
+
+    <Button
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="GRADE CLASS COUNT"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:text="EDIT"
+        android:textColor="#fff"
+        android:layout_gravity="right"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:id="@+id/edit_button"
+        android:onClick="onEditGcc"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Grade"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textColor="#2c3e50"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            />
+
+
+        <Spinner
+            android:id="@+id/grade_gcc"
+            android:layout_width="0dp"
+            android:textSize="18sp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back"
+            android:layout_weight="1"
+            android:padding="10dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="No. of Classes"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textColor="#2c3e50"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            />
+
+        <EditText
+            android:id="@+id/no_of_classes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:background="@drawable/back"
+            android:layout_marginLeft="20dp"
+            android:padding="10dp"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:textSize="36sp"
-        />
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Male Students"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textColor="#2c3e50"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            />
+
+        <EditText
+            android:id="@+id/male_students"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:background="@drawable/back"
+            android:layout_marginLeft="20dp"
+            android:padding="10dp"
+
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Female Students"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#2c3e50"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            />
+
+        <EditText
+            android:id="@+id/female_students"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:background="@drawable/back"
+            android:layout_marginLeft="20dp"
+            android:padding="10dp"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Total Students"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textColor="#2c3e50"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            />
+
+        <TextView
+            android:id="@+id/student_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="0"
+            android:textColor="#03A9F4"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Male Teachers"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textColor="#2c3e50"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            />
+
+        <EditText
+            android:id="@+id/male_teachers"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:background="@drawable/back"
+            android:layout_marginLeft="20dp"
+            android:padding="10dp"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Female Teachers"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textColor="#2c3e50"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            />
+
+        <EditText
+            android:id="@+id/female_teachers"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:background="@drawable/back"
+            android:layout_marginLeft="20dp"
+            android:padding="10dp"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Total Teachers"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textColor="#2c3e50"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            />
+
+        <TextView
+            android:id="@+id/teacher_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="0"
+            android:textColor="#03A9F4"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        android:backgroundTint="#66BB6A"
+        android:textColor="#fff"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:id="@+id/save_entry"
+        android:onClick="onSaveEbg"/>
+
+
 
 
 </LinearLayout>

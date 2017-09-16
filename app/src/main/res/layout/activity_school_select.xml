@@ -51,12 +51,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="36dp">
+        android:layout_marginTop="80dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="School Code"
+            android:textSize="20sp"
             android:textAllCaps="true"
             android:layout_marginLeft="24dp"
             android:textStyle="bold" />
@@ -66,8 +67,9 @@
             android:id="@+id/school_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             />
 
     </LinearLayout>
@@ -76,7 +78,7 @@
         android:id="@+id/school_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="54dp"
         android:onClick="onSchoolSelect"
         android:text="SELECT"
         android:layout_gravity="center"/>
@@ -86,11 +88,11 @@
         android:id="@+id/enrollment_by_grade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
         android:layout_marginTop="64dp"
         android:text="ENROLLMENT BY GRADE"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="@color/cardview_shadow_start_color"
         android:onClick="onFormSelect"
         android:visibility="gone"
         />
@@ -99,11 +101,11 @@
         android:id="@+id/grade_class_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
         android:layout_marginTop="16dp"
         android:text="GRADE CLASS COUNT"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="@color/cardview_shadow_start_color"
         android:onClick="onFormSelect"
         android:visibility="gone"
 
@@ -113,14 +115,15 @@
         android:id="@+id/boarding_enrollment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
         android:layout_marginTop="16dp"
         android:text="Boarding Enrollment"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="@color/cardview_shadow_start_color"
         android:onClick="onFormSelect"
         android:visibility="gone"
         />
+
 
 
 </LinearLayout>

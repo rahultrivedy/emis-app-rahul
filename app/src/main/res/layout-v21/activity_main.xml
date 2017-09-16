@@ -1,75 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <!--<TextView-->
-    <!--android:id="@+id/text_view_emis"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:padding="100dp"/>-->
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        android:layout_height="match_parent"
+        >
 
-    <TextView
-        android:id="@+id/doe_title_view"
-        android:layout_below="@id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="@string/instn"
-        android:textAllCaps="true"
-        android:textColor="#00838F"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/doe_title_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/logo"
-        />
+        <TextView
+            android:id="@+id/doe_title_view"
+            android:layout_below="@id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/instn"
+            android:textAllCaps="true"
+            android:textColor="#00838F"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"/>
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:hint="@string/prompt_email"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="32dp"
-        android:layout_marginLeft="72dp"
-        android:layout_marginRight="72dp"
-        android:layout_below="@id/logo"
-        android:layout_marginBottom="16dp"/>
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/doe_title_view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/logo"
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:hint="@string/prompt_password"
-        android:gravity="center_horizontal"
-        android:layout_below="@id/username"
-        android:inputType="textPassword"
-        android:layout_marginLeft="72dp"
-        android:layout_marginRight="72dp"
-        android:maxLines="1" />
+            />
 
-    <LinearLayout
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:hint="@string/prompt_email"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="72dp"
+            android:layout_below="@id/logo"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/prompt_password"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/username"
+            android:inputType="textPassword"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="72dp"
+            android:maxLines="1" />
+
+        <LinearLayout
             android:id="@+id/census"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,29 +90,33 @@
                 android:gravity="center_horizontal"
                 android:padding="8dp"
                 android:layout_marginRight="16dp"
-               />
+                />
 
             <Spinner
                 android:id="@+id/census_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-               />
+                />
 
         </LinearLayout>
 
-    <Button
-        android:id="@+id/button_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:onClick="onButtonClick"
-        android:text="@string/action_sign_in"
-        android:layout_marginLeft="72dp"
-        android:layout_marginRight="72dp"
-        android:layout_below="@id/census"/>
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:onClick="onButtonClick"
+            android:text="@string/action_sign_in"
+            android:textColor="#fff"
+            android:backgroundTint="#66BB6A"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="72dp"
+            android:layout_below="@id/census"/>
 
 
-    <!--Rahul Branch-->
+        <!--Rahul Branch-->
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>
