@@ -67,13 +67,15 @@ public class MainActivity extends AppCompatActivity {
     /* Census Spinner Code*/
 
         spinner = (Spinner) findViewById(R.id.census_year);
-        adapter = ArrayAdapter.createFromResource(this, R.array.census_year, R.layout.spinner_layout);
+        adapter = ArrayAdapter.createFromResource(this, R.array.census_year, R.layout.spinner_layout); //note : census_year linked to strings.xml
         adapter.setDropDownViewResource(R.layout.spinner_layout);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 censusYear = adapterView.getItemAtPosition(i).toString();
+                MyApplication myApplication = (MyApplication) getApplication();
+                myApplication.setGlobal_censusYear(censusYear);
             }
 
             @Override

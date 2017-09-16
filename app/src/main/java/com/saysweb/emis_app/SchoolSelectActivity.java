@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CursorAdapter;
@@ -23,7 +24,11 @@ import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 import com.saysweb.emis_app.data.emisDBHelper;
 import com.saysweb.emis_app.MainActivity;
 
+import java.util.HashMap;
+
 import static android.R.id.message;
+import static android.support.constraint.R.id.parent;
+import static android.text.TextUtils.split;
 import static com.saysweb.emis_app.R.id.school_code;
 
 public class SchoolSelectActivity extends AppCompatActivity {
@@ -38,6 +43,9 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
     private emisDBHelper helper;
 //    private emisDBHelper helper2;
+    String year;
+    int schlID;
+    HashMap<String,String> schlId_schoolName = new HashMap<String, String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +74,10 @@ public class SchoolSelectActivity extends AppCompatActivity {
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         String userId = intent.getStringExtra("UserName");
-        String year = intent.getStringExtra("CensusYear");
+//        year = intent.getStringExtra("CensusYear");
+
+        MyApplication myApplication = (MyApplication) getApplication();
+        year=myApplication.getGlobal_censusYear();
 
         String userName = helper.getUserName(userId); // Goes to emisDBHelper.java
 
@@ -76,7 +87,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
         // Capture the layout's TextView and set the string as its text
         TextView userTextView = (TextView) findViewById(R.id.user_id);
-        userTextView.setText("Welcome " + userName);
+        userTextView.setText(userName);
 
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -88,16 +99,38 @@ public class SchoolSelectActivity extends AppCompatActivity {
     /*Implementing AutoComplete through ArrayAdapter*/
 
 
-        String[] schoolCodes;
+        Cursor schoolCodesCursor;
+        schoolCodesCursor = helper.valueOfCursor(); //Getting school codes in array. Goes to emisDBHelper.java
+        String[] school_codes = new String[schoolCodesCursor.getCount()];
+        String[] schlid = new String[schoolCodesCursor.getCount()];
+        int i4 = 0;
+        while (schoolCodesCursor.moveToNext()) {
+            school_codes[i4] = schoolCodesCursor.getString(1) + " , " + schoolCodesCursor.getString(0);
+            schlid[i4] = schoolCodesCursor.getString(2);
+            i4++;
+        }
+        schoolCodesCursor.close();
 
-        schoolCodes = helper.valueOfCursor(); //Getting school codes in array. Goes to emisDBHelper.java
+        // Preparing Key - Value pair for AUTOCOMPLETE - SCHLID and SCHOOL CODE
+
+        String[] spinnerArray = new String[school_codes.length];
+
+        int j;
+        for (j = 0; j < school_codes.length; j++)
+        {
+            schlId_schoolName.put(school_codes[j],schlid[j]);
+            spinnerArray[j] = school_codes[j];
+        }
+
+
         textView = (MultiAutoCompleteTextView) findViewById(school_code);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, schoolCodes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, spinnerArray);
         textView.setThreshold(2);
         textView.setAdapter(adapter);
         textView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
     }
+
 
      /*
     * Method invoked when Select button is clicked
@@ -105,6 +138,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
     */
 
      public void onSchoolSelect (View v){
+
 
          View view = findViewById(R.id.enrollment_by_grade);
          view.setVisibility(View.VISIBLE);
@@ -125,27 +159,40 @@ public class SchoolSelectActivity extends AppCompatActivity {
     * take user inputs in a variable and call function to return password for the username - searchPass
     */
     public void onFormSelect(View v) {
+        String school_code_send;
+        EditText text = (EditText) findViewById(R.id.school_code);
+        school_code_send = text.getText().toString();
+        String[] myString = split(school_code_send,",");
+        String school_code_send2 = myString[1];
+        String school_code_send3 = school_code_send2.replaceAll("\\p{Z}","");
+
+        MyApplication myApplication = (MyApplication) getApplication(); // Set Global variable setGlobal_CensusYear to school code
+        myApplication.setGlobal_schoolCode(school_code_send3);
+
 
         switch (v.getId()){
             case R.id.enrollment_by_grade:
                 Intent intent = new Intent(SchoolSelectActivity.this, EnrollmentByGrade.class);
-//                intent.putExtra("UserName", userName);
-//                intent.putExtra("CensusYear", censusYear);
+                intent.putExtra("intentID", "SchoolSelect");
+//                intent.putExtra("SchoolCode", school_code_send3);
+//                intent.putExtra("CensusYear", year);
                 startActivity(intent);
                 break;
 
 
             case R.id.grade_class_count:
                 Intent intent2 = new Intent(SchoolSelectActivity.this, GradeClassCount.class);
-//                intent.putExtra("UserName", userName);
-//                intent.putExtra("CensusYear", censusYear);
+                intent2.putExtra("intentID", "SchoolSelect");
+//                intent2.putExtra("SchoolCode", school_code_send3);
+//                intent2.putExtra("CensusYear", year);
                 startActivity(intent2);
                 break;
 
             case R.id.boarding_enrollment:
+
                 Intent intent3 = new Intent(SchoolSelectActivity.this, BoardingEnrollment.class);
-//                intent.putExtra("UserName", userName);
-//                intent.putExtra("CensusYear", censusYear);
+                intent3.putExtra("intentID", "SchoolSelect");
+//                gettent3.putExtra("CensusYear", year);
                 startActivity(intent3);
                 break;
 

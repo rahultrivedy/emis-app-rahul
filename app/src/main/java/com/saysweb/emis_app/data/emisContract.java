@@ -75,7 +75,6 @@ public final class emisContract {
 
     public static abstract class EnrollmentByGradesEntry implements BaseColumns {
         public static final String TABLE_NAME = "ENROLLMENT_BY_GRADE";
-        public static final String COLUMN_NAME_GRADE_ID = "GRADE_ID";
         public static final String COLUMN_NAME_GRADE_CODE = "GRADE_CODE";
         public static final String COLUMN_NAME_CENSUS_YEAR = "CENSUS_YEAR";
         public static final String COLUMN_NAME_BIRTH_YEAR = "BIRTH_YEAR";
@@ -110,5 +109,15 @@ public final class emisContract {
         public static final String COLUMN_NAME_FEMALE_BOARDING_COUNT = "FEMALE_BOARDING_COUNT";
         public static final String COLUMN_NAME_FEMALE_DAY_COUNT = "FEMALE_DAY_COUNT";
         public static final String COLUMN_NAME_SCHL_ID = "SCHL_ID";
+    }
+
+    public static abstract class GradeEntry implements BaseColumns {
+        public static final String TABLE_NAME = "GRADE_TABLE";
+        public static final String COLUMN_NAME_GRADE_CODE= "GRADE_CODE";
+        public static final String COLUMN_NAME_GRADE_NAME = "GRADE_NAME";
+        public static final String COLUMN_NAME_SECTOR_CODE = "SECTOR_CODE";
+        public static final String COLUMN_NAME_GRADE_SORT = "GRADE_SORT";
+        public static final String COLUMN_NAME_PK_CODE = "PK_CODE";
+        public static final String COLUMN_NAME_ACTIVE = "ACTIVE";
     }
 }
