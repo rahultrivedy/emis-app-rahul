@@ -4,14 +4,14 @@
     package="com.saysweb.emis_app">
 
     <application
-        android:allowBackup="true"
-        android:fullBackupContent="true"
+        android:name=".MyApplication"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
         android:icon="@mipmap/launcher_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".MyApplication">
+        android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,9 +51,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SchoolSelectActivity" />
         </activity>
-        <activity android:name=".EditEnrollmentByGrade"></activity>
-
+        <activity android:name=".EditEnrollmentByGrade" />
+        <activity android:name=".EditGradeClassCount" />
+        <activity android:name=".EditBoardingEnrollment"></activity>
     </application>
-
 
 </manifest>

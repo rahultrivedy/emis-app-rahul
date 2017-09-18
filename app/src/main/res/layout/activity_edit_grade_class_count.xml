@@ -110,7 +110,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enrollment By Grade"
+        android:text="Grade Class Count"
         android:gravity="center"
         android:textColor="#607D8B"
         android:textSize="22sp"
@@ -120,18 +120,18 @@
 
 
     <ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ecf0f1"
-    android:padding="16dp">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="#ecf0f1"
+        android:padding="16dp">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewGcc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</ScrollView>
+        </android.support.v7.widget.RecyclerView>
+
+    </ScrollView>
 
 </LinearLayout>

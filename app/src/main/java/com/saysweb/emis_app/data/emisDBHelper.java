@@ -136,10 +136,10 @@ public class emisDBHelper extends SQLiteOpenHelper {
         //CREATING GRADE CLASS COUNT TABLE
         String SQL_CREATE_GCC_TABLE = "CREATE TABLE " + GradeClassCountEntry.TABLE_NAME + " ("
                 + GradeClassCountEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + GradeClassCountEntry.COLUMN_NAME_GCC_ID + " INTEGER NOT NULL UNIQUE, "
+                + GradeClassCountEntry.COLUMN_NAME_GCC_ID + " INTEGER , "
                 + GradeClassCountEntry.COLUMN_NAME_CENSUS_YEAR + " INTEGER NOT NULL, "
-                + GradeClassCountEntry.COLUMN_NAME_GRADE_CODE + " INTEGER  , "
-                + GradeClassCountEntry.COLUMN_NAME_CLASS_COUNT + " INTEGER , "
+                + GradeClassCountEntry.COLUMN_NAME_GRADE_CODE + " TEXT NOT NULL  , "
+                + GradeClassCountEntry.COLUMN_NAME_CLASS_COUNT + " INTEGER  NOT NULL, "
                 + GradeClassCountEntry.COLUMN_NAME_SCHL_ID + " INTEGER, "
                 + GradeClassCountEntry.COLUMN_NAME_STUDENT_MALE_COUNT + " INTEGER, "
                 + GradeClassCountEntry.COLUMN_NAME_STUDENT_FEMALE_COUNT + " INTEGER, "
@@ -152,7 +152,7 @@ public class emisDBHelper extends SQLiteOpenHelper {
         //CREATING BOARDING ENROLLMENT TABLE
         String SQL_CREATE_BOARDING_ENROLLMENT_TABLE = "CREATE TABLE " + EnrollmentByBoardingEntry.TABLE_NAME + " ("
                 + EnrollmentByBoardingEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + EnrollmentByBoardingEntry.COLUMN_NAME_ENROLLMENT_BOARDING_ID + " INTEGER NOT NULL UNIQUE, "
+                + EnrollmentByBoardingEntry.COLUMN_NAME_ENROLLMENT_BOARDING_ID + " INTEGER , "
                 + EnrollmentByBoardingEntry.COLUMN_NAME_CENSUS_YEAR + " INTEGER NOT NULL, "
                 + EnrollmentByBoardingEntry.COLUMN_NAME_GRADE_CODE + " TEXT, "
                 + EnrollmentByBoardingEntry.COLUMN_NAME_MALE_BOARDING_COUNT + " INTEGER , "
@@ -389,12 +389,6 @@ public class emisDBHelper extends SQLiteOpenHelper {
         // Insert the new row, returning the primary key value of the new row
         db.insert(GradeEntry.TABLE_NAME, null, values);
 
-
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(GradeEntry.TABLE_NAME, null, values);
-
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(GradeEntry.TABLE_NAME, null, values);
 
         // INSERT DATA INTO SCHOOLS
         //---------------------------------------School Entry - 01-------------------------------

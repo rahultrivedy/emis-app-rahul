@@ -7,36 +7,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.saysweb.emis_app.data.emisDBHelper;
-import com.saysweb.emis_app.data.emisContract.GradeEntry;
+import com.saysweb.emis_app.data.emisContract;
+
 import com.saysweb.emis_app.data.emisContract.SchoolEntry;
-import com.saysweb.emis_app.data.emisContract.EnrollmentByGradesEntry;
-
-
-import org.w3c.dom.Text;
+import com.saysweb.emis_app.data.emisContract.EnrollmentByBoardingEntry;
+import com.saysweb.emis_app.data.emisDBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditEnrollmentByGrade extends AppCompatActivity {
+public class EditBoardingEnrollment extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerViewEB;
     private RecyclerView.Adapter adapter;
-    private List<ListItem> listItems;
+    private List<ListItemEB> listItemsEB;
     private emisDBHelper mDbHelper;
     int censusYear = 0;
-
-//    private String grade_code;
-//    private String school_id;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_enrollment_by_grade);
+        setContentView(R.layout.activity_edit_boarding_enrollment);
 
         MyApplication myApplication = (MyApplication) getApplication();
         String year = myApplication.getGlobal_censusYear();
@@ -48,38 +42,36 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
         String schoolID = intent.getStringExtra("SchoolID");
         mDbHelper = new emisDBHelper(this);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(false);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewEB = (RecyclerView) findViewById(R.id.recyclerViewEB);
+        recyclerViewEB.setHasFixedSize(false);
+        recyclerViewEB.setLayoutManager(new LinearLayoutManager(this));
 
-        listItems = new ArrayList<>();
+        listItemsEB = new ArrayList<>();
 
-
-//
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        String[] projection = {EnrollmentByGradesEntry.COLUMN_NAME_GRADE_CODE,EnrollmentByGradesEntry.COLUMN_NAME_BIRTH_YEAR, EnrollmentByGradesEntry.COLUMN_NAME_FEMALE_COUNT, EnrollmentByGradesEntry.COLUMN_NAME_MALE_COUNT};
-        String selection = EnrollmentByGradesEntry.COLUMN_NAME_SCHL_ID + " = ? AND " + EnrollmentByGradesEntry.COLUMN_NAME_CENSUS_YEAR + " = ?";
+        String[] projection = {EnrollmentByBoardingEntry.COLUMN_NAME_GRADE_CODE,EnrollmentByBoardingEntry.COLUMN_NAME_MALE_BOARDING_COUNT, EnrollmentByBoardingEntry.COLUMN_NAME_FEMALE_BOARDING_COUNT};
+
+        String selection = EnrollmentByBoardingEntry.COLUMN_NAME_SCHL_ID + " = ? AND " + EnrollmentByBoardingEntry.COLUMN_NAME_CENSUS_YEAR + " = ?";
+
         String[] selectionArgs = {schoolID, year};
 
-//      Cursor with all the rows from Columns - School Code and School Name
-        Cursor cursor = db.query(EnrollmentByGradesEntry.TABLE_NAME, projection,
+        //        Cursor with all the rows from Columns - School Code and School Name
+        Cursor cursor = db.query(EnrollmentByBoardingEntry.TABLE_NAME, projection,
                 selection, selectionArgs, null, null, null);
 
         int cursorLength = cursor.getCount();
+
         String[] grade_code = new String[cursor.getCount()];
-        String[] birth_year = new String[cursor.getCount()];
-        String[] female_count = new String[cursor.getCount()];
-        String[] male_count = new String[cursor.getCount()];
+        String[] females = new String[cursor.getCount()];
+        String[] males= new String[cursor.getCount()];
 
         int i = 0;
-//        TextView textView = (TextView) findViewById(R.id.sample);
-//        textView.setText("" + cursorLength);
 
-        while(cursor.moveToNext()) {
+        while(cursor.moveToNext()){
+
             grade_code[i] = cursor.getString(0);
-            birth_year[i] = cursor.getString(1);
-            female_count[i] = cursor.getString(2);
-            male_count[i] = cursor.getString(3);
+            males[i] = cursor.getString(1);
+            females[i] = cursor.getString(2);
             i++;
         }
         cursor.close();
@@ -104,6 +96,7 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
             }while (SchoolNamecursor.moveToNext());
         }
         SchoolNamecursor.close();
+
         TextView textView = (TextView) findViewById(R.id.name);
         textView.setText(schoolName);
 
@@ -115,22 +108,19 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
 
         for(int i1=0; i1<cursorLength; i1++ ){
 
-            ListItem listItem = new ListItem(
+            ListItemEB listItemEB = new ListItemEB(
 
                     grade_code[i1],
-                    birth_year[i1],
-                    female_count[i1],
-                    male_count[i1]
-
-
+                    males[i1],
+                    females[i1]
             );
 
-            listItems.add(listItem);
+            listItemsEB.add(listItemEB);
 
         }
 
-        adapter = new RecyclerViewAdapter(listItems, this);
-        recyclerView.setAdapter(adapter);
-    }
+        adapter = new RecycleViewAdapterEB(listItemsEB, this);
+        recyclerViewEB.setAdapter(adapter);
 
+    }
 }

@@ -86,7 +86,7 @@ public final class emisContract {
 
     public static abstract class GradeClassCountEntry implements BaseColumns {
         public static final String TABLE_NAME = "GRADE_CLASS_COUNT";
-        public static final String COLUMN_NAME_GCC_ID = "GCC ID";
+        public static final String COLUMN_NAME_GCC_ID = "GCC_ID";
         public static final String COLUMN_NAME_CENSUS_YEAR = "CENSUS_YEAR";
         public static final String COLUMN_NAME_GRADE_CODE = "GRADE_CODE";
         public static final String COLUMN_NAME_CLASS_COUNT = "CLASS_COUNT";
@@ -120,4 +120,6 @@ public final class emisContract {
         public static final String COLUMN_NAME_PK_CODE = "PK_CODE";
         public static final String COLUMN_NAME_ACTIVE = "ACTIVE";
     }
+
+
 }

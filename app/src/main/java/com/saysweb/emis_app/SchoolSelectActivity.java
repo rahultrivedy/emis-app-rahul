@@ -36,7 +36,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
     /* Code for Auto Complete - Start*/
 
 
-    MultiAutoCompleteTextView textView;
+    AutoCompleteTextView textView;
 
     /* Code for Auto Complete - END*/
 
@@ -105,7 +105,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
         String[] schlid = new String[schoolCodesCursor.getCount()];
         int i4 = 0;
         while (schoolCodesCursor.moveToNext()) {
-            school_codes[i4] = schoolCodesCursor.getString(1) + " , " + schoolCodesCursor.getString(0);
+            school_codes[i4] = schoolCodesCursor.getString(1) + " - " + schoolCodesCursor.getString(0);
             schlid[i4] = schoolCodesCursor.getString(2);
             i4++;
         }
@@ -123,11 +123,11 @@ public class SchoolSelectActivity extends AppCompatActivity {
         }
 
 
-        textView = (MultiAutoCompleteTextView) findViewById(school_code);
+        textView = (AutoCompleteTextView) findViewById(school_code);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, spinnerArray);
         textView.setThreshold(2);
         textView.setAdapter(adapter);
-        textView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+//        textView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
     }
 
@@ -162,7 +162,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
         String school_code_send;
         EditText text = (EditText) findViewById(R.id.school_code);
         school_code_send = text.getText().toString();
-        String[] myString = split(school_code_send,",");
+        String[] myString = split(school_code_send," - ");
         String school_code_send2 = myString[1];
         String school_code_send3 = school_code_send2.replaceAll("\\p{Z}","");
 

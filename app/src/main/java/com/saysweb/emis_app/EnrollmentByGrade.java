@@ -80,17 +80,17 @@ public class EnrollmentByGrade extends AppCompatActivity {
         MyApplication myApplication1 = (MyApplication) getApplication();
         schoolCode = myApplication1.getGlobal_schoolCode();
 
-//      overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
-//        /* Actionbar*/
-//        /*Set the new toolbar as the Actionbar*/
-//        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar3);
-//        setSupportActionBar(myToolbar);
-//        ActionBar actionBar2 = getSupportActionBar();
-//        actionBar2.setCustomView(R.layout.action_bar);
-//        actionBar2.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
-//                | ActionBar.DISPLAY_SHOW_HOME);
+      overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
+        /* Actionbar*/
+        /*Set the new toolbar as the Actionbar*/
+        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar3);
+        setSupportActionBar(myToolbar);
+        ActionBar actionBar2 = getSupportActionBar();
+        actionBar2.setCustomView(R.layout.action_bar);
+        actionBar2.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
+                | ActionBar.DISPLAY_SHOW_HOME);
 
-//        actionBar2.setTitle("EMIS");
+//        actionBar2.setTitle("EMIS - Enrollment By Grade");
 
         /*Getting INTENT from School Select Activity*/
 
@@ -188,7 +188,7 @@ public class EnrollmentByGrade extends AppCompatActivity {
 //        TextView textView = (TextView) findViewById(R.id.hello);
 //        textView.setText("hello" +" "+ grades_array[0]+" " + grades_array[1]+ " " +grades_array[2]);
 
-        spinner = (Spinner)findViewById(grade);
+        spinner = (Spinner)findViewById(R.id.grade);
         ArrayAdapter<String> gradeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         gradeAdapter.setDropDownViewResource(R.layout.spinner_layout);
         spinner.setAdapter(gradeAdapter);
@@ -204,7 +204,7 @@ public class EnrollmentByGrade extends AppCompatActivity {
             }
         }); /* GRADES SPINNER CODE END */
 //
-    } /* END OF ON CREATE METHOD*/
+    } /* END OF ON-CREATE METHOD*/
 
 
 
@@ -285,12 +285,14 @@ public class EnrollmentByGrade extends AppCompatActivity {
             if(cursor != null && cursor.getCount() !=0){
                 flag = 1;
             }
+            cursor.close();
+            cursor_grade.close();
 
         }
 
 
-        TextView textViewhello = (TextView) findViewById(R.id.hello);
-        textViewhello.setText(""+censusYear + school_id + birthYear + grade_code+" "+flag);
+//        TextView textViewhello = (TextView) findViewById(R.id.hello);
+//        textViewhello.setText(""+censusYear + school_id + birthYear + grade_code+" "+flag);
 
         if(flag == 0) {
 
@@ -309,6 +311,12 @@ public class EnrollmentByGrade extends AppCompatActivity {
 
             Toast toast = Toast.makeText(this, "Form has been submitted Successfully", Toast.LENGTH_LONG);
             toast.show();
+
+            Intent intent_refresh = new Intent(EnrollmentByGrade.this, EnrollmentByGrade.class);
+            intent_refresh.putExtra("intentID", "SchoolActivity");
+            intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            overridePendingTransition(0, 0);
+            startActivity(intent_refresh);
         }
  else{
 
@@ -322,7 +330,7 @@ public class EnrollmentByGrade extends AppCompatActivity {
             final int finalMales = males;
             final int finalFemales = females;
             builder1.setPositiveButton(
-                    "UPDATE",
+                    "UPDATE",  //TODO : When returning from edit form, if user changes the grade , record needs to be deleted and new record to be added. GEt grade code from intent and delete record
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             ContentValues values = new ContentValues();
