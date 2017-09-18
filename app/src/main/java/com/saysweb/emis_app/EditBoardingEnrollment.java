@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.saysweb.emis_app.data.emisContract;
@@ -36,10 +37,14 @@ public class EditBoardingEnrollment extends AppCompatActivity {
         String year = myApplication.getGlobal_censusYear();
         censusYear = Integer.parseInt(year);
 
+        myApplication = (MyApplication) getApplication();
+        String schoolID = myApplication.getGlobal_schlID();
+
+
         // Get the Intent that started this activity and extract the string
 
         Intent intent = getIntent();
-        String schoolID = intent.getStringExtra("SchoolID");
+        String intentID = intent.getStringExtra("IntentID");
         mDbHelper = new emisDBHelper(this);
 
         recyclerViewEB = (RecyclerView) findViewById(R.id.recyclerViewEB);
@@ -123,4 +128,12 @@ public class EditBoardingEnrollment extends AppCompatActivity {
         recyclerViewEB.setAdapter(adapter);
 
     }
+
+    public void onAddNew_EB(View vNew){
+        Intent intent_add_new_EB = new Intent(this, BoardingEnrollment.class);
+        intent_add_new_EB.putExtra("intentID" , "SchoolSelect");
+        startActivity(intent_add_new_EB);
+    }
+
+
 }

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -120,19 +120,38 @@
         android:fontFamily="serif"
         />
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ecf0f1"
         android:padding="16dp">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewEB"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewEB"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-        </android.support.v7.widget.RecyclerView>
 
     </ScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="50dp"
+            android:layout_height="57dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:onClick="onAddNew_EB"
+            android:src="@drawable/ic_add_black"
+            app:backgroundTint="#FF5722"
+            app:rippleColor="#fff" />
+
+    </RelativeLayout>
 
 </LinearLayout>

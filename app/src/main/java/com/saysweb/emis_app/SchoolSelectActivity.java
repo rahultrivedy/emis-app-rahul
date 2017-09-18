@@ -46,6 +46,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
     String year;
     int schlID;
     HashMap<String,String> schlId_schoolName = new HashMap<String, String>();
+    String school_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,13 +167,32 @@ public class SchoolSelectActivity extends AppCompatActivity {
         String school_code_send2 = myString[1];
         String school_code_send3 = school_code_send2.replaceAll("\\p{Z}","");
 
-        MyApplication myApplication = (MyApplication) getApplication(); // Set Global variable setGlobal_CensusYear to school code
+        SQLiteDatabase db = helper.getReadableDatabase();
+
+        String[] projection = {SchoolEntry.COLUMN_NAME_SCHL_ID};
+        String selection = SchoolEntry.COLUMN_NAME_SCHOOL_CODE + "=?";
+        String[] selectionArgs = {school_code_send3};
+
+//      Cursor with all the rows from Columns - School Code and School Name
+        Cursor cursor = db.query(SchoolEntry.TABLE_NAME, projection,
+                selection, selectionArgs, null, null, null);
+
+        while(cursor.moveToNext()) {
+            school_id = cursor.getString(0);
+
+        }
+        cursor.close();
+
+        MyApplication myApplication = (MyApplication) getApplication();
+        myApplication.setGlobal_schlID(school_id); // SET GLOBAL VARIABLE schlID
+
+        myApplication = (MyApplication) getApplication(); // Set Global variable setGlobal_CensusYear to school code
         myApplication.setGlobal_schoolCode(school_code_send3);
 
 
         switch (v.getId()){
             case R.id.enrollment_by_grade:
-                Intent intent = new Intent(SchoolSelectActivity.this, EnrollmentByGrade.class);
+                Intent intent = new Intent(SchoolSelectActivity.this, EditEnrollmentByGrade.class);
                 intent.putExtra("intentID", "SchoolSelect");
 //                intent.putExtra("SchoolCode", school_code_send3);
 //                intent.putExtra("CensusYear", year);
@@ -181,7 +201,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
 
             case R.id.grade_class_count:
-                Intent intent2 = new Intent(SchoolSelectActivity.this, GradeClassCount.class);
+                Intent intent2 = new Intent(SchoolSelectActivity.this, EditGradeClassCount.class);
                 intent2.putExtra("intentID", "SchoolSelect");
 //                intent2.putExtra("SchoolCode", school_code_send3);
 //                intent2.putExtra("CensusYear", year);
@@ -190,7 +210,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
             case R.id.boarding_enrollment:
 
-                Intent intent3 = new Intent(SchoolSelectActivity.this, BoardingEnrollment.class);
+                Intent intent3 = new Intent(SchoolSelectActivity.this, EditBoardingEnrollment.class);
                 intent3.putExtra("intentID", "SchoolSelect");
 //                gettent3.putExtra("CensusYear", year);
                 startActivity(intent3);
