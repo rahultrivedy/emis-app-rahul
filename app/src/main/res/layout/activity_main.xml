@@ -56,6 +56,7 @@
         android:layout_below="@id/logo"
         android:layout_marginBottom="16dp"/>
 
+
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
@@ -68,6 +69,16 @@
         android:layout_marginLeft="72dp"
         android:layout_marginRight="72dp"
         android:maxLines="1" />
+
+    <ImageButton
+        android:id="@+id/show_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_eye"
+        android:layout_alignBottom="@+id/password"
+        android:layout_toRightOf="@+id/census"
+        android:layout_marginBottom="6dp"
+        />
 
     <LinearLayout
             android:id="@+id/census"
