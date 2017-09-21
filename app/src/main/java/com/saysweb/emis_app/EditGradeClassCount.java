@@ -60,10 +60,11 @@ public class EditGradeClassCount extends AppCompatActivity {
         String selection = GradeClassCountEntry.COLUMN_NAME_SCHL_ID + " = ? AND " + GradeClassCountEntry.COLUMN_NAME_CENSUS_YEAR + " = ?";
 
         String[] selectionArgs = {schoolID, year};
+        String sortOrder = GradeClassCountEntry.COLUMN_NAME_UPDATED_DATE + " DESC";
 
 //        Cursor with all the rows from Columns - School Code and School Name
         Cursor cursor = db.query(GradeClassCountEntry.TABLE_NAME, projection,
-                selection, selectionArgs, null, null, null);
+                selection, selectionArgs, null, null, sortOrder);
 
         int cursorLength = cursor.getCount();
 

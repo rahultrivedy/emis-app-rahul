@@ -95,8 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 censusYear = adapterView.getItemAtPosition(i).toString();
-                MyApplication myApplication = (MyApplication) getApplication();
-                myApplication.setGlobal_censusYear(censusYear);
+
             }
 
             @Override
@@ -130,9 +129,16 @@ public class MainActivity extends AppCompatActivity {
 
             if (password.equals(entered_password)) {
 
+                MyApplication myApplication = (MyApplication) getApplication();
+                myApplication.setGlobal_userID(userName);
+
+                myApplication = (MyApplication) getApplication();
+                myApplication.setGlobal_censusYear(censusYear);
+
                 Intent intent = new Intent(MainActivity.this, SchoolSelectActivity.class);
                 intent.putExtra("UserName", userName);
-                intent.putExtra("CensusYear", censusYear);
+//                intent.putExtra("CensusYear", censusYear);
+
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 

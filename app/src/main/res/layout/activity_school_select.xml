@@ -122,14 +122,14 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/school_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="54dp"
-            android:onClick="onSchoolSelect"
-            android:text="SELECT"
-            android:layout_gravity="center"/>
+        <!--<Button-->
+            <!--android:id="@+id/school_select"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="36dp"-->
+            <!--android:onClick="onSchoolSelect"-->
+            <!--android:text="SELECT"-->
+            <!--android:layout_gravity="center"/>-->
 
 
         <Button

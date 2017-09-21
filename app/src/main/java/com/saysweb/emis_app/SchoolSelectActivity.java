@@ -1,5 +1,6 @@
 package com.saysweb.emis_app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,7 +9,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -55,7 +58,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
         /* Actionbar*/
         /*Set the new toolbar as the Actionbar*/
-        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar2);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar2);
         setSupportActionBar(myToolbar);
         ActionBar actionBar1 = getSupportActionBar();
         actionBar1.setCustomView(R.layout.action_bar);
@@ -78,7 +81,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
 //        year = intent.getStringExtra("CensusYear");
 
         MyApplication myApplication = (MyApplication) getApplication();
-        year=myApplication.getGlobal_censusYear();
+        year = myApplication.getGlobal_censusYear();
 
         String userName = helper.getUserName(userId); // Goes to emisDBHelper.java
 
@@ -117,9 +120,8 @@ public class SchoolSelectActivity extends AppCompatActivity {
         String[] spinnerArray = new String[school_codes.length];
 
         int j;
-        for (j = 0; j < school_codes.length; j++)
-        {
-            schlId_schoolName.put(school_codes[j],schlid[j]);
+        for (j = 0; j < school_codes.length; j++) {
+            schlId_schoolName.put(school_codes[j], schlid[j]);
             spinnerArray[j] = school_codes[j];
         }
 
@@ -128,7 +130,27 @@ public class SchoolSelectActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, spinnerArray);
         textView.setThreshold(2);
         textView.setAdapter(adapter);
-//        textView.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(arg1.getApplicationWindowToken(), 0);
+
+
+                    View view = findViewById(R.id.enrollment_by_grade);
+                    view.setVisibility(View.VISIBLE);
+
+
+                    View view1 = findViewById(R.id.boarding_enrollment);
+                    view1.setVisibility(View.VISIBLE);
+
+
+                    View view2 = findViewById(R.id.grade_class_count);
+                    view2.setVisibility(View.VISIBLE);
+
+            }
+        });
 
     }
 
@@ -140,17 +162,24 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
      public void onSchoolSelect (View v){
 
+         // Check if no view has focus:
+//         View view_keyboard = this.getCurrentFocus();
+//         if (view_keyboard != null) {
+//             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//             imm.hideSoftInputFromWindow(view_keyboard.getWindowToken(), 0);
+//         }
 
-         View view = findViewById(R.id.enrollment_by_grade);
-         view.setVisibility(View.VISIBLE);
 
-
-         View view1 = findViewById(R.id.boarding_enrollment);
-         view1.setVisibility(View.VISIBLE);
-
-
-         View view2 = findViewById(R.id.grade_class_count);
-         view2.setVisibility(View.VISIBLE);
+//         View view = findViewById(R.id.enrollment_by_grade);
+//         view.setVisibility(View.VISIBLE);
+//
+//
+//         View view1 = findViewById(R.id.boarding_enrollment);
+//         view1.setVisibility(View.VISIBLE);
+//
+//
+//         View view2 = findViewById(R.id.grade_class_count);
+//         view2.setVisibility(View.VISIBLE);
 
     }
 
@@ -194,8 +223,6 @@ public class SchoolSelectActivity extends AppCompatActivity {
             case R.id.enrollment_by_grade:
                 Intent intent = new Intent(SchoolSelectActivity.this, EditEnrollmentByGrade.class);
                 intent.putExtra("intentID", "SchoolSelect");
-//                intent.putExtra("SchoolCode", school_code_send3);
-//                intent.putExtra("CensusYear", year);
                 startActivity(intent);
                 break;
 
@@ -203,8 +230,6 @@ public class SchoolSelectActivity extends AppCompatActivity {
             case R.id.grade_class_count:
                 Intent intent2 = new Intent(SchoolSelectActivity.this, EditGradeClassCount.class);
                 intent2.putExtra("intentID", "SchoolSelect");
-//                intent2.putExtra("SchoolCode", school_code_send3);
-//                intent2.putExtra("CensusYear", year);
                 startActivity(intent2);
                 break;
 
@@ -212,7 +237,6 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
                 Intent intent3 = new Intent(SchoolSelectActivity.this, EditBoardingEnrollment.class);
                 intent3.putExtra("intentID", "SchoolSelect");
-//                gettent3.putExtra("CensusYear", year);
                 startActivity(intent3);
                 break;
 

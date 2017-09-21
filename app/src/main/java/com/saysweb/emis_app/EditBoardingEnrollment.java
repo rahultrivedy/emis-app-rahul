@@ -60,9 +60,11 @@ public class EditBoardingEnrollment extends AppCompatActivity {
 
         String[] selectionArgs = {schoolID, year};
 
+        String sortOrder = EnrollmentByBoardingEntry.COLUMN_NAME_UPDATED_DATE + " DESC";
+
         //        Cursor with all the rows from Columns - School Code and School Name
         Cursor cursor = db.query(EnrollmentByBoardingEntry.TABLE_NAME, projection,
-                selection, selectionArgs, null, null, null);
+                selection, selectionArgs, null, null, sortOrder);
 
         int cursorLength = cursor.getCount();
 

@@ -3,6 +3,7 @@ package com.saysweb.emis_app;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBar;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -57,6 +59,7 @@ public class GradeClassCount extends AppCompatActivity {
     int numberFemaleTeachers;
     int flag = 0 ;
     String year;
+    String gccGradeString = "empty";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +94,7 @@ public class GradeClassCount extends AppCompatActivity {
             Intent intent = getIntent();
         }else if (intentID.equals("GCC")) {
             Intent intent = getIntent();
-            String gccGradeString = intent.getStringExtra("Grade");
+            gccGradeString = intent.getStringExtra("Grade");
             String gccNoOfClassesString = intent.getStringExtra("No of Classes");
             String gccFemaleStudentCountString = intent.getStringExtra("Female SCount");
             String gccMaleStudentCountString = intent.getStringExtra("Male SCount");
@@ -136,6 +139,16 @@ public class GradeClassCount extends AppCompatActivity {
                 textView5.setText("0");
             }
 
+            Resources r = getResources();
+            float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, r.getDisplayMetrics());
+
+            TextView textView6 = (TextView) findViewById(R.id.save_entry);
+            textView6.setTranslationX(px);
+
+            TextView textView7 = (TextView) findViewById(R.id.delete_entry);
+            textView7.setVisibility(View.VISIBLE);
+
+
         }
 
         /* END INTENT CODE*/
@@ -175,23 +188,32 @@ public class GradeClassCount extends AppCompatActivity {
 
         // Preparing Key - Value pair for Spinner - Grade Name and Grade Code
 
-        String[] spinnerArray = new String[grades.length];
+        String[] spinnerArray = new String[grades.length + 1];
 
         int j;
+        spinnerArray[0] = "--SELECT--";
         for (j = 0; j < grades.length; j++)
         {
-            spinnerMap.put(j,grade_codes[j]);
-            spinnerArray[j] = grades[j];
+            spinnerMap.put(j+1,grade_codes[j]);
+            spinnerArray[j+1] = grades[j];
         }
 
+        int key = 0;
+        if(!gccGradeString.equals("empty")) {
+            Object key_obj = EnrollmentByGrade.getKeyFromValue(spinnerMap, gccGradeString);
+            if (key_obj != null) {
+                key = (Integer) key_obj;
+            }
+        }
 
-//        TextView textView = (TextView) findViewById(R.id.hello);
-//        textView.setText("hello" +" "+ grades_array[0]+" " + grades_array[1]+ " " +grades_array[2]);
 
         spinner = (Spinner)findViewById(R.id.grade_gcc);
         ArrayAdapter<String> gradeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         gradeAdapter.setDropDownViewResource(R.layout.spinner_layout);
         spinner.setAdapter(gradeAdapter);
+        if(key != 0){
+            spinner.setSelection(key);
+        }
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -289,6 +311,12 @@ public class GradeClassCount extends AppCompatActivity {
             cursor.close();
             cursor_grade.close();
         }
+
+        Long tsLong = System.currentTimeMillis()/1000;
+        final String ts = tsLong.toString();
+
+        MyApplication myApplication = (MyApplication) getApplication();
+        final String uid = myApplication.getGlobal_userID();
 //
         if(flag == 0) {
 
@@ -301,6 +329,10 @@ public class GradeClassCount extends AppCompatActivity {
             values.put(GradeClassCountEntry.COLUMN_NAME_TEACHER_FEMALE_COUNT, femaleTeachers);
             values.put(GradeClassCountEntry.COLUMN_NAME_TEACHER_MALE_COUNT, maleTeachers);
             values.put(GradeClassCountEntry.COLUMN_NAME_SCHL_ID, school_id);
+            values.put(GradeClassCountEntry.COLUMN_NAME_CREATED_BY, uid);
+            values.put(GradeClassCountEntry.COLUMN_NAME_CREATED_DATE, ts);
+            values.put(GradeClassCountEntry.COLUMN_NAME_UPDATED_BY, uid);
+            values.put(GradeClassCountEntry.COLUMN_NAME_UPDATED_DATE, ts);
 //
 
 //       Insert the new row, returning the primary key value of the new row
@@ -340,6 +372,8 @@ public class GradeClassCount extends AppCompatActivity {
                             values.put(GradeClassCountEntry.COLUMN_NAME_TEACHER_FEMALE_COUNT, final_femaleTeachers);
                             values.put(GradeClassCountEntry.COLUMN_NAME_TEACHER_MALE_COUNT, final_maleTeachers);
                             values.put(GradeClassCountEntry.COLUMN_NAME_SCHL_ID, school_id);
+                            values.put(GradeClassCountEntry.COLUMN_NAME_UPDATED_BY, uid);
+                            values.put(GradeClassCountEntry.COLUMN_NAME_UPDATED_DATE, ts);
 
                             String whereClause =  GradeClassCountEntry.COLUMN_NAME_CENSUS_YEAR +  " = ? AND " + GradeClassCountEntry.COLUMN_NAME_SCHL_ID + " = ? AND " + GradeClassCountEntry.COLUMN_NAME_GRADE_CODE + " = ?" ;
                             String[] whereArgs = {year, school_id, grade_code};
@@ -372,6 +406,62 @@ public class GradeClassCount extends AppCompatActivity {
         }
 
     }/*END OF OnSaveGcc*/
+
+
+    public void onDeleteGcc(View vDelete){
+
+        final SQLiteDatabase db_delete = mDbHelper.getReadableDatabase();
+
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Are you sure you want to delete this entry ? ");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton(
+                "YES",  //TODO : When returning from edit form, if user changes the grade , record needs to be deleted and new record to be added. GEt grade code from intent and delete record
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        String grade_id = null;
+                        String[] projection = {GradeClassCountEntry._ID};
+                        String selection = GradeClassCountEntry.COLUMN_NAME_CENSUS_YEAR +  " = ? AND " + GradeClassCountEntry.COLUMN_NAME_SCHL_ID + " = ? AND " + GradeClassCountEntry.COLUMN_NAME_GRADE_CODE + " = ?" ;
+                        String[] selectionArgs = {year, school_id, gccGradeString};
+
+                        Cursor cursor_grade_id = db_delete.query(GradeClassCountEntry.TABLE_NAME, projection, selection,
+                                selectionArgs, null, null, null);
+
+                        while(cursor_grade_id.moveToNext()) {
+                            grade_id = cursor_grade_id.getString(0);
+                        }
+                        cursor_grade_id.close();
+
+                        // CODE TO DELETE ITEM FROM DB
+
+                        String selection1 = GradeClassCountEntry._ID + " LIKE ?";
+                        String[] selectionArgs1 = {grade_id};
+                        db_delete.delete(GradeClassCountEntry.TABLE_NAME, selection1, selectionArgs1);
+
+                        Toast toast = Toast.makeText(GradeClassCount.this, "Entry has been DELETED Successfully", Toast.LENGTH_LONG);
+                        toast.show();
+
+                        Intent intent_refresh = new Intent(GradeClassCount.this, GradeClassCount.class);
+                        intent_refresh.putExtra("intentID", "SchoolActivity");
+                        intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent_refresh);
+
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "NO",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+    }// END of onDeleteGcc
 
     public Cursor find_grades(String school_code2){/*------------------------------------------------------------------*/
 

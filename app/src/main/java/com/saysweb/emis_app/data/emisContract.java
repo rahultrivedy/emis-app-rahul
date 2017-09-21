@@ -82,6 +82,12 @@ public final class emisContract {
         public static final String COLUMN_NAME_MALE_COUNT = "MALE_COUNT";
         public static final String COLUMN_NAME_FEMALE_COUNT = "FEMALE_COUNT";
         public static final String COLUMN_NAME_SCHL_ID = "SCHL_ID";
+        public static final String COLUMN_NAME_CREATED_DATE = "CREATED_DATE";
+        public static final String COLUMN_NAME_CREATED_BY = "CREATED_BY";
+        public static final String COLUMN_NAME_UPDATED_DATE = "UPDATED_DATE";
+        public static final String COLUMN_NAME_UPDATED_BY = "UPDATED_BY ";
+
+
     }
 
     public static abstract class GradeClassCountEntry implements BaseColumns {
@@ -96,6 +102,10 @@ public final class emisContract {
         public static final String COLUMN_NAME_TEACHER_MALE_COUNT = "TEACHER_MALE_COUNT";
         public static final String COLUMN_NAME_TEACHER_FEMALE_COUNT = "TEACHER_FEMALE_COUNT";
         public static final String COLUMN_NAME_QTR = "QTR";
+        public static final String COLUMN_NAME_CREATED_DATE = "CREATED_DATE";
+        public static final String COLUMN_NAME_CREATED_BY = "CREATED_BY";
+        public static final String COLUMN_NAME_UPDATED_DATE = "UPDATED_DATE";
+        public static final String COLUMN_NAME_UPDATED_BY = "UPDATED_BY ";
     }
 
 
@@ -109,6 +119,10 @@ public final class emisContract {
         public static final String COLUMN_NAME_FEMALE_BOARDING_COUNT = "FEMALE_BOARDING_COUNT";
         public static final String COLUMN_NAME_FEMALE_DAY_COUNT = "FEMALE_DAY_COUNT";
         public static final String COLUMN_NAME_SCHL_ID = "SCHL_ID";
+        public static final String COLUMN_NAME_CREATED_DATE = "CREATED_DATE";
+        public static final String COLUMN_NAME_CREATED_BY = "CREATED_BY";
+        public static final String COLUMN_NAME_UPDATED_DATE = "UPDATED_DATE";
+        public static final String COLUMN_NAME_UPDATED_BY = "UPDATED_BY ";
     }
 
     public static abstract class GradeEntry implements BaseColumns {

@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.CharArrayBuffer;
 import android.database.ContentObserver;
 import android.database.Cursor;
@@ -18,6 +19,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,9 +36,11 @@ import com.saysweb.emis_app.data.emisDBHelper;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
 
 import static android.R.attr.duration;
 import static android.R.attr.id;
+import static android.R.attr.key;
 import static android.R.attr.x;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static android.os.Build.VERSION_CODES.N;
@@ -67,6 +71,7 @@ public class EnrollmentByGrade extends AppCompatActivity {
     String school_id;
     int flag = 0;
     HashMap<Integer,String> spinnerMap = new HashMap<Integer, String>();
+    String ebgGradeString = "empty";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +98,7 @@ public class EnrollmentByGrade extends AppCompatActivity {
 //        actionBar2.setTitle("EMIS - Enrollment By Grade");
 
         /*Getting INTENT from School Select Activity*/
-
+        mDbHelper = new emisDBHelper(this);
 
         String intentID = getIntent().getStringExtra("intentID");
 //         Checking intentID variable to check which class sent the intent
@@ -104,7 +109,8 @@ public class EnrollmentByGrade extends AppCompatActivity {
 //            censusYear = Integer.parseInt(year);
         }else if (intentID.equals("EBG")){
             Intent intent = getIntent();
-            String ebgGradeString = intent.getStringExtra("Grade");
+            overridePendingTransition(0, 0);
+            ebgGradeString = intent.getStringExtra("Grade");
             String ebgBirthYearString = intent.getStringExtra("Birth Year");
             String ebgFemaleCountString = intent.getStringExtra("Female Count");
             String ebgMaleCountString = intent.getStringExtra("Male Count");
@@ -129,13 +135,23 @@ public class EnrollmentByGrade extends AppCompatActivity {
                 textView3.setText("0");
             }
 
+
+            Resources r = getResources();
+            float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, r.getDisplayMetrics());
+
+            TextView textView4 = (TextView) findViewById(R.id.save_entry);
+            textView4.setTranslationX(px);
+
+            TextView textView5 = (TextView) findViewById(R.id.delete_entry);
+            textView5.setVisibility(View.VISIBLE);
+
         }
 
 
         /* END INTENT CODE*/
 
 
-        mDbHelper = new emisDBHelper(this);
+
 
         /* ADDING MALE AND FEMALE FEILDS */
 
@@ -175,15 +191,38 @@ public class EnrollmentByGrade extends AppCompatActivity {
 
         // Preparing Key - Value pair for Spinner - Grade Name and Grade Code
 
-        String[] spinnerArray = new String[grades.length];
+        String[] spinnerArray = new String[grades.length + 1];
 
+        spinnerArray[0] = "--SELECT--";
         int j;
         for (j = 0; j < grades.length; j++)
         {
-            spinnerMap.put(j,grade_codes[j]);
-            spinnerArray[j] = grades[j];
+            spinnerMap.put(j+1 , grade_codes[j]);
+            spinnerArray[j+1] = grades[j];
         }
 
+        int key = 0;
+        if(!ebgGradeString.equals("empty")) {
+            Object key_obj = getKeyFromValue(spinnerMap, ebgGradeString);
+            if (key_obj != null) {
+                key = (Integer) key_obj;
+            }
+        }
+
+
+
+
+
+//        if(ebgGradeString != "empty"){
+//            String compareValue = "some value";
+//            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.select_state, android.R.layout.simple_spinner_item);
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//            mSpinner.setAdapter(adapter);
+//            if (!compareValue.equals(null)) {
+//                int spinnerPosition = adapter.getPosition(compareValue);
+//                mSpinner.setSelection(spinnerPosition);
+//            }
+//        }
 
 //        TextView textView = (TextView) findViewById(R.id.hello);
 //        textView.setText("hello" +" "+ grades_array[0]+" " + grades_array[1]+ " " +grades_array[2]);
@@ -192,6 +231,9 @@ public class EnrollmentByGrade extends AppCompatActivity {
         ArrayAdapter<String> gradeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         gradeAdapter.setDropDownViewResource(R.layout.spinner_layout);
         spinner.setAdapter(gradeAdapter);
+        if(key != 0){
+                spinner.setSelection(key);
+            }
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -273,7 +315,7 @@ public class EnrollmentByGrade extends AppCompatActivity {
         String[] projection = {EnrollmentByGradesEntry._ID};
         String selection = EnrollmentByGradesEntry.COLUMN_NAME_GRADE_CODE + "= ?";
         String[] selectionArgs = {grade_code};
-////
+
         Cursor cursor_grade = db_read.query(EnrollmentByGradesEntry.TABLE_NAME, projection, selection,
                 selectionArgs, null, null, null);
 
@@ -290,9 +332,10 @@ public class EnrollmentByGrade extends AppCompatActivity {
 
         }
 
-
-//        TextView textViewhello = (TextView) findViewById(R.id.hello);
-//        textViewhello.setText(""+censusYear + school_id + birthYear + grade_code+" "+flag);
+        Long tsLong = System.currentTimeMillis()/1000;
+        final String ts = tsLong.toString();
+        MyApplication myApplication = (MyApplication) getApplication();
+        final String uid = myApplication.getGlobal_userID();
 
         if(flag == 0) {
 
@@ -304,6 +347,11 @@ public class EnrollmentByGrade extends AppCompatActivity {
             values.put(EnrollmentByGradesEntry.COLUMN_NAME_FEMALE_COUNT, females);
             values.put(EnrollmentByGradesEntry.COLUMN_NAME_SCHL_ID, school_id);
             values.put(EnrollmentByGradesEntry.COLUMN_NAME_CENSUS_YEAR, censusYear);
+            values.put(EnrollmentByGradesEntry.COLUMN_NAME_CREATED_DATE, ts);
+            values.put(EnrollmentByGradesEntry.COLUMN_NAME_CREATED_BY, uid );
+            values.put(EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_DATE, ts);
+            values.put(EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_BY, uid );
+
 //
 
 //       Insert the new row, returning the primary key value of the new row
@@ -341,6 +389,8 @@ public class EnrollmentByGrade extends AppCompatActivity {
                             values.put(EnrollmentByGradesEntry.COLUMN_NAME_FEMALE_COUNT, finalFemales);
                             values.put(EnrollmentByGradesEntry.COLUMN_NAME_SCHL_ID, school_id);
                             values.put(EnrollmentByGradesEntry.COLUMN_NAME_CENSUS_YEAR, censusYear);
+                            values.put(EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_DATE, ts);
+                            values.put(EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_BY, uid);
 
                             String whereClause =  EnrollmentByGradesEntry.COLUMN_NAME_CENSUS_YEAR +  " = ? AND " + EnrollmentByGradesEntry.COLUMN_NAME_SCHL_ID + " = ? AND " + EnrollmentByGradesEntry.COLUMN_NAME_BIRTH_YEAR + " = ? AND " + EnrollmentByGradesEntry.COLUMN_NAME_GRADE_CODE + " = ?" ;
                             String[] whereArgs = {year,school_id, String.valueOf(finalBirthYear), grade_code};
@@ -353,7 +403,6 @@ public class EnrollmentByGrade extends AppCompatActivity {
                             Intent intent_refresh = new Intent(EnrollmentByGrade.this, EnrollmentByGrade.class);
                             intent_refresh.putExtra("intentID", "SchoolActivity");
                             intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            overridePendingTransition(0, 0);
                             startActivity(intent_refresh);
                             //TODO : ADD VALIDATION TO FORMS && Check if form data has been submitted successfully before refreshing.
 
@@ -371,9 +420,70 @@ public class EnrollmentByGrade extends AppCompatActivity {
             AlertDialog alert11 = builder1.create();
             alert11.show();
         }
-//
+
     }
 //
+// DELETE the entry by DELETE BUTTON
+
+
+
+    public void onDeleteEbg(View vDelete){
+
+        EditText birthYearTexView = (EditText) findViewById(R.id.birth_year_entry);
+        final String birthString;
+        birthString = birthYearTexView.getText().toString();
+        final SQLiteDatabase db_delete = mDbHelper.getReadableDatabase();
+
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Are you sure you want to delete this entry ? ");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton(
+                "YES",  //TODO : When returning from edit form, if user changes the grade , record needs to be deleted and new record to be added. GEt grade code from intent and delete record
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        String grade_id = null;
+                        String[] projection = {EnrollmentByGradesEntry._ID};
+                        String selection = EnrollmentByGradesEntry.COLUMN_NAME_CENSUS_YEAR +  " = ? AND " + EnrollmentByGradesEntry.COLUMN_NAME_SCHL_ID + " = ? AND " + EnrollmentByGradesEntry.COLUMN_NAME_BIRTH_YEAR + " = ? AND " + EnrollmentByGradesEntry.COLUMN_NAME_GRADE_CODE + " = ?" ;
+                        String[] selectionArgs = {year,school_id, birthString, ebgGradeString};
+
+                        Cursor cursor_grade_id = db_delete.query(EnrollmentByGradesEntry.TABLE_NAME, projection, selection,
+                                selectionArgs, null, null, null);
+
+                        while(cursor_grade_id.moveToNext()) {
+                            grade_id = cursor_grade_id.getString(0);
+                        }
+                        cursor_grade_id.close();
+
+                        // CODE TO DELETE ITEM FROM DB
+
+                        String selection1 = EnrollmentByGradesEntry._ID + " LIKE ?";
+                        String[] selectionArgs1 = {grade_id};
+                        db_delete.delete(EnrollmentByGradesEntry.TABLE_NAME, selection1, selectionArgs1);
+
+                        Toast toast = Toast.makeText(EnrollmentByGrade.this, "Entry has been DELETED Successfully", Toast.LENGTH_LONG);
+                        toast.show();
+
+                        Intent intent_refresh = new Intent(EnrollmentByGrade.this, EnrollmentByGrade.class);
+                        intent_refresh.putExtra("intentID", "SchoolActivity");
+                        intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent_refresh);
+
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "NO",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+    }
 
     // Method to find grades in a school
 
@@ -384,7 +494,7 @@ public class EnrollmentByGrade extends AppCompatActivity {
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
         String[] projection = {SchoolEntry.COLUMN_NAME_SECTOR_CODE, SchoolEntry.COLUMN_NAME_SCHL_ID};
-                String selection = SchoolEntry.COLUMN_NAME_SCHOOL_CODE + "=?";
+                String selection = SchoolEntry.COLUMN_NAME_SCHOOL_CODE + " =?";
                 String[] selectionArgs = {school_code2};
 
 //      Cursor with all the rows from Columns - School Code and School Name
@@ -479,8 +589,18 @@ public class EnrollmentByGrade extends AppCompatActivity {
             }else if (femaleText.length() == 0 && maleText.length() == 0){
                 totalTextView.setText("0");
             }
-
         }
     };
+
+
+    public static Object getKeyFromValue(Map hm, Object value) {
+        for (Object o : hm.keySet()) {
+            if (hm.get(o).equals(value)) {
+                return o;
+            }
+        }
+        return null;
+    }
+
 
 }

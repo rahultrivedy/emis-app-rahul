@@ -22,6 +22,8 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.saysweb.emis_app.R.id.date;
+
 public class EditEnrollmentByGrade extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -29,6 +31,7 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
     private List<ListItem> listItems;
     private emisDBHelper mDbHelper;
     int censusYear = 0;
+
 
 //    private String grade_code;
 //    private String school_id;
@@ -62,19 +65,21 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
 
 //
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        String[] projection = {EnrollmentByGradesEntry.COLUMN_NAME_GRADE_CODE,EnrollmentByGradesEntry.COLUMN_NAME_BIRTH_YEAR, EnrollmentByGradesEntry.COLUMN_NAME_FEMALE_COUNT, EnrollmentByGradesEntry.COLUMN_NAME_MALE_COUNT};
+        String[] projection = {EnrollmentByGradesEntry.COLUMN_NAME_GRADE_CODE,EnrollmentByGradesEntry.COLUMN_NAME_BIRTH_YEAR, EnrollmentByGradesEntry.COLUMN_NAME_FEMALE_COUNT, EnrollmentByGradesEntry.COLUMN_NAME_MALE_COUNT, EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_DATE};
         String selection = EnrollmentByGradesEntry.COLUMN_NAME_SCHL_ID + " = ? AND " + EnrollmentByGradesEntry.COLUMN_NAME_CENSUS_YEAR + " = ?";
         String[] selectionArgs = {schoolID, year};
+        String sortOrder = EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_DATE + " DESC";
 
 //      Cursor with all the rows from Columns - School Code and School Name
         Cursor cursor = db.query(EnrollmentByGradesEntry.TABLE_NAME, projection,
-                selection, selectionArgs, null, null, null);
+                selection, selectionArgs, null, null, sortOrder);
 
         int cursorLength = cursor.getCount();
         String[] grade_code = new String[cursor.getCount()];
         String[] birth_year = new String[cursor.getCount()];
         String[] female_count = new String[cursor.getCount()];
         String[] male_count = new String[cursor.getCount()];
+        String[] date_updated = new String[cursor.getCount()];
 
         int i = 0;
 //        TextView textView = (TextView) findViewById(R.id.sample);
@@ -85,6 +90,7 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
             birth_year[i] = cursor.getString(1);
             female_count[i] = cursor.getString(2);
             male_count[i] = cursor.getString(3);
+            date_updated[i] = cursor.getString(4);
             i++;
         }
         cursor.close();
@@ -125,9 +131,8 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
                     grade_code[i1],
                     birth_year[i1],
                     female_count[i1],
-                    male_count[i1]
-
-
+                    male_count[i1],
+                    date_updated[i1]
             );
 
             listItems.add(listItem);

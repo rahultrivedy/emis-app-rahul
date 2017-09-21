@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context="com.saysweb.emis_app.GradeClassCount">
@@ -355,16 +355,41 @@
                 />
         </LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SAVE"
-            android:backgroundTint="#66BB6A"
-            android:textColor="#fff"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="18dp"
-            android:id="@+id/save_entry"
-            android:onClick="onSaveGcc"/>
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SAVE"
+                android:backgroundTint="#66BB6A"
+                android:textColor="#fff"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="18dp"
+                android:id="@+id/save_entry"
+                android:onClick="onSaveGcc"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:backgroundTint="#d32f2f"
+                android:textColor="#fff"
+                android:layout_toLeftOf="@id/save_entry"
+                android:layout_marginTop="18dp"
+                android:id="@+id/delete_entry"
+                android:onClick="onDeleteGcc"
+                />
+
+
+        </RelativeLayout>
+
+
+
 
 
 

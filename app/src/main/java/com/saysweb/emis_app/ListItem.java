@@ -9,6 +9,7 @@ public class ListItem {
     private String birthYr;
     private String fCount;
     private String mCount;
+    private String date;
 
     public String getGrade() {
         return grade;
@@ -26,11 +27,16 @@ public class ListItem {
         return mCount;
     }
 
-    public ListItem(String grade, String birthyr, String fcount, String mcount) {
+    public String getDate() {
+        return date;
+    }
+
+    public ListItem(String grade, String birthyr, String fcount, String mcount, String date) {
         this.grade = grade;
         this.birthYr = birthyr;
         this.fCount = fcount;
         this.mCount = mcount;
+        this.date = date;
 
     }
 }

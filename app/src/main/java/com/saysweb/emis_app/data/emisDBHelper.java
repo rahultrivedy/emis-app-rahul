@@ -129,7 +129,11 @@ public class emisDBHelper extends SQLiteOpenHelper {
                 + EnrollmentByGradesEntry.COLUMN_NAME_AGE + " INTEGER, "
                 + EnrollmentByGradesEntry.COLUMN_NAME_FEMALE_COUNT + " INTEGER, "
                 + EnrollmentByGradesEntry.COLUMN_NAME_MALE_COUNT + " INTEGER, "
-                + EnrollmentByGradesEntry.COLUMN_NAME_SCHL_ID + " INTEGER NOT NULL);";
+                + EnrollmentByGradesEntry.COLUMN_NAME_SCHL_ID + " INTEGER NOT NULL,"
+                + EnrollmentByGradesEntry.COLUMN_NAME_CREATED_DATE + " INTEGER, "
+                + EnrollmentByGradesEntry.COLUMN_NAME_CREATED_BY + " TEXT, "
+                + EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_DATE + " INTEGER, "
+                + EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_BY + " TEXT);";
 
         db.execSQL(SQL_CREATE_EBG_TABLE);
 
@@ -145,7 +149,12 @@ public class emisDBHelper extends SQLiteOpenHelper {
                 + GradeClassCountEntry.COLUMN_NAME_STUDENT_FEMALE_COUNT + " INTEGER, "
                 + GradeClassCountEntry.COLUMN_NAME_TEACHER_MALE_COUNT + " INTEGER, "
                 + GradeClassCountEntry.COLUMN_NAME_TEACHER_FEMALE_COUNT + " INTEGER, "
-                + GradeClassCountEntry.COLUMN_NAME_QTR + " INTEGER);";
+                + GradeClassCountEntry.COLUMN_NAME_QTR + " INTEGER, "
+                + GradeClassCountEntry.COLUMN_NAME_CREATED_DATE + " INTEGER, "
+                + GradeClassCountEntry.COLUMN_NAME_CREATED_BY + " TEXT, "
+                + GradeClassCountEntry.COLUMN_NAME_UPDATED_DATE + " INTEGER, "
+                + GradeClassCountEntry.COLUMN_NAME_UPDATED_BY + " TEXT);";
+
 
         db.execSQL(SQL_CREATE_GCC_TABLE);
 
@@ -159,7 +168,12 @@ public class emisDBHelper extends SQLiteOpenHelper {
                 + EnrollmentByBoardingEntry.COLUMN_NAME_FEMALE_BOARDING_COUNT + " INTEGER, "
                 + EnrollmentByBoardingEntry.COLUMN_NAME_MALE_DAY_COUNT + " INTEGER, "
                 + EnrollmentByBoardingEntry.COLUMN_NAME_FEMALE_DAY_COUNT + " INTEGER, "
-                + EnrollmentByBoardingEntry.COLUMN_NAME_SCHL_ID + " INTEGER );";
+                + EnrollmentByBoardingEntry.COLUMN_NAME_SCHL_ID + " INTEGER ,"
+                + EnrollmentByBoardingEntry.COLUMN_NAME_CREATED_DATE + " INTEGER, "
+                + EnrollmentByBoardingEntry.COLUMN_NAME_CREATED_BY + " TEXT, "
+                + EnrollmentByBoardingEntry.COLUMN_NAME_UPDATED_DATE + " INTEGER, "
+                + EnrollmentByBoardingEntry.COLUMN_NAME_UPDATED_BY + " TEXT);";
+
 
         db.execSQL(SQL_CREATE_BOARDING_ENROLLMENT_TABLE);
 

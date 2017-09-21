@@ -2,14 +2,22 @@ package com.saysweb.emis_app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,9 +29,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<ListItem> listItems;
     private Context context;
 
+
     public RecyclerViewAdapter(List<ListItem> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
+
+
     }
 
     @Override
@@ -31,6 +42,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item, parent, false);
         return new ViewHolder(v);
+
     }
 
     @Override
@@ -40,6 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(context, EnrollmentByGrade.class);
 
                 intent.putExtra("intentID", "EBG");
@@ -52,15 +65,41 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
                 context.startActivity(intent);
-//                Toast.makeText(context, "You Clicked "+listItem.getGrade(), Toast.LENGTH_LONG).show();
             }
         });
         holder.textViewGrade.setText(listItem.getGrade());
         holder.textViewBirthYr.setText(listItem.getBirthYr());
         holder.textViewFCount.setText(listItem.getfCount());
         holder.textViewMCount.setText(listItem.getmCount());
+        holder.textViewDate.setText(listItem.getDate());
+
+        /*-----------------------------------------------*/
+
+        long dbTimeInMilis = Long.parseLong(listItem.getDate()) * 1000L;
+        Calendar dbTime = Calendar.getInstance();
+        dbTime.setTimeInMillis(dbTimeInMilis);
+
+        Calendar now = Calendar.getInstance();
+
+        if(now.get(Calendar.DATE) == dbTime.get(Calendar.DATE))
+        {
+            FrameLayout frameLayout = (FrameLayout)holder.cardView.findViewById(R.id.frame);
+            frameLayout.setVisibility(View.VISIBLE);
+            holder.textViewDate.setVisibility(View.VISIBLE);
+        }else{
+            FrameLayout frameLayout = (FrameLayout)holder.cardView.findViewById(R.id.frame);
+            frameLayout.setVisibility(View.VISIBLE);
+            frameLayout.setBackgroundColor(Color.parseColor("#B0BEC5"));
+
+        }
+/*--------------------------------------------------------*/
+       for(int i = 0; i<= getItemCount();i+=2){
+           if(position == i) {
+               holder.cardView.setCardBackgroundColor(Color.parseColor("#CDDC39"));
 
 
+           }
+        }
 
     }
 
@@ -76,15 +115,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public TextView textViewBirthYr;
         public TextView textViewFCount;
         public TextView textViewMCount;
+        public CardView cardView;
+        public TextView textViewDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
+            cardView = (CardView) itemView.findViewById(R.id.cv);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
             textViewGrade = (TextView) itemView.findViewById(R.id.textViewGrade);
             textViewBirthYr = (TextView) itemView.findViewById(R.id.textViewBirthYr);
             textViewFCount = (TextView) itemView.findViewById(R.id.textViewFCount);
             textViewMCount = (TextView) itemView.findViewById(R.id.textViewMCount);
+            textViewDate = (TextView) itemView.findViewById(R.id.date);
 
         }
     }
