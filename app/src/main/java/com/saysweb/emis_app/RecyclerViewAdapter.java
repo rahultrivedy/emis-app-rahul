@@ -2,22 +2,17 @@ package com.saysweb.emis_app;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,7 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 Intent intent = new Intent(context, EnrollmentByGrade.class);
 
-                intent.putExtra("intentID", "EBG");
+                intent.putExtra("intentID", "EditEBG");
                 intent.putExtra("Grade", listItem.getGrade());
                 intent.putExtra("Birth Year", listItem.getBirthYr());
                 intent.putExtra("Female Count", listItem.getfCount());
@@ -95,7 +90,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 /*--------------------------------------------------------*/
        for(int i = 0; i<= getItemCount();i+=2){
            if(position == i) {
-               holder.cardView.setCardBackgroundColor(Color.parseColor("#CDDC39"));
+               holder.cardView.setCardBackgroundColor(Color.parseColor("#DCEBE4"));
 
 
            }

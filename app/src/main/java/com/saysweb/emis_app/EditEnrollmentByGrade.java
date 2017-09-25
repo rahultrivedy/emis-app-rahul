@@ -3,26 +3,19 @@ package com.saysweb.emis_app;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.saysweb.emis_app.data.emisDBHelper;
-import com.saysweb.emis_app.data.emisContract.GradeEntry;
-import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 import com.saysweb.emis_app.data.emisContract.EnrollmentByGradesEntry;
-
-
-import org.w3c.dom.Text;
+import com.saysweb.emis_app.data.emisContract.SchoolEntry;
+import com.saysweb.emis_app.data.emisDBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.saysweb.emis_app.R.id.date;
 
 public class EditEnrollmentByGrade extends AppCompatActivity {
 
@@ -42,6 +35,16 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_enrollment_by_grade);
 
+//           /* Actionbar*/
+//        /*Set the new toolbar as the Actionbar*/
+//        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar3);
+//        setSupportActionBar(myToolbar);
+//        ActionBar actionBar1 = getSupportActionBar();
+//        actionBar1.setCustomView(R.layout.action_bar);
+//        actionBar1.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
+//                | ActionBar.DISPLAY_SHOW_HOME);
+//        actionBar1.setDisplayHomeAsUpEnabled(true);
+
         MyApplication myApplication = (MyApplication) getApplication();
         String year = myApplication.getGlobal_censusYear();
         censusYear = Integer.parseInt(year);
@@ -54,6 +57,7 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
 
         Intent intent = getIntent();
         String intentID = intent.getStringExtra("IntentID");
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         mDbHelper = new emisDBHelper(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -147,6 +151,16 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
         Intent intent_add_new = new Intent(this, EnrollmentByGrade.class);
         intent_add_new.putExtra("intentID" , "SchoolSelect");
         startActivity(intent_add_new);
+        finish();
+    }
+
+    public void onHome(View vHome){
+
+        Intent intent_home = new Intent(this, SchoolSelectActivity.class);
+        intent_home.putExtra("intentID", "Home");
+        startActivity(intent_home);
+        finish();
+
     }
 
 }

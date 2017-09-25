@@ -3,23 +3,19 @@ package com.saysweb.emis_app;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.saysweb.emis_app.data.emisContract;
 import com.saysweb.emis_app.data.emisContract.GradeClassCountEntry;
 import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 import com.saysweb.emis_app.data.emisDBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.saysweb.emis_app.R.id.recyclerView;
-import static com.saysweb.emis_app.R.id.recyclerViewGcc;
 public class EditGradeClassCount extends AppCompatActivity {
 
     private RecyclerView recyclerViewGcc;
@@ -46,6 +42,8 @@ public class EditGradeClassCount extends AppCompatActivity {
 
         Intent intent = getIntent();
         String intentID = intent.getStringExtra("IntentID");
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
         mDbHelper = new emisDBHelper(this);
 
         recyclerViewGcc = (RecyclerView) findViewById(R.id.recyclerViewGcc);
@@ -55,7 +53,7 @@ public class EditGradeClassCount extends AppCompatActivity {
         listItemsGcc = new ArrayList<>();
 
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        String[] projection = {GradeClassCountEntry.COLUMN_NAME_GRADE_CODE,GradeClassCountEntry.COLUMN_NAME_CLASS_COUNT, GradeClassCountEntry.COLUMN_NAME_STUDENT_MALE_COUNT, GradeClassCountEntry.COLUMN_NAME_STUDENT_FEMALE_COUNT, GradeClassCountEntry.COLUMN_NAME_TEACHER_FEMALE_COUNT, GradeClassCountEntry.COLUMN_NAME_TEACHER_MALE_COUNT};
+        String[] projection = {GradeClassCountEntry.COLUMN_NAME_GRADE_CODE,GradeClassCountEntry.COLUMN_NAME_CLASS_COUNT, GradeClassCountEntry.COLUMN_NAME_STUDENT_MALE_COUNT, GradeClassCountEntry.COLUMN_NAME_STUDENT_FEMALE_COUNT, GradeClassCountEntry.COLUMN_NAME_TEACHER_FEMALE_COUNT, GradeClassCountEntry.COLUMN_NAME_TEACHER_MALE_COUNT, GradeClassCountEntry.COLUMN_NAME_UPDATED_DATE};
 
         String selection = GradeClassCountEntry.COLUMN_NAME_SCHL_ID + " = ? AND " + GradeClassCountEntry.COLUMN_NAME_CENSUS_YEAR + " = ?";
 
@@ -74,6 +72,7 @@ public class EditGradeClassCount extends AppCompatActivity {
         String[] male_student_count = new String[cursor.getCount()];
         String[] female_teacher_count = new String[cursor.getCount()];
         String[] male_teacher_count = new String[cursor.getCount()];
+        String[] date_updated = new String[cursor.getCount()];
 
         int i = 0;
 
@@ -85,6 +84,7 @@ public class EditGradeClassCount extends AppCompatActivity {
             female_student_count[i] = cursor.getString(3);
             female_teacher_count[i] = cursor.getString(4);
             male_teacher_count[i] = cursor.getString(5);
+            date_updated[i] = cursor.getString(6);
             i++;
         }
         cursor.close();
@@ -128,7 +128,8 @@ public class EditGradeClassCount extends AppCompatActivity {
                     female_student_count[i1],
                     male_student_count[i1],
                     female_teacher_count[i1],
-                    male_teacher_count[i1]
+                    male_teacher_count[i1],
+                    date_updated[i1]
             );
 
             listItemsGcc.add(listItemGcc);
@@ -143,6 +144,17 @@ public class EditGradeClassCount extends AppCompatActivity {
         Intent intent_add_new_gcc = new Intent(this, GradeClassCount.class);
         intent_add_new_gcc.putExtra("intentID" , "SchoolSelect");
         startActivity(intent_add_new_gcc);
+        finish();
     }
+
+    public void onHome(View vHome){
+
+        Intent intent_home = new Intent(this, SchoolSelectActivity.class);
+        intent_home.putExtra("intentID", "Home");
+        startActivity(intent_home);
+        finish();
+
+    }
+
 
 }

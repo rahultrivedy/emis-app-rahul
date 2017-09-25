@@ -3,17 +3,15 @@ package com.saysweb.emis_app;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.saysweb.emis_app.data.emisContract;
-
-import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 import com.saysweb.emis_app.data.emisContract.EnrollmentByBoardingEntry;
+import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 import com.saysweb.emis_app.data.emisDBHelper;
 
 import java.util.ArrayList;
@@ -45,6 +43,8 @@ public class EditBoardingEnrollment extends AppCompatActivity {
 
         Intent intent = getIntent();
         String intentID = intent.getStringExtra("IntentID");
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
         mDbHelper = new emisDBHelper(this);
 
         recyclerViewEB = (RecyclerView) findViewById(R.id.recyclerViewEB);
@@ -54,7 +54,7 @@ public class EditBoardingEnrollment extends AppCompatActivity {
         listItemsEB = new ArrayList<>();
 
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        String[] projection = {EnrollmentByBoardingEntry.COLUMN_NAME_GRADE_CODE,EnrollmentByBoardingEntry.COLUMN_NAME_MALE_BOARDING_COUNT, EnrollmentByBoardingEntry.COLUMN_NAME_FEMALE_BOARDING_COUNT};
+        String[] projection = {EnrollmentByBoardingEntry.COLUMN_NAME_GRADE_CODE,EnrollmentByBoardingEntry.COLUMN_NAME_MALE_BOARDING_COUNT, EnrollmentByBoardingEntry.COLUMN_NAME_FEMALE_BOARDING_COUNT, EnrollmentByBoardingEntry.COLUMN_NAME_UPDATED_DATE };
 
         String selection = EnrollmentByBoardingEntry.COLUMN_NAME_SCHL_ID + " = ? AND " + EnrollmentByBoardingEntry.COLUMN_NAME_CENSUS_YEAR + " = ?";
 
@@ -69,8 +69,9 @@ public class EditBoardingEnrollment extends AppCompatActivity {
         int cursorLength = cursor.getCount();
 
         String[] grade_code = new String[cursor.getCount()];
-        String[] females = new String[cursor.getCount()];
-        String[] males= new String[cursor.getCount()];
+        String[] males = new String[cursor.getCount()];
+        String[] females= new String[cursor.getCount()];
+        String[] date_updated = new String[cursor.getCount()];
 
         int i = 0;
 
@@ -79,6 +80,7 @@ public class EditBoardingEnrollment extends AppCompatActivity {
             grade_code[i] = cursor.getString(0);
             males[i] = cursor.getString(1);
             females[i] = cursor.getString(2);
+            date_updated[i] = cursor.getString(3);
             i++;
         }
         cursor.close();
@@ -118,8 +120,10 @@ public class EditBoardingEnrollment extends AppCompatActivity {
             ListItemEB listItemEB = new ListItemEB(
 
                     grade_code[i1],
+                    females[i1],
                     males[i1],
-                    females[i1]
+                    date_updated[i1]
+
             );
 
             listItemsEB.add(listItemEB);
@@ -135,7 +139,18 @@ public class EditBoardingEnrollment extends AppCompatActivity {
         Intent intent_add_new_EB = new Intent(this, BoardingEnrollment.class);
         intent_add_new_EB.putExtra("intentID" , "SchoolSelect");
         startActivity(intent_add_new_EB);
+        finish();
     }
+
+    public void onHome(View vHome){
+
+        Intent intent_home = new Intent(this, SchoolSelectActivity.class);
+        intent_home.putExtra("intentID", "Home");
+        startActivity(intent_home);
+        finish();
+
+    }
+
 
 
 }

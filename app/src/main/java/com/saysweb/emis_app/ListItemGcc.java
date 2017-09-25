@@ -11,6 +11,7 @@ public class ListItemGcc {
     private String mStudCount;
     private String fTeachCount;
     private String mTeachCount;
+    private String date;
 
 
     public String getGrade() {
@@ -37,17 +38,19 @@ public class ListItemGcc {
         return mTeachCount;
     }
 
+    public String getDate() {
+        return date;
+    }
 
 
-
-    public ListItemGcc(String grade, String noofclasses, String fstudcount, String mstudcount, String fteachcount, String mteachcount) {
+    public ListItemGcc(String grade, String noofclasses, String fstudcount, String mstudcount, String fteachcount, String mteachcount, String date) {
         this.grade = grade;
         this.noOfClasses = noofclasses;
         this.fStudCount = fstudcount;
         this.mStudCount = mstudcount;
         this.fTeachCount = fteachcount;
         this.mTeachCount = mteachcount;
-
+        this.date = date;
     }
 }
 

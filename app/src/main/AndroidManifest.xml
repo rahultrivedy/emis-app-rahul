@@ -19,24 +19,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SchoolSelectActivity"
-            android:parentActivityName=".MainActivity"
-            tools:targetApi="jelly_bean">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
+        <activity android:name=".SchoolSelectActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            />
         <activity
             android:name=".EnrollmentByGrade"
-            android:parentActivityName=".SchoolSelectActivity"
+            android:parentActivityName=".EditEnrollmentByGrade"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SchoolSelectActivity" />
+                android:value=".EditEnrollmentByGrade" />
         </activity>
         <activity
             android:name=".GradeClassCount"
+            android:parentActivityName=".EditGradeClassCount"
+            tools:targetApi="jelly_bean">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EditGradeClassCount" />
+        </activity>
+        <activity
+            android:name=".BoardingEnrollment"
+            android:parentActivityName=".EditBoardingEnrollment"
+            tools:targetApi="jelly_bean">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EditBoardingEnrollment" />
+        </activity>
+        <activity
+            android:name=".EditEnrollmentByGrade"
             android:parentActivityName=".SchoolSelectActivity"
             tools:targetApi="jelly_bean">
             <meta-data
@@ -44,16 +55,21 @@
                 android:value=".SchoolSelectActivity" />
         </activity>
         <activity
-            android:name=".BoardingEnrollment"
+            android:name=".EditGradeClassCount"
             android:parentActivityName=".SchoolSelectActivity"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SchoolSelectActivity" />
         </activity>
-        <activity android:name=".EditEnrollmentByGrade" />
-        <activity android:name=".EditGradeClassCount" />
-        <activity android:name=".EditBoardingEnrollment"></activity>
+        <activity android:name=".EditBoardingEnrollment">
+            android:parentActivityName=".SchoolSelectActivity"
+            tools:targetApi="jelly_bean">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SchoolSelectActivity" />
+        </activity>
+        <activity android:name=".EntryInfo"></activity>
     </application>
 
 </manifest>

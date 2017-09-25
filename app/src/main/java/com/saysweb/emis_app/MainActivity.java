@@ -1,36 +1,21 @@
 package com.saysweb.emis_app;
 
-import android.content.ContentValues;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.saysweb.emis_app.data.emisContract.UserEntry;
-import com.saysweb.emis_app.data.emisContract.ProvinceEntry;
-import com.saysweb.emis_app.data.emisContract.DistrictEntry;
-import com.saysweb.emis_app.data.emisContract.LlgvEntry;
-import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 import com.saysweb.emis_app.data.emisDBHelper;
-
-import static android.R.attr.duration;
-import static android.R.attr.enabled;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,6 +36,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        String intentId = getIntent().getStringExtra("Intent ID");
+        if (intentId != null && intentId.length() != 0 && intentId.equals("SchoolSelect")){
+
+            Intent intent = getIntent();
+            Toast toast = Toast.makeText(this, "You have been Logged Out", Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+
+//        String intentId = intent.getStringExtra("Intent ID");
 
         /*Set the new toolbar as the Actionbar*/
         Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
@@ -137,10 +133,12 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, SchoolSelectActivity.class);
                 intent.putExtra("UserName", userName);
+                intent.putExtra("intentID", "MainActivity");
+
 //                intent.putExtra("CensusYear", censusYear);
 
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
 
             } else {
                 Toast toast_fail = Toast.makeText(this, "User Name and Password do not match", Toast.LENGTH_SHORT);
@@ -149,44 +147,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onBackPressed()
+    {
+
+        finish();
+
+        moveTaskToBack(true);
+        android.os.Process.killProcess(android.os.Process.myPid());
 
 
+    }
 
-//    /**
-//     * Temporary helper method to display information in the onscreen TextView about the state of
-//     * the emis database.
-//     */
-//    private void displayDatabaseInfo() {
-//
-//        // To access our database, we instantiate our subclass of SQLiteOpenHelper
-//        // and pass the context, which is the current activity.
-//
-//
-//
-//        TextView displayView = (TextView) findViewById(R.id.text_view_emis);
-//        displayView.setText("Number of rows in EMIS database table: " + cursor.getColumnName(0));
-//
-//        // Perform this raw SQL query "SELECT * FROM emis"
-//        // to get a Cursor that contains all rows from the emis table.
-//        Cursor cursor = db.rawQuery("SELECT * FROM " + UserEntry.TABLE_NAME, null);
-//        try {
-//            // Display the number of rows in the Cursor (which reflects the number of rows in the
-//            // emis table in the database).
-//            TextView displayView = (TextView) findViewById(R.id.text_view_emis);
-//            displayView.setText("Number of rows in EMIS database table: " + cursor.getCount());
-//        } finally {
-//            // Always close the cursor when you're done reading from it. This releases all its
-//            // resources and makes it invalid.
-//            cursor.close();
-//        }
-//
-//
-////         ********************TEST ******************//
-//
-////         Inserting Dummy data in user table.
-////         Create and/or open a database to write on it
-//
-//
-//    }
 
 }

@@ -8,6 +8,7 @@ public class ListItemEB {
     private String grade;
     private String female;
     private String male;
+    private String date;
 
 
     public String getGrade() {
@@ -22,15 +23,17 @@ public class ListItemEB {
         return male;
     }
 
+    public String getDate() {
+        return date;
+    }
 
 
 
-
-    public ListItemEB(String grade,  String female, String male) {
+    public ListItemEB(String grade,  String female, String male, String date) {
         this.grade = grade;
         this.female = female;
-        this.male = female;
-
+        this.male = male;
+        this.date = date;
     }
 }
 

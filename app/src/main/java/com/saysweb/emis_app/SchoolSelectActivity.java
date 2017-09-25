@@ -1,36 +1,27 @@
 package com.saysweb.emis_app;
 
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.saysweb.emis_app.data.emisContract.UserEntry;
 import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 import com.saysweb.emis_app.data.emisDBHelper;
-import com.saysweb.emis_app.MainActivity;
 
 import java.util.HashMap;
 
-import static android.R.id.message;
-import static android.support.constraint.R.id.parent;
 import static android.text.TextUtils.split;
 import static com.saysweb.emis_app.R.id.school_code;
 
@@ -76,12 +67,44 @@ public class SchoolSelectActivity extends AppCompatActivity {
         /*GETTING THE INTENT from Main Activity*/
 
         // Get the Intent that started this activity and extract the string
-        Intent intent = getIntent();
-        String userId = intent.getStringExtra("UserName");
-//        year = intent.getStringExtra("CensusYear");
+        String intentID = getIntent().getStringExtra("intentID");
+//         Checking intentID variable to check which class sent the intent
+        if (intentID.equals("Home")) {
+            Intent intent = getIntent();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
+
+            MyApplication myApplication = (MyApplication) getApplication();
+            String autocompleteString = myApplication.getGlobal_autocompleteString();
+
+            if(autocompleteString.length()!=0 ){
+                AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(school_code);
+                autoCompleteTextView.setText(autocompleteString);
+                autoCompleteTextView.clearFocus();
+
+                View view = findViewById(R.id.enrollment_by_grade);
+                view.setVisibility(View.VISIBLE);
+
+
+                View view1 = findViewById(R.id.boarding_enrollment);
+                view1.setVisibility(View.VISIBLE);
+
+
+                View view2 = findViewById(R.id.grade_class_count);
+                view2.setVisibility(View.VISIBLE);
+
+
+            }
+
+        }else if (intentID.equals("MainActivity")){
+            Intent intent = getIntent();
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
 
         MyApplication myApplication = (MyApplication) getApplication();
         year = myApplication.getGlobal_censusYear();
+
+        myApplication = (MyApplication) getApplication();
+        String userId = myApplication.getGlobal_userID();
 
         String userName = helper.getUserName(userId); // Goes to emisDBHelper.java
 
@@ -93,7 +116,6 @@ public class SchoolSelectActivity extends AppCompatActivity {
         TextView userTextView = (TextView) findViewById(R.id.user_id);
         userTextView.setText(userName);
 
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         // -------------------
 
@@ -134,7 +156,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(arg1.getApplicationWindowToken(), 0);
 
 
@@ -155,38 +177,9 @@ public class SchoolSelectActivity extends AppCompatActivity {
     }
 
 
-     /*
-    * Method invoked when Select button is clicked
-    * Make the buttons for forms visible
-    */
-
-     public void onSchoolSelect (View v){
-
-         // Check if no view has focus:
-//         View view_keyboard = this.getCurrentFocus();
-//         if (view_keyboard != null) {
-//             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//             imm.hideSoftInputFromWindow(view_keyboard.getWindowToken(), 0);
-//         }
-
-
-//         View view = findViewById(R.id.enrollment_by_grade);
-//         view.setVisibility(View.VISIBLE);
-//
-//
-//         View view1 = findViewById(R.id.boarding_enrollment);
-//         view1.setVisibility(View.VISIBLE);
-//
-//
-//         View view2 = findViewById(R.id.grade_class_count);
-//         view2.setVisibility(View.VISIBLE);
-
-    }
-
-
     /*
-    * Method invoked when Login button is clicked
-    * take user inputs in a variable and call function to return password for the username - searchPass
+    * Method invoked when one of three buttons is clicked
+    * takes autocomplete string as input breaks them and saves school code to send to next activity
     */
     public void onFormSelect(View v) {
         String school_code_send;
@@ -213,6 +206,9 @@ public class SchoolSelectActivity extends AppCompatActivity {
         cursor.close();
 
         MyApplication myApplication = (MyApplication) getApplication();
+        myApplication.setGlobal_autocompleteString(school_code_send); // SET GLOBAL VARIABLE autocompleteString
+
+        myApplication = (MyApplication) getApplication();
         myApplication.setGlobal_schlID(school_id); // SET GLOBAL VARIABLE schlID
 
         myApplication = (MyApplication) getApplication(); // Set Global variable setGlobal_CensusYear to school code
@@ -224,6 +220,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
                 Intent intent = new Intent(SchoolSelectActivity.this, EditEnrollmentByGrade.class);
                 intent.putExtra("intentID", "SchoolSelect");
                 startActivity(intent);
+                finish();
                 break;
 
 
@@ -231,6 +228,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
                 Intent intent2 = new Intent(SchoolSelectActivity.this, EditGradeClassCount.class);
                 intent2.putExtra("intentID", "SchoolSelect");
                 startActivity(intent2);
+                finish();
                 break;
 
             case R.id.boarding_enrollment:
@@ -238,9 +236,53 @@ public class SchoolSelectActivity extends AppCompatActivity {
                 Intent intent3 = new Intent(SchoolSelectActivity.this, EditBoardingEnrollment.class);
                 intent3.putExtra("intentID", "SchoolSelect");
                 startActivity(intent3);
+                finish();
                 break;
 
         }
     }
 
+    public void onBackPressed()
+    {
+
+//        moveTaskToBack(true);
+
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setTitle("Confirmation");
+        builder1.setMessage("Are you sure you want to exit the App ?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                        moveTaskToBack(true);
+
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "NO",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+    }
+
+    public void onSignOut(View vLogout){
+        Intent intent = new Intent(SchoolSelectActivity.this, MainActivity.class);
+        intent.putExtra("Intent ID", "SchoolSelect");
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+    }
+
+
 }
+

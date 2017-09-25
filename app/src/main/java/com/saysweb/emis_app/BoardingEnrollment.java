@@ -6,10 +6,11 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,14 +23,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.saysweb.emis_app.data.emisContract.SchoolEntry;
-import com.saysweb.emis_app.data.emisContract.GradeEntry;
 import com.saysweb.emis_app.data.emisContract.EnrollmentByBoardingEntry;
+import com.saysweb.emis_app.data.emisContract.GradeEntry;
+import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 import com.saysweb.emis_app.data.emisDBHelper;
 
 import java.util.HashMap;
-
-import static com.saysweb.emis_app.R.id.grade;
 
 public class BoardingEnrollment extends AppCompatActivity {
 
@@ -57,7 +56,6 @@ public class BoardingEnrollment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boarding_enrollment);
-        overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
 
          /* Actionbar*/
         /*Set the new toolbar as the Actionbar*/
@@ -67,6 +65,7 @@ public class BoardingEnrollment extends AppCompatActivity {
         actionBar2.setCustomView(R.layout.action_bar);
         actionBar2.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
                 | ActionBar.DISPLAY_SHOW_HOME);
+        actionBar2.setDisplayHomeAsUpEnabled(true);
 
         MyApplication myApplication = (MyApplication) getApplication();
         year = myApplication.getGlobal_censusYear();
@@ -82,12 +81,18 @@ public class BoardingEnrollment extends AppCompatActivity {
 //         Checking intentID variable to check which class sent the intent
         if (intentID.equals("SchoolSelect")) {
             Intent intent = getIntent();
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
-        else if (intentID.equals("EB")){
+        else if (intentID.equals("EditEB")){
             Intent intent = getIntent();
             ebGradeString = intent.getStringExtra("Grade");
-            String ebMalesString = intent.getStringExtra("Females");
-            String ebFemalesString = intent.getStringExtra("Males");
+            overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top);
+
+            Spinner spinner = (Spinner)findViewById(R.id.grade_be);
+            spinner.setEnabled(false);
+
+            String ebMalesString = intent.getStringExtra("Males");
+            String ebFemalesString = intent.getStringExtra("Females");
 //
             TextView textView = (TextView) findViewById(R.id.male_be);
             textView.setText(ebMalesString);
@@ -203,6 +208,7 @@ public class BoardingEnrollment extends AppCompatActivity {
             Intent intent = new Intent(this, EditBoardingEnrollment.class);
             intent.putExtra("SchoolID", school_id);
             startActivity(intent);
+            finish();
         }
 
     }
@@ -218,8 +224,15 @@ public class BoardingEnrollment extends AppCompatActivity {
         Spinner gradeEntrySpinner = (Spinner) findViewById(R.id.grade_be);
 
         String gradeSpinner = gradeEntrySpinner.getSelectedItem().toString();
-        if (gradeSpinner.length() != 0) {
+        if (!gradeSpinner.equals("--SELECT--")) {
             grade_code = spinnerMap.get(spinner.getSelectedItemPosition());
+        }else if (gradeSpinner.equals("--SELECT--")){
+            gradeEntrySpinner.requestFocus();
+            TextView errorText = (TextView)gradeEntrySpinner.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Required");//changes the selected item text to this
+            return;
         }
 
         String females_string = femaleTextView.getText().toString();
@@ -269,8 +282,8 @@ public class BoardingEnrollment extends AppCompatActivity {
             ContentValues values = new ContentValues();
             values.put(EnrollmentByBoardingEntry.COLUMN_NAME_CENSUS_YEAR, censusYear);
             values.put(EnrollmentByBoardingEntry.COLUMN_NAME_GRADE_CODE, grade_code);
-            values.put(EnrollmentByBoardingEntry.COLUMN_NAME_MALE_BOARDING_COUNT, females);
-            values.put(EnrollmentByBoardingEntry.COLUMN_NAME_FEMALE_BOARDING_COUNT, males);
+            values.put(EnrollmentByBoardingEntry.COLUMN_NAME_MALE_BOARDING_COUNT, males);
+            values.put(EnrollmentByBoardingEntry.COLUMN_NAME_FEMALE_BOARDING_COUNT, females);
             values.put(EnrollmentByBoardingEntry.COLUMN_NAME_SCHL_ID, school_id);
             values.put(EnrollmentByBoardingEntry.COLUMN_NAME_CREATED_BY, uid);
             values.put(EnrollmentByBoardingEntry.COLUMN_NAME_CREATED_DATE, ts);
@@ -325,6 +338,7 @@ public class BoardingEnrollment extends AppCompatActivity {
                             intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             overridePendingTransition(0, 0);
                             startActivity(intent_refresh);
+                            finish();
 //                            //TODO : ADD VALIDATION TO FORMS && Check if form data has been submitted successfully before refreshing.
 
                         }
@@ -380,10 +394,11 @@ public class BoardingEnrollment extends AppCompatActivity {
                         Toast toast = Toast.makeText(BoardingEnrollment.this, "Entry has been DELETED Successfully", Toast.LENGTH_LONG);
                         toast.show();
 
-                        Intent intent_refresh = new Intent(BoardingEnrollment.this, BoardingEnrollment.class);
-                        intent_refresh.putExtra("intentID", "SchoolActivity");
+                        Intent intent_refresh = new Intent(BoardingEnrollment.this, EditBoardingEnrollment.class);
+                        intent_refresh.putExtra("SchoolID", school_id);
                         intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent_refresh);
+                        finish();
 
                     }
                 });
@@ -524,7 +539,10 @@ public class BoardingEnrollment extends AppCompatActivity {
         }
     };
 
-
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom);
+    }
 
 
 

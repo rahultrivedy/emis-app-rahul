@@ -4,7 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FCFFE4"
+    >
 
 
 
@@ -18,7 +20,9 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/my_toolbar3"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
@@ -126,6 +130,7 @@
                 android:background="@drawable/back"
                 android:layout_marginLeft="20dp"
                 android:padding="10dp"
+                android:imeOptions="flagNoExtractUi"
 
                 />
         </LinearLayout>
@@ -163,6 +168,7 @@
                 android:background="@drawable/back"
                 android:layout_marginLeft="20dp"
                 android:padding="10dp"
+                android:imeOptions="flagNoExtractUi"
 
                 />
         </LinearLayout>
@@ -200,6 +206,7 @@
                 android:background="@drawable/back"
                 android:layout_marginLeft="20dp"
                 android:padding="10dp"
+                android:imeOptions="flagNoExtractUi"
 
                 />
         </LinearLayout>
@@ -275,6 +282,7 @@
                 android:background="@drawable/back"
                 android:layout_marginLeft="20dp"
                 android:padding="10dp"
+                android:imeOptions="flagNoExtractUi"
 
                 />
         </LinearLayout>
@@ -313,6 +321,7 @@
                 android:background="@drawable/back"
                 android:layout_marginLeft="20dp"
                 android:padding="10dp"
+                android:imeOptions="flagNoExtractUi"
 
                 />
         </LinearLayout>
@@ -359,7 +368,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:orientation="horizontal">
 
             <Button
@@ -383,6 +391,7 @@
                 android:layout_marginTop="18dp"
                 android:id="@+id/delete_entry"
                 android:onClick="onDeleteGcc"
+                android:visibility="gone"
                 />
 
 

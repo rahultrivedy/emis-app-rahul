@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FCFFE4"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context="com.saysweb.emis_app.SchoolSelectActivity">
 
@@ -118,6 +120,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
+                android:imeOptions="flagNoExtractUi"
                 />
 
         </LinearLayout>
@@ -126,7 +129,7 @@
             <!--android:id="@+id/school_select"-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="54dp"-->
+            <!--android:layout_marginTop="36dp"-->
             <!--android:onClick="onSchoolSelect"-->
             <!--android:text="SELECT"-->
             <!--android:layout_gravity="center"/>-->
@@ -170,6 +173,19 @@
             android:backgroundTint="#B0BEC5"
             android:onClick="onFormSelect"
             android:visibility="gone"
+            />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_gravity="center"
+            android:textColor="#fff"
+            android:text="Sign Out"
+            android:textStyle="italic"
+            android:backgroundTint="#C2185B"
+            android:onClick="onSignOut"
             />
 
 

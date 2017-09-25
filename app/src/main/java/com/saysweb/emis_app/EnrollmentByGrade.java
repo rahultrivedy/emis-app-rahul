@@ -1,21 +1,16 @@
 package com.saysweb.emis_app;
 
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.CharArrayBuffer;
-import android.database.ContentObserver;
 import android.database.Cursor;
-import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.os.Build;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,26 +23,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.saysweb.emis_app.data.emisContract;
+import com.saysweb.emis_app.data.emisContract.EnrollmentByGradesEntry;
 import com.saysweb.emis_app.data.emisContract.GradeEntry;
 import com.saysweb.emis_app.data.emisContract.SchoolEntry;
-import com.saysweb.emis_app.data.emisContract.EnrollmentByGradesEntry;
 import com.saysweb.emis_app.data.emisDBHelper;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-import static android.R.attr.duration;
-import static android.R.attr.id;
-import static android.R.attr.key;
-import static android.R.attr.x;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static android.os.Build.VERSION_CODES.N;
-import static com.saysweb.emis_app.R.id.census_year;
-import static com.saysweb.emis_app.R.id.grade;
-import static com.saysweb.emis_app.R.id.male_entry;
-import static com.saysweb.emis_app.R.id.school_code;
 
 public class EnrollmentByGrade extends AppCompatActivity {
 
@@ -85,7 +68,6 @@ public class EnrollmentByGrade extends AppCompatActivity {
         MyApplication myApplication1 = (MyApplication) getApplication();
         schoolCode = myApplication1.getGlobal_schoolCode();
 
-      overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
         /* Actionbar*/
         /*Set the new toolbar as the Actionbar*/
         Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar3);
@@ -94,6 +76,8 @@ public class EnrollmentByGrade extends AppCompatActivity {
         actionBar2.setCustomView(R.layout.action_bar);
         actionBar2.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
                 | ActionBar.DISPLAY_SHOW_HOME);
+
+        actionBar2.setDisplayHomeAsUpEnabled(true);
 
 //        actionBar2.setTitle("EMIS - Enrollment By Grade");
 
@@ -104,12 +88,14 @@ public class EnrollmentByGrade extends AppCompatActivity {
 //         Checking intentID variable to check which class sent the intent
         if (intentID.equals("SchoolSelect")) {
             Intent intent = getIntent();
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 //            schoolCode = intent.getStringExtra("SchoolCode");
 //            String year = intent.getStringExtra("CensusYear");
 //            censusYear = Integer.parseInt(year);
-        }else if (intentID.equals("EBG")){
+        }else if (intentID.equals("EditEBG")){
             Intent intent = getIntent();
-            overridePendingTransition(0, 0);
+            overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top);
+
             ebgGradeString = intent.getStringExtra("Grade");
             String ebgBirthYearString = intent.getStringExtra("Birth Year");
             String ebgFemaleCountString = intent.getStringExtra("Female Count");
@@ -117,9 +103,13 @@ public class EnrollmentByGrade extends AppCompatActivity {
 
             TextView textView = (TextView) findViewById(R.id.birth_year_entry);
             textView.setText(ebgBirthYearString );
+            textView.setEnabled(false);
 
             TextView textView1 = (TextView) findViewById(R.id.female_entry);
             textView1.setText(ebgFemaleCountString);
+
+            Spinner spinner = (Spinner)findViewById(R.id.grade);
+            spinner.setEnabled(false);
 
             TextView textView2 = (TextView) findViewById(R.id.male_entry);
             textView2.setText(ebgMaleCountString);
@@ -283,16 +273,25 @@ public class EnrollmentByGrade extends AppCompatActivity {
             Calendar calendar = Calendar.getInstance(); // to find the current year
             int currentYear = calendar.get(Calendar.YEAR);
             age = currentYear - birthYear;
+        }else{
+            EditText editText = (EditText) findViewById(R.id.birth_year_entry);
+            editText.setError("Required");
+            return;
         }
 //
         Spinner gradeEntrySpinner = (Spinner) findViewById(R.id.grade);
 
 
-        grade = gradeEntrySpinner.getSelectedItem().toString();
-        if (grade.length() != 0){
+        String gradeSpinner = gradeEntrySpinner.getSelectedItem().toString();
+        if (!gradeSpinner.equals("--SELECT--")) {
             grade_code = spinnerMap.get(spinner.getSelectedItemPosition());
-//            TextView textViewhello = (TextView) findViewById(R.id.hello);
-//            textViewhello.setText(""+grade_code);
+        }else if (gradeSpinner.equals("--SELECT--")){
+            gradeEntrySpinner.requestFocus();
+            TextView errorText = (TextView)gradeEntrySpinner.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Required");//changes the selected item text to this
+            return;
         }
 
 
@@ -365,6 +364,7 @@ public class EnrollmentByGrade extends AppCompatActivity {
             intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             overridePendingTransition(0, 0);
             startActivity(intent_refresh);
+            finish();
         }
  else{
 
@@ -404,6 +404,7 @@ public class EnrollmentByGrade extends AppCompatActivity {
                             intent_refresh.putExtra("intentID", "SchoolActivity");
                             intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent_refresh);
+                            finish();
                             //TODO : ADD VALIDATION TO FORMS && Check if form data has been submitted successfully before refreshing.
 
                         }
@@ -464,10 +465,11 @@ public class EnrollmentByGrade extends AppCompatActivity {
                         Toast toast = Toast.makeText(EnrollmentByGrade.this, "Entry has been DELETED Successfully", Toast.LENGTH_LONG);
                         toast.show();
 
-                        Intent intent_refresh = new Intent(EnrollmentByGrade.this, EnrollmentByGrade.class);
-                        intent_refresh.putExtra("intentID", "SchoolActivity");
+                        Intent intent_refresh = new Intent(EnrollmentByGrade.this, EditEnrollmentByGrade.class);
+                        intent_refresh.putExtra("SchoolID", school_id);
                         intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent_refresh);
+                        finish();
 
                     }
                 });
@@ -601,6 +603,33 @@ public class EnrollmentByGrade extends AppCompatActivity {
         }
         return null;
     }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom);
+    }
+//
+
+//    CODE to overwrite default up button on actionbar. DO NOT DELETE
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+////                 todo: goto back activity from here
+//
+//                Intent intent = new Intent(EnrollmentByGrade.this, EditEnrollmentByGrade.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom);
+//                startActivity(intent);
+//
+//                finish();
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
+
 
 
 }

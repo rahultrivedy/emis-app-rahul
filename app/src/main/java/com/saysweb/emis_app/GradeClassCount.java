@@ -6,10 +6,11 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,16 +23,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.saysweb.emis_app.data.emisContract;
-import com.saysweb.emis_app.data.emisContract.SchoolEntry;
-import com.saysweb.emis_app.data.emisContract.GradeEntry;
 import com.saysweb.emis_app.data.emisContract.GradeClassCountEntry;
+import com.saysweb.emis_app.data.emisContract.GradeEntry;
+import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 import com.saysweb.emis_app.data.emisDBHelper;
 
 import java.util.HashMap;
-
-import static android.R.string.no;
-import static com.saysweb.emis_app.R.id.grade;
 
 public class GradeClassCount extends AppCompatActivity {
 
@@ -65,7 +62,7 @@ public class GradeClassCount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grade_class_count);
-        overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
+
 
         MyApplication myApplication = (MyApplication) getApplication();
         year = myApplication.getGlobal_censusYear();
@@ -74,9 +71,6 @@ public class GradeClassCount extends AppCompatActivity {
         MyApplication myApplication1 = (MyApplication) getApplication();
         schoolCode = myApplication1.getGlobal_schoolCode();
 
-        /*Getting Intent from School Select Activity*/
-
-        overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
         /* Actionbar*/
         /*Set the new toolbar as the Actionbar*/
         Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar3);
@@ -85,6 +79,7 @@ public class GradeClassCount extends AppCompatActivity {
         actionBar2.setCustomView(R.layout.action_bar);
         actionBar2.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
                 | ActionBar.DISPLAY_SHOW_HOME);
+        actionBar2.setDisplayHomeAsUpEnabled(true);
 
         /*Getting INTENT from School Select Activity*/
 
@@ -92,9 +87,15 @@ public class GradeClassCount extends AppCompatActivity {
 //         Checking intentID variable to check which class sent the intent
         if (intentID.equals("SchoolSelect")) {
             Intent intent = getIntent();
-        }else if (intentID.equals("GCC")) {
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }else if (intentID.equals("EditGCC")) {
             Intent intent = getIntent();
+            overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top);
+
             gccGradeString = intent.getStringExtra("Grade");
+            Spinner spinner = (Spinner)findViewById(R.id.grade_gcc);
+            spinner.setEnabled(false);
+
             String gccNoOfClassesString = intent.getStringExtra("No of Classes");
             String gccFemaleStudentCountString = intent.getStringExtra("Female SCount");
             String gccMaleStudentCountString = intent.getStringExtra("Male SCount");
@@ -237,6 +238,7 @@ public class GradeClassCount extends AppCompatActivity {
             Intent intent = new Intent(this, EditGradeClassCount.class);
             intent.putExtra("SchoolID", school_id);
             startActivity(intent);
+            finish();
         }
 
     }
@@ -256,8 +258,15 @@ public class GradeClassCount extends AppCompatActivity {
 
 
         String gradeSpinner = gradeEntrySpinner.getSelectedItem().toString();
-        if (gradeSpinner.length() != 0){
+        if (!gradeSpinner.equals("--SELECT--")) {
             grade_code = spinnerMap.get(spinner.getSelectedItemPosition());
+        }else if (gradeSpinner.equals("--SELECT--")){
+            gradeEntrySpinner.requestFocus();
+            TextView errorText = (TextView)gradeEntrySpinner.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Required");//changes the selected item text to this
+            return;
         }
 
 
@@ -265,6 +274,10 @@ public class GradeClassCount extends AppCompatActivity {
         String classesString = classesText.getText().toString();
         if (classesString.length() != 0){
             noOfClasses = Integer.parseInt(classesString);
+        }else{
+            EditText editText = (EditText) findViewById(R.id.no_of_classes);
+            editText.setError("Required");
+            return;
         }
 
 //
@@ -346,6 +359,7 @@ public class GradeClassCount extends AppCompatActivity {
             intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             overridePendingTransition(0, 0);
             startActivity(intent_refresh);
+            finish();
         }else{
 
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
@@ -388,6 +402,7 @@ public class GradeClassCount extends AppCompatActivity {
                             intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             overridePendingTransition(0, 0);
                             startActivity(intent_refresh);
+                            finish();
 //                            //TODO : ADD VALIDATION TO FORMS && Check if form data has been submitted successfully before refreshing.
 
                         }
@@ -442,10 +457,11 @@ public class GradeClassCount extends AppCompatActivity {
                         Toast toast = Toast.makeText(GradeClassCount.this, "Entry has been DELETED Successfully", Toast.LENGTH_LONG);
                         toast.show();
 
-                        Intent intent_refresh = new Intent(GradeClassCount.this, GradeClassCount.class);
-                        intent_refresh.putExtra("intentID", "SchoolActivity");
+                        Intent intent_refresh = new Intent(GradeClassCount.this, EditGradeClassCount.class);
+                        intent_refresh.putExtra("SchoolID", school_id);
                         intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent_refresh);
+                        finish();
 
                     }
                 });
@@ -665,6 +681,11 @@ public class GradeClassCount extends AppCompatActivity {
             }
         }
     };
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom);
+    }
 
 
 

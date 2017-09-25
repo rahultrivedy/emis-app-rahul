@@ -23,6 +23,13 @@
             android:orientation="horizontal"
             android:id="@+id/linearLayoutGcc">
 
+            <FrameLayout
+                android:id="@+id/frame"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="#FF0000"
+                android:visibility="gone" />
+
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -82,6 +89,37 @@
                     android:layout_gravity="center"/>
             </LinearLayout>
 
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="M.St."
+                    android:textColor="#2c3e50"
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    />
+
+
+                <TextView
+                    android:id="@+id/textViewMSCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#52BBD6"
+                    android:text="count"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -111,6 +149,8 @@
 
             </LinearLayout>
 
+
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -121,7 +161,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="M.St."
+                    android:text="M.Tch"
                     android:textColor="#2c3e50"
                     android:layout_gravity="center"
                     android:textSize="18sp"
@@ -130,7 +170,7 @@
 
 
                 <TextView
-                    android:id="@+id/textViewMSCount"
+                    android:id="@+id/textViewMTCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#52BBD6"
@@ -174,29 +214,29 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                >
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="M.Tch"
-                    android:textColor="#2c3e50"
                     android:layout_gravity="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    />
+                    android:text="Date"
+                    android:textColor="#2c3e50"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
 
                 <TextView
-                    android:id="@+id/textViewMTCount"
+                    android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="date"
                     android:textColor="#52BBD6"
-                    android:text="count"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
 
         </LinearLayout>
 
