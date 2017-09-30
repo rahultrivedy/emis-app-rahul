@@ -238,7 +238,6 @@ public class GradeClassCount extends AppCompatActivity {
             Intent intent = new Intent(this, EditGradeClassCount.class);
             intent.putExtra("SchoolID", school_id);
             startActivity(intent);
-            finish();
         }
 
     }
@@ -359,7 +358,7 @@ public class GradeClassCount extends AppCompatActivity {
             intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             overridePendingTransition(0, 0);
             startActivity(intent_refresh);
-            finish();
+
         }else{
 
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
@@ -402,7 +401,7 @@ public class GradeClassCount extends AppCompatActivity {
                             intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             overridePendingTransition(0, 0);
                             startActivity(intent_refresh);
-                            finish();
+
 //                            //TODO : ADD VALIDATION TO FORMS && Check if form data has been submitted successfully before refreshing.
 
                         }

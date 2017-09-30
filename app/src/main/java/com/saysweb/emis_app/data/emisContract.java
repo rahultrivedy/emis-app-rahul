@@ -86,6 +86,7 @@ public final class emisContract {
         public static final String COLUMN_NAME_CREATED_BY = "CREATED_BY";
         public static final String COLUMN_NAME_UPDATED_DATE = "UPDATED_DATE";
         public static final String COLUMN_NAME_UPDATED_BY = "UPDATED_BY ";
+        public static final String COLUMN_NAME_SYNC_STATUS = "STATUS";
 
 
     }
@@ -106,6 +107,7 @@ public final class emisContract {
         public static final String COLUMN_NAME_CREATED_BY = "CREATED_BY";
         public static final String COLUMN_NAME_UPDATED_DATE = "UPDATED_DATE";
         public static final String COLUMN_NAME_UPDATED_BY = "UPDATED_BY ";
+        public static final String COLUMN_NAME_SYNC_STATUS = "STATUS";
     }
 
 
@@ -123,6 +125,7 @@ public final class emisContract {
         public static final String COLUMN_NAME_CREATED_BY = "CREATED_BY";
         public static final String COLUMN_NAME_UPDATED_DATE = "UPDATED_DATE";
         public static final String COLUMN_NAME_UPDATED_BY = "UPDATED_BY ";
+        public static final String COLUMN_NAME_SYNC_STATUS = "STATUS";
     }
 
     public static abstract class GradeEntry implements BaseColumns {

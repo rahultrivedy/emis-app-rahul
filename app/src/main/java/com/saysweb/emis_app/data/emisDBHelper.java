@@ -5,21 +5,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
-import com.saysweb.emis_app.BoardingEnrollment;
-import com.saysweb.emis_app.EnrollmentByGrade;
-import com.saysweb.emis_app.data.emisContract.UserEntry;
-import com.saysweb.emis_app.data.emisContract.ProvinceEntry;
 import com.saysweb.emis_app.data.emisContract.DistrictEntry;
-import com.saysweb.emis_app.data.emisContract.LlgvEntry;
-import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 import com.saysweb.emis_app.data.emisContract.EnrollmentByBoardingEntry;
 import com.saysweb.emis_app.data.emisContract.EnrollmentByGradesEntry;
 import com.saysweb.emis_app.data.emisContract.GradeClassCountEntry;
 import com.saysweb.emis_app.data.emisContract.GradeEntry;
+import com.saysweb.emis_app.data.emisContract.LlgvEntry;
+import com.saysweb.emis_app.data.emisContract.ProvinceEntry;
+import com.saysweb.emis_app.data.emisContract.SchoolEntry;
+import com.saysweb.emis_app.data.emisContract.UserEntry;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by sukant on 05/09/17.
@@ -133,7 +131,8 @@ public class emisDBHelper extends SQLiteOpenHelper {
                 + EnrollmentByGradesEntry.COLUMN_NAME_CREATED_DATE + " INTEGER, "
                 + EnrollmentByGradesEntry.COLUMN_NAME_CREATED_BY + " TEXT, "
                 + EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_DATE + " INTEGER, "
-                + EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_BY + " TEXT);";
+                + EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_BY + " TEXT, "
+                + EnrollmentByGradesEntry.COLUMN_NAME_SYNC_STATUS + " INTEGER DEFAULT 0); ";
 
         db.execSQL(SQL_CREATE_EBG_TABLE);
 
@@ -153,7 +152,8 @@ public class emisDBHelper extends SQLiteOpenHelper {
                 + GradeClassCountEntry.COLUMN_NAME_CREATED_DATE + " INTEGER, "
                 + GradeClassCountEntry.COLUMN_NAME_CREATED_BY + " TEXT, "
                 + GradeClassCountEntry.COLUMN_NAME_UPDATED_DATE + " INTEGER, "
-                + GradeClassCountEntry.COLUMN_NAME_UPDATED_BY + " TEXT);";
+                + GradeClassCountEntry.COLUMN_NAME_UPDATED_BY + " TEXT, "
+                + GradeClassCountEntry.COLUMN_NAME_SYNC_STATUS + " INTEGER DEFAULT 0); ";
 
 
         db.execSQL(SQL_CREATE_GCC_TABLE);
@@ -172,7 +172,8 @@ public class emisDBHelper extends SQLiteOpenHelper {
                 + EnrollmentByBoardingEntry.COLUMN_NAME_CREATED_DATE + " INTEGER, "
                 + EnrollmentByBoardingEntry.COLUMN_NAME_CREATED_BY + " TEXT, "
                 + EnrollmentByBoardingEntry.COLUMN_NAME_UPDATED_DATE + " INTEGER, "
-                + EnrollmentByBoardingEntry.COLUMN_NAME_UPDATED_BY + " TEXT);";
+                + EnrollmentByBoardingEntry.COLUMN_NAME_UPDATED_BY + " TEXT, "
+                + EnrollmentByBoardingEntry.COLUMN_NAME_SYNC_STATUS + " INTEGER DEFAULT 0); ";
 
 
         db.execSQL(SQL_CREATE_BOARDING_ENROLLMENT_TABLE);
@@ -243,82 +244,82 @@ public class emisDBHelper extends SQLiteOpenHelper {
         db.insert(ProvinceEntry.TABLE_NAME, null, values);
 
 //        INSERT DATA INTO DISTRICT TABLE
-        //---------------------------------------District Entry - 01-------------------------------
-        values = new ContentValues();
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1101);
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Abau District");
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1101);
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Abau District");
-        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 11);
-
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(DistrictEntry.TABLE_NAME, null, values);
-
-        //---------------------------------------District Entry - 02-------------------------------
-        values = new ContentValues();
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1102);
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Goilala District");
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1102);
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Goilala District");
-        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 11);
-
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(DistrictEntry.TABLE_NAME, null, values);
-
-        //---------------------------------------District Entry - 03-------------------------------
-        values = new ContentValues();
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1109);
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Kairuku-Hiri District");
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1103);
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Kairuku District");
-        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 11);
-
-        //---------------------------------------District Entry - 04-------------------------------
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(DistrictEntry.TABLE_NAME, null, values);
-
-        values = new ContentValues();
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1201);
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Daulo District");
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1201);
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Daulo District");
-        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 12);
-
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(DistrictEntry.TABLE_NAME, null, values);
-
-        //---------------------------------------District Entry - 05-------------------------------
-        values = new ContentValues();
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1202);
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Goroka District");
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1203);
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Goroka District");
-        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 12);
-
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(DistrictEntry.TABLE_NAME, null, values);
-
-        //---------------------------------------District Entry - 06-------------------------------
-        values = new ContentValues();
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1301);
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Imbonggu District");
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1301);
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Imbonggu District");
-        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 13);
-
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(DistrictEntry.TABLE_NAME, null, values);
-
-        //---------------------------------------District Entry - 07-------------------------------
-        values = new ContentValues();
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1311);
-        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Mendi-Munihu District");
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1311);
-        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Mendi District");
-        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 13);
-
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(DistrictEntry.TABLE_NAME, null, values);
+//        //---------------------------------------District Entry - 01-------------------------------
+//        values = new ContentValues();
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1101);
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Abau District");
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1101);
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Abau District");
+//        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 11);
+//
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(DistrictEntry.TABLE_NAME, null, values);
+//
+//        //---------------------------------------District Entry - 02-------------------------------
+//        values = new ContentValues();
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1102);
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Goilala District");
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1102);
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Goilala District");
+//        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 11);
+//
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(DistrictEntry.TABLE_NAME, null, values);
+//
+//        //---------------------------------------District Entry - 03-------------------------------
+//        values = new ContentValues();
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1109);
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Kairuku-Hiri District");
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1103);
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Kairuku District");
+//        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 11);
+//
+//        //---------------------------------------District Entry - 04-------------------------------
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(DistrictEntry.TABLE_NAME, null, values);
+//
+//        values = new ContentValues();
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1201);
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Daulo District");
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1201);
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Daulo District");
+//        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 12);
+//
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(DistrictEntry.TABLE_NAME, null, values);
+//
+//        //---------------------------------------District Entry - 05-------------------------------
+//        values = new ContentValues();
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1202);
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Goroka District");
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1203);
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Goroka District");
+//        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 12);
+//
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(DistrictEntry.TABLE_NAME, null, values);
+//
+//        //---------------------------------------District Entry - 06-------------------------------
+//        values = new ContentValues();
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1301);
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Imbonggu District");
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1301);
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Imbonggu District");
+//        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 13);
+//
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(DistrictEntry.TABLE_NAME, null, values);
+//
+//        //---------------------------------------District Entry - 07-------------------------------
+//        values = new ContentValues();
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, 1311);
+//        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, "Mendi-Munihu District");
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, 1311);
+//        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, "Mendi District");
+//        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, 13);
+//
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(DistrictEntry.TABLE_NAME, null, values);
 
         // INSERT DATA INTO GRADES TABLE
         values = new ContentValues();
@@ -741,9 +742,78 @@ public class emisDBHelper extends SQLiteOpenHelper {
     }
 
 
+
+
+
 /* DATABASE VERSION UPGRADE*/
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+
+    public static Cursor readEBG(SQLiteDatabase db){
+
+//        String selection = EnrollmentByGradesEntry.COLUMN_NAME_SYNC_STATUS;
+//        String[] selectionArgs = {"0"};
+        String sortOrder = EnrollmentByGradesEntry._ID + " ASC";
+
+        return db.query(EnrollmentByGradesEntry.TABLE_NAME, null, EnrollmentByGradesEntry.COLUMN_NAME_SYNC_STATUS +  " = " + "0", null, null, null, sortOrder);
+
+    }
+
+
+    public static void updateEBG(String EBGid, int sync_status, SQLiteDatabase db){
+
+        ContentValues values = new ContentValues();
+        values.put(EnrollmentByGradesEntry.COLUMN_NAME_SYNC_STATUS, sync_status);
+
+        String whereClause = EnrollmentByGradesEntry._ID +  " = ?";
+        String[] whereArgs = {EBGid};
+
+
+        db.update(EnrollmentByGradesEntry.TABLE_NAME, values, whereClause, whereArgs);
+
+    }
+
+
+    /**
+     * Inserts User into SQLite DB
+     * @param queryValues
+     */
+    public static void insertUser(HashMap<String, String> queryValues, SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+        values.put(DistrictEntry._ID, queryValues.get("Id"));
+        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, queryValues.get("District_Code"));
+        values.put(DistrictEntry.COLUMN_NAME_DISTRICT_NAME, queryValues.get("District_Name"));
+        values.put(DistrictEntry.COLUMN_NAME_PROVINCE_CODE, queryValues.get("Province_Code"));
+        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, queryValues.get("Old_District_Code"));
+        values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, queryValues.get("Old_District_Name"));
+        db.insert(DistrictEntry.TABLE_NAME, null, values);
+    }
+
+    /**
+     * Get list of Users from SQLite DB as Array List
+     * @return
+     */
+    public ArrayList<HashMap<String, String>> getAllUsers() {
+        ArrayList<HashMap<String, String>> usersList;
+        usersList = new ArrayList<HashMap<String, String>>();
+        String selectQuery = "SELECT  * FROM users";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("userId", cursor.getString(0));
+                map.put("userName", cursor.getString(1));
+                usersList.add(map);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        database.close();
+        return usersList;
+    }
+
+
 }

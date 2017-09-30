@@ -208,7 +208,7 @@ public class BoardingEnrollment extends AppCompatActivity {
             Intent intent = new Intent(this, EditBoardingEnrollment.class);
             intent.putExtra("SchoolID", school_id);
             startActivity(intent);
-            finish();
+
         }
 
     }
@@ -338,7 +338,7 @@ public class BoardingEnrollment extends AppCompatActivity {
                             intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             overridePendingTransition(0, 0);
                             startActivity(intent_refresh);
-                            finish();
+
 //                            //TODO : ADD VALIDATION TO FORMS && Check if form data has been submitted successfully before refreshing.
 
                         }
@@ -398,7 +398,7 @@ public class BoardingEnrollment extends AppCompatActivity {
                         intent_refresh.putExtra("SchoolID", school_id);
                         intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent_refresh);
-                        finish();
+
 
                     }
                 });

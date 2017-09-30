@@ -364,7 +364,6 @@ public class EnrollmentByGrade extends AppCompatActivity {
             intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             overridePendingTransition(0, 0);
             startActivity(intent_refresh);
-            finish();
         }
  else{
 
@@ -404,7 +403,6 @@ public class EnrollmentByGrade extends AppCompatActivity {
                             intent_refresh.putExtra("intentID", "SchoolActivity");
                             intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent_refresh);
-                            finish();
                             //TODO : ADD VALIDATION TO FORMS && Check if form data has been submitted successfully before refreshing.
 
                         }

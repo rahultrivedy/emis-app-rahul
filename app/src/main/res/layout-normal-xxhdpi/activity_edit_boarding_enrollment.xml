@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="#fff"
+        tools:context="com.saysweb.emis_app.EditBoardingEnrollment">
         >
 
 
@@ -164,7 +165,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:elevation="10dp"
-            android:onClick="onHome"
+            android:onClick="onHome_EB"
             android:src="@drawable/ic_home"
             app:backgroundTint="#2196F3"
             app:rippleColor="#fff" />

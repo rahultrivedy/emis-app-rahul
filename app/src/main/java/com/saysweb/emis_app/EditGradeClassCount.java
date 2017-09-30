@@ -144,13 +144,13 @@ public class EditGradeClassCount extends AppCompatActivity {
         Intent intent_add_new_gcc = new Intent(this, GradeClassCount.class);
         intent_add_new_gcc.putExtra("intentID" , "SchoolSelect");
         startActivity(intent_add_new_gcc);
-        finish();
     }
 
     public void onHome(View vHome){
 
         Intent intent_home = new Intent(this, SchoolSelectActivity.class);
         intent_home.putExtra("intentID", "Home");
+        intent_home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent_home);
         finish();
 

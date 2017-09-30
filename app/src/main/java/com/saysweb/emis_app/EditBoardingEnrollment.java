@@ -139,14 +139,15 @@ public class EditBoardingEnrollment extends AppCompatActivity {
         Intent intent_add_new_EB = new Intent(this, BoardingEnrollment.class);
         intent_add_new_EB.putExtra("intentID" , "SchoolSelect");
         startActivity(intent_add_new_EB);
-        finish();
+
     }
 
-    public void onHome(View vHome){
+    public void onHome_EB(View vHome){
 
         Intent intent_home = new Intent(this, SchoolSelectActivity.class);
         intent_home.putExtra("intentID", "Home");
         startActivity(intent_home);
+        intent_home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
 
     }

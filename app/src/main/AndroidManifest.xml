@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.saysweb.emis_app">
 
+    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+
     <application
         android:name=".MyApplication"
         android:allowBackup="false"
@@ -70,6 +73,13 @@
                 android:value=".SchoolSelectActivity" />
         </activity>
         <activity android:name=".EntryInfo"></activity>
+
+        <!--<receiver android:name=".NetworkStateChecker">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+
     </application>
 
 </manifest>

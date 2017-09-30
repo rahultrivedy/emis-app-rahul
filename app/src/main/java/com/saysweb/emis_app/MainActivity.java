@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        String intentId = getIntent().getStringExtra("Intent ID");
+        String intentId = getIntent().getStringExtra("intentID");
         if (intentId != null && intentId.length() != 0 && intentId.equals("SchoolSelect")){
 
             Intent intent = getIntent();

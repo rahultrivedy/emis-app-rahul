@@ -94,6 +94,41 @@
             </LinearLayout>
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <Button
+                android:id="@+id/sync"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_gravity="center"
+                android:textColor="#fff"
+                android:text="SYNC"
+                android:textStyle="italic"
+                android:backgroundTint="#1976D2"
+                android:onClick="onSync"
+                />
+
+
+            <Button
+                android:id="@+id/entry_info"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_gravity="center"
+                android:textColor="#fff"
+                android:text="Entry Info"
+                android:textStyle="italic"
+                android:backgroundTint="#C2185B"
+                android:onClick="onEntryInfo"
+                />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -187,6 +222,30 @@
             android:backgroundTint="#C2185B"
             android:onClick="onSignOut"
             />
+
+        <Button
+            android:id="@+id/getFromSql"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_gravity="center"
+            android:textColor="#fff"
+            android:text="Fetch From Sql"
+            android:textStyle="italic"
+            android:backgroundTint="#1976D2"
+            android:onClick="onGetFromSQL"
+            />
+
+        <TextView
+            android:id="@+id/sample"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="sample text"
+            android:textColor="#03A9F4"
+            android:textSize="20sp" />
 
 
 

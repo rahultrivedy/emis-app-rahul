@@ -151,7 +151,7 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
         Intent intent_add_new = new Intent(this, EnrollmentByGrade.class);
         intent_add_new.putExtra("intentID" , "SchoolSelect");
         startActivity(intent_add_new);
-        finish();
+
     }
 
     public void onHome(View vHome){
@@ -159,6 +159,7 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
         Intent intent_home = new Intent(this, SchoolSelectActivity.class);
         intent_home.putExtra("intentID", "Home");
         startActivity(intent_home);
+        intent_home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
 
     }
