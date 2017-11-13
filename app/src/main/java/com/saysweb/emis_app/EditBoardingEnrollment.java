@@ -31,6 +31,8 @@ public class EditBoardingEnrollment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_boarding_enrollment);
 
+        getSupportActionBar().hide();
+
         MyApplication myApplication = (MyApplication) getApplication();
         String year = myApplication.getGlobal_censusYear();
         censusYear = Integer.parseInt(year);
@@ -43,7 +45,7 @@ public class EditBoardingEnrollment extends AppCompatActivity {
 
         Intent intent = getIntent();
         String intentID = intent.getStringExtra("IntentID");
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         mDbHelper = new emisDBHelper(this);
 
@@ -142,7 +144,7 @@ public class EditBoardingEnrollment extends AppCompatActivity {
 
     }
 
-    public void onHome_EB(View vHome){
+    public void onHome(View vHome){
 
         Intent intent_home = new Intent(this, SchoolSelectActivity.class);
         intent_home.putExtra("intentID", "Home");

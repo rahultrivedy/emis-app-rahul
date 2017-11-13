@@ -8,21 +8,20 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:elevation="6dp"
         app:cardCornerRadius="6dp"
-        android:id="@+id/cvBE"
+        android:id="@+id/cvGcc"
         app:cardBackgroundColor="#FAFAFA"
         >
 
         <LinearLayout
-            android:id="@+id/linearLayoutBE"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:orientation="horizontal"
-            >
+            android:id="@+id/linearLayoutGcc">
 
             <FrameLayout
                 android:id="@+id/frame"
@@ -41,7 +40,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Grade"
+                    android:text="Gr."
                     android:textColor="#2c3e50"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -52,8 +51,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="grade"
+                    android:inputType="textMultiLine"
+                    android:scrollHorizontally="false"
                     android:textStyle="bold"
-                    android:textColor="#52BBD6"
+                    android:textColor="#FF6F00"
                     android:textSize="18sp"
                     android:layout_gravity="center"
                     />
@@ -71,7 +72,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Males"
+                    android:text="Cls"
                     android:textColor="#2c3e50"
                     android:layout_gravity="center"
                     android:textSize="18sp"
@@ -80,15 +81,16 @@
 
 
                 <TextView
-                    android:id="@+id/textViewMale"
+                    android:id="@+id/textViewNoOfClasses"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text=" no."
                     android:textColor="#52BBD6"
-                    android:text="count"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_gravity="center"/>
             </LinearLayout>
+
 
 
             <LinearLayout
@@ -101,7 +103,36 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Females"
+                    android:text="M.S"
+                    android:textColor="#2c3e50"
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    />
+
+
+                <TextView
+                    android:id="@+id/textViewMSCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#52BBD6"
+                    android:text="count"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="F.S"
                     android:layout_gravity="center"
                     android:textColor="#2c3e50"
                     android:textSize="18sp"
@@ -109,7 +140,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/textViewFemale"
+                    android:id="@+id/textViewFSCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#52BBD6"
@@ -118,6 +149,66 @@
                     android:textStyle="bold"
                     android:layout_gravity="center"/>
 
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="M.T"
+                    android:textColor="#2c3e50"
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    />
+
+
+                <TextView
+                    android:id="@+id/textViewMTCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#52BBD6"
+                    android:text="count"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="F.T"
+                    android:textColor="#2c3e50"
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    />
+
+
+                <TextView
+                    android:id="@+id/textViewFTCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#52BBD6"
+                    android:text="count"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
             </LinearLayout>
 
             <LinearLayout
@@ -147,10 +238,6 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
-
-
-
 
 
         </LinearLayout>

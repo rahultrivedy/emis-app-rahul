@@ -8,10 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -73,13 +71,13 @@ public class GradeClassCount extends AppCompatActivity {
 
         /* Actionbar*/
         /*Set the new toolbar as the Actionbar*/
-        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar3);
-        setSupportActionBar(myToolbar);
-        ActionBar actionBar2 = getSupportActionBar();
-        actionBar2.setCustomView(R.layout.action_bar);
-        actionBar2.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
-                | ActionBar.DISPLAY_SHOW_HOME);
-        actionBar2.setDisplayHomeAsUpEnabled(true);
+//        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar3);
+//        setSupportActionBar(myToolbar);
+//        ActionBar actionBar2 = getSupportActionBar();
+//        actionBar2.setCustomView(R.layout.action_bar);
+//        actionBar2.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
+//                | ActionBar.DISPLAY_SHOW_HOME);
+//        actionBar2.setDisplayHomeAsUpEnabled(true);
 
         /*Getting INTENT from School Select Activity*/
 

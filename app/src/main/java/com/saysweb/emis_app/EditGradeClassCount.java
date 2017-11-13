@@ -30,6 +30,8 @@ public class EditGradeClassCount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_grade_class_count);
 
+        getSupportActionBar().hide();
+
         MyApplication myApplication = (MyApplication) getApplication();
         String year = myApplication.getGlobal_censusYear();
         censusYear = Integer.parseInt(year);
@@ -41,8 +43,8 @@ public class EditGradeClassCount extends AppCompatActivity {
         // Get the Intent that started this activity and extract the string
 
         Intent intent = getIntent();
-        String intentID = intent.getStringExtra("IntentID");
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        String intentID = intent.getStringExtra("intentID");
+//        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         mDbHelper = new emisDBHelper(this);
 

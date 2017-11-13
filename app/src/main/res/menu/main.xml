@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+
+    <item
+        android:title="SYNC DATA"
+        android:id="@+id/menu_sync"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_sync_black_32dp"
+        android:onClick="onSync"
+        />
+
+    <item
+        android:title="UPDATE APP DATA"
+        android:id="@+id/menu_update"
+        android:orderInCategory="101"
+        app:showAsAction="never"
+        android:onClick="onGetFromSQL"
+        />
+
+    <item
+        android:title="REPORT"
+        android:id="@+id/menu_report"
+        android:orderInCategory="102"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_report_32dp"
+        android:onClick="onEntryInfo"
+        />
+
+    <item
+        android:title="LOGOUT"
+        android:id="@+id/menu_logout"
+        android:orderInCategory="103"
+        app:showAsAction="never"
+        android:onClick="onSignOut"
+        />
+
+
+</menu>

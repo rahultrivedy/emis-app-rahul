@@ -2,9 +2,7 @@ package com.saysweb.emis_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().hide();
+
         String intentId = getIntent().getStringExtra("intentID");
         if (intentId != null && intentId.length() != 0 && intentId.equals("SchoolSelect")){
 
@@ -49,14 +49,14 @@ public class MainActivity extends AppCompatActivity {
 //        String intentId = intent.getStringExtra("Intent ID");
 
         /*Set the new toolbar as the Actionbar*/
-        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-
-        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setTitle("EMIS--");
-        actionBar.setCustomView(R.layout.action_bar);
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
-                | ActionBar.DISPLAY_SHOW_HOME);
+//        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
+//        setSupportActionBar(myToolbar);
+//
+//        ActionBar actionBar = getSupportActionBar();
+////        actionBar.setTitle("EMIS--");
+//        actionBar.setCustomView(R.layout.action_bar);
+//        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
+//                | ActionBar.DISPLAY_SHOW_HOME);
 
 
         ImageButton imageButton = (ImageButton) findViewById(R.id.show_pwd);

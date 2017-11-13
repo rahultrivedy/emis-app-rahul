@@ -28,7 +28,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile files('src/main/java/com/saysweb/emis_app/libs/android-async-http-1.4.9.jar')
-    compile files('src/main/java/com/saysweb/emis_app/libs/android-support-v4.jar')
+//    compile files('src/main/java/com/saysweb/emis_app/libs/android-support-v4.jar')
     compile files('src/main/java/com/saysweb/emis_app/libs/gson-2.2.2.jar')
 }
 

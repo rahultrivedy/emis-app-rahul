@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:text="grade"
                     android:textStyle="bold"
-                    android:textColor="#52BBD6"
+                    android:textColor="#FF6F00"
                     android:textSize="18sp"
                     android:layout_gravity="center"
                     />

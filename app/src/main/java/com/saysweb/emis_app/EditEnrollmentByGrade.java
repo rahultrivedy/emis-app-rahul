@@ -35,6 +35,8 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_enrollment_by_grade);
 
+        getSupportActionBar().hide();
+
 //           /* Actionbar*/
 //        /*Set the new toolbar as the Actionbar*/
 //        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar3);
@@ -55,9 +57,19 @@ public class EditEnrollmentByGrade extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
 
+
+//        String intentID = getIntent().getStringExtra("intentID");
+
         Intent intent = getIntent();
-        String intentID = intent.getStringExtra("IntentID");
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        String intentID = intent.getStringExtra("intentID");
+
+//        if(intentID.equals("SchoolSelect")){
+//            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//        }else{
+//            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_righ);
+//        }
+
+
         mDbHelper = new emisDBHelper(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -7,22 +8,22 @@
     >
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="8dp"
+        android:clickable="true"
         android:elevation="6dp"
-        app:cardCornerRadius="6dp"
-        android:id="@+id/cvBE"
         app:cardBackgroundColor="#FAFAFA"
-        >
+        app:cardCornerRadius="6dp"
+        app:rippleColor="#fff">
 
         <LinearLayout
-            android:id="@+id/linearLayoutBE"
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
             android:orientation="horizontal"
-            >
+            android:padding="16dp">
 
             <FrameLayout
                 android:id="@+id/frame"
@@ -30,6 +31,33 @@
                 android:layout_height="match_parent"
                 android:background="#FF0000"
                 android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Grade"
+                    android:textColor="#2c3e50"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewGrade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="grade"
+                    android:textColor="#FF6F00"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
 
             <LinearLayout
@@ -41,53 +69,22 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Grade"
-                    android:textColor="#2c3e50"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
-
-                <TextView
-                    android:id="@+id/textViewGrade"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="grade"
-                    android:textStyle="bold"
-                    android:textColor="#52BBD6"
-                    android:textSize="18sp"
                     android:layout_gravity="center"
-                    />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Males"
+                    android:text="Bth.Yr."
                     android:textColor="#2c3e50"
-                    android:layout_gravity="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
 
                 <TextView
-                    android:id="@+id/textViewMale"
+                    android:id="@+id/textViewBirthYr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=" Year"
                     android:textColor="#52BBD6"
-                    android:text="count"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
 
@@ -95,30 +92,56 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Females"
                     android:layout_gravity="center"
+                    android:text="Male"
                     android:textColor="#2c3e50"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    />
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
 
                 <TextView
-                    android:id="@+id/textViewFemale"
+                    android:id="@+id/textViewMCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#52BBD6"
+                    android:layout_gravity="center"
                     android:text="count"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:textColor="#52BBD6"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Female"
+                    android:textColor="#2c3e50"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewFCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="count"
+                    android:textColor="#52BBD6"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -147,11 +170,6 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
-
-
-
-
 
         </LinearLayout>
 

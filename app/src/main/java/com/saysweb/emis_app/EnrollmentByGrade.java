@@ -8,10 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -68,16 +66,18 @@ public class EnrollmentByGrade extends AppCompatActivity {
         MyApplication myApplication1 = (MyApplication) getApplication();
         schoolCode = myApplication1.getGlobal_schoolCode();
 
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
+
         /* Actionbar*/
         /*Set the new toolbar as the Actionbar*/
-        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar3);
-        setSupportActionBar(myToolbar);
-        ActionBar actionBar2 = getSupportActionBar();
-        actionBar2.setCustomView(R.layout.action_bar);
-        actionBar2.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
-                | ActionBar.DISPLAY_SHOW_HOME);
-
-        actionBar2.setDisplayHomeAsUpEnabled(true);
+//        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar3);
+//        setSupportActionBar(myToolbar);
+//        ActionBar actionBar2 = getSupportActionBar();
+//        actionBar2.setCustomView(R.layout.action_bar);
+//        actionBar2.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
+//                | ActionBar.DISPLAY_SHOW_HOME);
+//
+//        actionBar2.setDisplayHomeAsUpEnabled(true);
 
 //        actionBar2.setTitle("EMIS - Enrollment By Grade");
 
@@ -350,7 +350,6 @@ public class EnrollmentByGrade extends AppCompatActivity {
             values.put(EnrollmentByGradesEntry.COLUMN_NAME_CREATED_BY, uid );
             values.put(EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_DATE, ts);
             values.put(EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_BY, uid );
-
 //
 
 //       Insert the new row, returning the primary key value of the new row
@@ -360,7 +359,7 @@ public class EnrollmentByGrade extends AppCompatActivity {
             toast.show();
 
             Intent intent_refresh = new Intent(EnrollmentByGrade.this, EnrollmentByGrade.class);
-            intent_refresh.putExtra("intentID", "SchoolActivity");
+            intent_refresh.putExtra("intentID", "EBG");
             intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             overridePendingTransition(0, 0);
             startActivity(intent_refresh);
@@ -464,7 +463,8 @@ public class EnrollmentByGrade extends AppCompatActivity {
                         toast.show();
 
                         Intent intent_refresh = new Intent(EnrollmentByGrade.this, EditEnrollmentByGrade.class);
-                        intent_refresh.putExtra("SchoolID", school_id);
+//                        intent_refresh.putExtra("SchoolID", school_id);
+                        intent_refresh.putExtra("intentID", "EBG");
                         intent_refresh.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent_refresh);
                         finish();
@@ -626,6 +626,18 @@ public class EnrollmentByGrade extends AppCompatActivity {
 //            default:
 //                return super.onOptionsItemSelected(item);
 //        }
+//    }
+
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            // Respond to the action bar's Up/Home button
+//            case android.R.id.home:
+//                NavUtils.navigateUpFromSameTask(this);
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
 //    }
 
 

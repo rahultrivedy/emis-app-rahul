@@ -717,20 +717,11 @@ public class emisDBHelper extends SQLiteOpenHelper {
 
         String[] projection = {SchoolEntry.COLUMN_NAME_SCHOOL_CODE,
                 SchoolEntry.COLUMN_NAME_SCHOOL_NAME, SchoolEntry.COLUMN_NAME_SCHL_ID};
-//                String selection = UserEntry.COLUMN_PET_GENDER + “=?”;
-//                String selectionArgs = new String[] { UserEntry.GENDER_FEMALE };
 
 //      Cursor with all the rows from Columns - School Code and School Name
         Cursor cursor = db2.query(SchoolEntry.TABLE_NAME, projection,
                 null, null, null, null, null);
-//
-//        String[] school_codes = new String[cursor.getCount()];
-//
-//        int i4 = 0;
-//        while (cursor.moveToNext()) {
-//            school_codes[i4] = cursor.getString(1) + " , " + cursor.getString(0);
-//            i4++;
-//        }
+
         return cursor;
     }
 
@@ -751,18 +742,39 @@ public class emisDBHelper extends SQLiteOpenHelper {
 
     }
 
+// METHOD to get all rows from EBG-entry with status = 0 (NOT SYNCED) - sent from SchoolSelectActivity
 
     public static Cursor readEBG(SQLiteDatabase db){
 
-//        String selection = EnrollmentByGradesEntry.COLUMN_NAME_SYNC_STATUS;
-//        String[] selectionArgs = {"0"};
         String sortOrder = EnrollmentByGradesEntry._ID + " ASC";
 
         return db.query(EnrollmentByGradesEntry.TABLE_NAME, null, EnrollmentByGradesEntry.COLUMN_NAME_SYNC_STATUS +  " = " + "0", null, null, null, sortOrder);
 
     }
 
+    // METHOD to get all rows from GCC-entry with status = 0 (NOT SYNCED) - sent from SchoolSelectActivity
 
+    public static Cursor readGCC(SQLiteDatabase db){
+
+        String sortOrder = GradeClassCountEntry._ID + " ASC";
+
+        return db.query(GradeClassCountEntry.TABLE_NAME, null, GradeClassCountEntry.COLUMN_NAME_SYNC_STATUS +  " = " + "0", null, null, null, sortOrder);
+
+    }
+
+
+    // METHOD to get all rows from EB-entry with status = 0 (NOT SYNCED) - sent from SchoolSelectActivity
+
+    public static Cursor readEB(SQLiteDatabase db){
+
+        String sortOrder = EnrollmentByBoardingEntry._ID + " ASC";
+
+        return db.query(EnrollmentByBoardingEntry.TABLE_NAME, null, EnrollmentByBoardingEntry.COLUMN_NAME_SYNC_STATUS +  " = " + "0", null, null, null, sortOrder);
+
+    }
+
+
+// Method to update SYNC status in EBG-entry after data is synced to server - sent from SchoolSelectActivity
     public static void updateEBG(String EBGid, int sync_status, SQLiteDatabase db){
 
         ContentValues values = new ContentValues();
@@ -777,11 +789,42 @@ public class emisDBHelper extends SQLiteOpenHelper {
     }
 
 
+    // Method to update Sync status in GCC-entry after data is synced to server - sent from SchoolSelectActivity
+    public static void updateGCC(String GCCid, int sync_status, SQLiteDatabase db){
+
+        ContentValues values = new ContentValues();
+        values.put(GradeClassCountEntry.COLUMN_NAME_SYNC_STATUS, sync_status);
+
+        String whereClause = GradeClassCountEntry._ID +  " = ?";
+        String[] whereArgs = {GCCid};
+
+
+        db.update(GradeClassCountEntry.TABLE_NAME, values, whereClause, whereArgs);
+
+    }
+
+
+    // Method to update Sync status in GCC-entry after data is synced to server - sent from SchoolSelectActivity
+    public static void updateEB(String EBid, int sync_status, SQLiteDatabase db){
+
+        ContentValues values = new ContentValues();
+        values.put(EnrollmentByBoardingEntry.COLUMN_NAME_SYNC_STATUS, sync_status);
+
+        String whereClause = EnrollmentByBoardingEntry._ID +  " = ?";
+        String[] whereArgs = {EBid};
+
+
+        db.update(EnrollmentByBoardingEntry.TABLE_NAME, values, whereClause, whereArgs);
+
+    }
+
     /**
-     * Inserts User into SQLite DB
+     * Inserts Districts into SQLite DB from Server
      * @param queryValues
      */
-    public static void insertUser(HashMap<String, String> queryValues, SQLiteDatabase db) {
+    //Called from SchoolSelectActivity
+
+    public static void insertDistrict(HashMap<String, String> queryValues, SQLiteDatabase db) {
         ContentValues values = new ContentValues();
         values.put(DistrictEntry._ID, queryValues.get("Id"));
         values.put(DistrictEntry.COLUMN_NAME_DISTRICT_CODE, queryValues.get("District_Code"));
@@ -790,6 +833,27 @@ public class emisDBHelper extends SQLiteOpenHelper {
         values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_CODE, queryValues.get("Old_District_Code"));
         values.put(DistrictEntry.COLUMN_NAME_OLD_DISTRICT_NAME, queryValues.get("Old_District_Name"));
         db.insert(DistrictEntry.TABLE_NAME, null, values);
+    }
+
+
+    /**
+     * Inserts Users into SQLite DB from Server
+     * @param queryValues
+     */
+    //Called from SchoolSelectActivity
+
+    public static void insertUser(HashMap<String, String> queryValues, SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+//        values.put(UserEntry._ID, queryValues.get("Id"));
+        values.put(UserEntry.COLUMN_NAME_USER_ID, queryValues.get("User_Id"));
+        values.put(UserEntry.COLUMN_NAME_USER_NAME, queryValues.get("User_Name"));
+        values.put(UserEntry.COLUMN_NAME_PASSWORD, queryValues.get("Password"));
+        values.put(UserEntry.COLUMN_NAME_EMP_CODE, queryValues.get("Emp_Code"));
+        values.put(UserEntry.COLUMN_NAME_EMP_NAME, queryValues.get("Emp_Name"));
+        values.put(UserEntry.COLUMN_NAME_EMAIL, queryValues.get("Email"));
+        values.put(UserEntry.COLUMN_NAME_MOBILE_NO, queryValues.get("Mobile_no"));
+
+        db.insert(UserEntry.TABLE_NAME, null, values);
     }
 
     /**

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FCFFE4"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".MainActivity"
+        >
+
+        <!--<TextView-->
+        <!--android:id="@+id/text_view_emis"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:padding="100dp"/>-->
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/my_toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="?attr/colorPrimary"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:elevation="4dp"-->
+            <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/title_toolbar"
+            android:layout_below="@id/my_toolbar"
+            android:orientation="vertical"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            >
+            <TextView
+                android:id="@+id/title_head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:text="EMIS"
+                android:textSize="30sp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/doe_title_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="(Education Management Information System)"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/doe_image_title_view"
+            android:layout_below="@id/title_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:layout_marginTop="2dp"
+            android:text="@string/instn"
+            android:textAllCaps="true"
+            android:textColor="#00838F"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"
+            />
+
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_below="@id/doe_image_title_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/logo"
+            />
+
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_below="@id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:hint="@string/prompt_email"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="72dp"
+            android:layout_marginBottom="16dp"
+            android:imeOptions="flagNoExtractUi"/>
+
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/prompt_password"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/username"
+            android:inputType="textPassword"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="72dp"
+            android:maxLines="1"
+            android:imeOptions="flagNoExtractUi"/>
+
+        <ImageButton
+            android:id="@+id/show_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_eye"
+            android:layout_alignBottom="@+id/password"
+            android:layout_toRightOf="@+id/census"
+            android:layout_marginBottom="6dp"
+            />
+
+        <LinearLayout
+                android:id="@+id/census"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/password"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Census Year"
+                    android:textSize="16sp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_horizontal"
+                    android:padding="8dp"
+                    android:layout_marginRight="16dp"
+                   />
+
+                <Spinner
+                    android:id="@+id/census_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                   />
+
+            </LinearLayout>
+
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:onClick="onButtonClick"
+            android:text="@string/action_sign_in"
+            android:textColor="#fff"
+            android:backgroundTint="#66BB6A"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="72dp"
+            android:layout_below="@id/census"/>
+
+
+        <!--Rahul Branch-->
+
+    </RelativeLayout>
+
+</ScrollView>
