@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
@@ -511,6 +512,8 @@ public class EnrollmentByGrade extends AppCompatActivity {
         MyApplication myApplication = (MyApplication) getApplication();
         myApplication.setGlobal_schlID(school_id); // SET GLOBAL VARIABLE schlID
 
+        Log.d("EnrollmentByGrade", "sector_code =  " + sector_code);
+        Log.d("EnrollmentByGrade", "school_id =  " + school_id);
         String[] projection1 = {GradeEntry.COLUMN_NAME_GRADE_NAME, GradeEntry.COLUMN_NAME_GRADE_CODE};
         String selection1 = GradeEntry.COLUMN_NAME_SECTOR_CODE + "=?";
         String[] selectionArgs1 = {sector_code};

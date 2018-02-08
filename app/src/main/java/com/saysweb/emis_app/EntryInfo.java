@@ -1,5 +1,6 @@
 package com.saysweb.emis_app;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -25,11 +27,19 @@ import com.saysweb.emis_app.data.emisContract.GradeClassCountEntry;
 import com.saysweb.emis_app.data.emisContract.SchoolEntry;
 import com.saysweb.emis_app.data.emisDBHelper;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 import static android.text.TextUtils.split;
 import static com.saysweb.emis_app.R.id.school_search;
+import static com.saysweb.emis_app.R.id.titleGCC;
 
 public class EntryInfo extends AppCompatActivity {
 
@@ -117,22 +127,23 @@ public class EntryInfo extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, spinnerArray);
         textView.setThreshold(2);
         textView.setAdapter(adapter);
+
         textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 
-                InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(arg1.getApplicationWindowToken(), 0);
 
                 SQLiteDatabase db = mDbHelper.getReadableDatabase();
                 String school_code_send;
                 EditText text = findViewById(R.id.school_search);
                 school_code_send = text.getText().toString();
-                String[] myString = split(school_code_send," - ");
+                String[] myString = split(school_code_send, " - ");
                 String school_code_send2 = myString[1];
-                String school_code_send3 = school_code_send2.replaceAll("\\p{Z}","");
-                TextView tv = (TextView) findViewById(R.id.sample_tv);
-                tv.setText(school_code_send3);
+                String school_code_send3 = school_code_send2.replaceAll("\\p{Z}", "");
+//                TextView tv = (TextView) findViewById(R.id.sample_tv);
+//                tv.setText(school_code_send3);
 
                 String[] projection = {SchoolEntry.COLUMN_NAME_SCHL_ID};
                 String selection = SchoolEntry.COLUMN_NAME_SCHOOL_CODE + "=?";
@@ -142,18 +153,18 @@ public class EntryInfo extends AppCompatActivity {
                 Cursor cursor = db.query(SchoolEntry.TABLE_NAME, projection,
                         selection, selectionArgs, null, null, null);
 
-                while(cursor.moveToNext()) {
+                while (cursor.moveToNext()) {
                     school_id = cursor.getString(0);
 
                 }
                 cursor.close();
 
                 tableEBG();
+                tableGCC();
+                tableEB();
 
             }
         });
-
-
 
     }
 
@@ -221,7 +232,6 @@ public class EntryInfo extends AppCompatActivity {
             school_name_EBG = new String[schlID_EBG.length];
             school_name = new String[schlID_EBG.length];
             school_name_EBG = getSchoolNames(schlID_EBG);
-
             entryTime_EBG = new String[updated_date_EBG.length];
             entry_time = new String[updated_date_EBG.length];
             entryTime_EBG = getDateTime(updated_date_EBG);
@@ -407,14 +417,36 @@ public class EntryInfo extends AppCompatActivity {
     public void tableGCC() {
 
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        Cursor cursor;
 
-        String[] projection = {GradeClassCountEntry.COLUMN_NAME_SCHL_ID, GradeClassCountEntry.COLUMN_NAME_UPDATED_DATE, GradeClassCountEntry.COLUMN_NAME_GRADE_CODE, GradeClassCountEntry.COLUMN_NAME_CENSUS_YEAR, GradeClassCountEntry.COLUMN_NAME_SYNC_STATUS};
+        if(school_id != null) {
+
+            String[] projection = {GradeClassCountEntry.COLUMN_NAME_SCHL_ID, GradeClassCountEntry.COLUMN_NAME_UPDATED_DATE, GradeClassCountEntry.COLUMN_NAME_GRADE_CODE, GradeClassCountEntry.COLUMN_NAME_CENSUS_YEAR, GradeClassCountEntry.COLUMN_NAME_SYNC_STATUS};
+
+            String selection = GradeClassCountEntry.COLUMN_NAME_SCHL_ID + " = ?";
+
+            String[] selectionArgs = {school_id};
+
+            String sortOrder = GradeClassCountEntry.COLUMN_NAME_UPDATED_DATE + " DESC";
+
+            cursor = db.query(GradeClassCountEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
 
 
-        String sortOrder = GradeClassCountEntry.COLUMN_NAME_UPDATED_DATE + " DESC";
+            TableLayout tableLayout = (TableLayout) findViewById(R.id.maintableGCC);
 
-        Cursor cursor = db.query(GradeClassCountEntry.TABLE_NAME, projection,
-                null, null, null, null, sortOrder);
+            tableLayout.removeAllViews();
+
+        } else{
+
+                String[] projection = {GradeClassCountEntry.COLUMN_NAME_SCHL_ID, GradeClassCountEntry.COLUMN_NAME_UPDATED_DATE, GradeClassCountEntry.COLUMN_NAME_GRADE_CODE, GradeClassCountEntry.COLUMN_NAME_CENSUS_YEAR, GradeClassCountEntry.COLUMN_NAME_SYNC_STATUS};
+
+
+                String sortOrder = GradeClassCountEntry.COLUMN_NAME_UPDATED_DATE + " DESC";
+
+                cursor = db.query(GradeClassCountEntry.TABLE_NAME, projection,
+                        null, null, null, null, sortOrder);
+
+            }
 
         int cursorLength = cursor.getCount();
 
@@ -616,14 +648,35 @@ public class EntryInfo extends AppCompatActivity {
     public void tableEB(){
 
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        Cursor cursor;
 
-        String[] projection = {EnrollmentByBoardingEntry.COLUMN_NAME_SCHL_ID, EnrollmentByBoardingEntry.COLUMN_NAME_UPDATED_DATE, EnrollmentByBoardingEntry.COLUMN_NAME_GRADE_CODE, EnrollmentByBoardingEntry.COLUMN_NAME_CENSUS_YEAR, EnrollmentByBoardingEntry.COLUMN_NAME_SYNC_STATUS};
+        if(school_id != null) {
+
+            String[] projection = {EnrollmentByBoardingEntry.COLUMN_NAME_SCHL_ID, EnrollmentByBoardingEntry.COLUMN_NAME_UPDATED_DATE, EnrollmentByBoardingEntry.COLUMN_NAME_GRADE_CODE, EnrollmentByBoardingEntry.COLUMN_NAME_CENSUS_YEAR, EnrollmentByBoardingEntry.COLUMN_NAME_SYNC_STATUS};
+
+            String selection = EnrollmentByBoardingEntry.COLUMN_NAME_SCHL_ID + " = ?";
+
+            String[] selectionArgs = {school_id};
+
+            String sortOrder = EnrollmentByBoardingEntry.COLUMN_NAME_UPDATED_DATE + " DESC";
+
+            cursor = db.query(EnrollmentByBoardingEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
 
 
-        String sortOrder = EnrollmentByBoardingEntry.COLUMN_NAME_UPDATED_DATE + " DESC";
+            TableLayout tableLayout = (TableLayout) findViewById(R.id.maintableEB);
 
-        Cursor cursor = db.query(EnrollmentByBoardingEntry.TABLE_NAME, projection,
-                null, null, null, null, sortOrder);
+            tableLayout.removeAllViews();
+
+        } else {
+
+            String[] projection = {EnrollmentByBoardingEntry.COLUMN_NAME_SCHL_ID, EnrollmentByBoardingEntry.COLUMN_NAME_UPDATED_DATE, EnrollmentByBoardingEntry.COLUMN_NAME_GRADE_CODE, EnrollmentByBoardingEntry.COLUMN_NAME_CENSUS_YEAR, EnrollmentByBoardingEntry.COLUMN_NAME_SYNC_STATUS};
+
+
+            String sortOrder = EnrollmentByBoardingEntry.COLUMN_NAME_UPDATED_DATE + " DESC";
+
+            cursor = db.query(EnrollmentByBoardingEntry.TABLE_NAME, projection,
+                    null, null, null, null, sortOrder);
+        }
 
         int cursorLength = cursor.getCount();
 
@@ -906,5 +959,18 @@ public class EntryInfo extends AppCompatActivity {
         tableLayout.setVisibility(tableLayout.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
 
     }
+
+    public void onHome(View vHome){
+
+        Intent intent_home = new Intent(this, SchoolSelectActivity.class);
+        intent_home.putExtra("intentID", "Home");
+        startActivity(intent_home);
+        intent_home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        finish();
+
+    }
+
+
+
 
 }

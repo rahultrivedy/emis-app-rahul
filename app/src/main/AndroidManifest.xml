@@ -14,7 +14,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
+
 
 
         <activity android:name=".MainActivity">
@@ -30,6 +32,7 @@
         <activity
             android:name=".EnrollmentByGrade"
             android:parentActivityName=".EditEnrollmentByGrade"
+            android:windowSoftInputMode="stateAlwaysHidden"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -39,6 +42,7 @@
         <activity
             android:name=".GradeClassCount"
             android:parentActivityName=".EditGradeClassCount"
+            android:windowSoftInputMode="stateAlwaysHidden"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -47,6 +51,7 @@
         <activity
             android:name=".BoardingEnrollment"
             android:parentActivityName=".EditBoardingEnrollment"
+            android:windowSoftInputMode="stateAlwaysHidden"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -68,14 +73,25 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SchoolSelectActivity" />
         </activity>
-        <activity android:name=".EditBoardingEnrollment">
+        <activity android:name=".EditBoardingEnrollment"
             android:parentActivityName=".SchoolSelectActivity"
             tools:targetApi="jelly_bean">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SchoolSelectActivity" />
         </activity>
-        <activity android:name=".EntryInfo"></activity>
+        <activity android:name=".EntryInfo"
+            android:windowSoftInputMode="stateAlwaysHidden">
+
+        </activity>
+            <!--android:parentActivityName=".SchoolSelectActivity"-->
+
+            <!--tools:targetApi="jelly_bean">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value=".SchoolSelectActivity" />-->
+
+
 
         <!--<receiver android:name=".NetworkStateChecker">-->
             <!--<intent-filter>-->

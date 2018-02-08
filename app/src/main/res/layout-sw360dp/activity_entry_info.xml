@@ -1,181 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="com.saysweb.emis_app.EntryInfo">
+        android:background="#F5F5F5">
 
-        <TextView
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="sample"
-            android:background="#CFD8DC"
-            android:elevation="20dp"
-            android:textColor="#424242"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:id="@+id/sample_tv"
-            android:onClick="onClickEBG">
+            android:orientation="vertical"
+            tools:context="com.saysweb.emis_app.EntryInfo">
 
-        </TextView>
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text="sample"-->
+                <!--android:background="#CFD8DC"-->
+                <!--android:elevation="20dp"-->
+                <!--android:textColor="#424242"-->
+                <!--android:layout_marginTop="15dp"-->
+                <!--android:gravity="center"-->
+                <!--android:textSize="20dp"-->
+                <!--android:id="@+id/sample_tv"-->
+                <!--android:onClick="onClickEBG">-->
 
-
-
-
-        <AutoCompleteTextView
-            android:id="@+id/school_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="SEARCH SCHOOL"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:imeOptions="flagNoExtractUi"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="ENROLLMENT BY GRADE"
-            android:background="#CFD8DC"
-            android:elevation="20dp"
-            android:textColor="#424242"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:id="@+id/titleEBG"
-            android:onClick="onClickEBG">
-
-        </TextView>
+            <!--</TextView>-->
 
 
 
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:layout_marginTop="4dp"
-            android:background="#C8E6C9"
-            android:id="@+id/horizontalScroll"
-            android:scrollIndicators="bottom"
-            >
+            <AutoCompleteTextView
+                android:id="@+id/school_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="SEARCH SCHOOL"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:imeOptions="flagNoExtractUi"
+                />
 
-            <TableLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:stretchColumns="*"
-                android:id="@+id/maintable"
+                android:text="ENROLLMENT BY GRADE"
+                android:background="#CFD8DC"
+                android:elevation="20dp"
+                android:textColor="#424242"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:id="@+id/titleEBG"
+                android:onClick="onClickEBG">
 
+            </TextView>
+
+
+
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal"
+                android:layout_marginTop="4dp"
+                android:background="#C8E6C9"
+                android:id="@+id/horizontalScroll"
+                android:scrollIndicators="bottom"
                 >
 
-            </TableLayout>
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:stretchColumns="*"
+                    android:id="@+id/maintable"
 
-        </HorizontalScrollView>
+                    >
+
+                </TableLayout>
+
+            </HorizontalScrollView>
 
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:layout_marginTop="4dp"
-            android:background="#C8E6C9"
-            android:id="@+id/horizontalScrollSearch"
-            android:scrollIndicators="bottom"
-            >
-
-            <TableLayout
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:stretchColumns="*"
-                android:id="@+id/maintableSearch"
-
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal"
+                android:layout_marginTop="4dp"
+                android:background="#C8E6C9"
+                android:id="@+id/horizontalScrollSearch"
+                android:scrollIndicators="bottom"
                 >
 
-            </TableLayout>
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:stretchColumns="*"
+                    android:id="@+id/maintableSearch"
 
-        </HorizontalScrollView>
+                    >
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="GRADE CLASS COUNT"
-            android:textColor="#424242"
-            android:background="#CFD8DC"
-            android:elevation="20dp"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:id="@+id/titleGCC"
-            android:onClick="onClickGCC">
+                </TableLayout>
 
-        </TextView>
+            </HorizontalScrollView>
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:layout_marginTop="4dp"
-            android:background="#D1C4E9"
-            android:id="@+id/horizontalScroll1"
-            android:scrollIndicators="bottom"
-            >
-
-            <TableLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:stretchColumns="*"
-                android:id="@+id/maintableGCC" >
-            </TableLayout>
+                android:text="GRADE CLASS COUNT"
+                android:textColor="#424242"
+                android:background="#CFD8DC"
+                android:elevation="20dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:id="@+id/titleGCC"
+                android:onClick="onClickGCC">
 
-        </HorizontalScrollView>
+            </TextView>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="BOARDING ENROLLMENT"
-            android:layout_marginTop="15dp"
-            android:background="#CFD8DC"
-            android:elevation="20dp"
-            android:textColor="#424242"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:id="@+id/titleEB"
-            android:onClick="onClickEB">
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal"
+                android:layout_marginTop="4dp"
+                android:background="#D1C4E9"
+                android:id="@+id/horizontalScroll1"
+                android:scrollIndicators="bottom"
+                >
 
-        </TextView>
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:stretchColumns="*"
+                    android:id="@+id/maintableGCC" >
+                </TableLayout>
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:background="#FFE0B2"
-            android:layout_marginTop="4dp"
-            android:scrollIndicators="bottom"
-            android:id="@+id/horizontalScroll2"
-            >
+            </HorizontalScrollView>
 
-            <TableLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:stretchColumns="*"
-                android:id="@+id/maintableEB" >
-            </TableLayout>
+                android:text="BOARDING ENROLLMENT"
+                android:layout_marginTop="15dp"
+                android:background="#CFD8DC"
+                android:elevation="20dp"
+                android:textColor="#424242"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:id="@+id/titleEB"
+                android:onClick="onClickEB">
 
-        </HorizontalScrollView>
+            </TextView>
 
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal"
+                android:background="#FFE0B2"
+                android:layout_marginTop="4dp"
+                android:scrollIndicators="bottom"
+                android:id="@+id/horizontalScroll2"
+                >
 
-    </LinearLayout>
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:stretchColumns="*"
+                    android:id="@+id/maintableEB" >
+                </TableLayout>
 
-</ScrollView>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_home"
+        android:layout_width="50dp"
+        android:layout_height="57dp"
+        android:layout_margin="20dp"
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:elevation="10dp"
+        android:onClick="onHome"
+        android:src="@drawable/ic_home"
+        app:backgroundTint="#2196F3"
+        app:rippleColor="#fff" />
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/sync_school"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="57dp"-->
+        <!--android:layout_margin="20dp"-->
+        <!--android:clickable="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:elevation="10dp"-->
+        <!--android:onClick="onSchoolSync"-->
+        <!--android:src="@drawable/ic_sync_black"-->
+        <!--app:backgroundTint="#2196F3"-->
+        <!--app:rippleColor="#fff" />-->
+
+</RelativeLayout>

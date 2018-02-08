@@ -11,7 +11,7 @@ public class MyApplication extends Application{
 
 
     private String global_censusYear;
-    private String global_autocompleteString;
+    private String global_autocompleteString = "";
     private String global_schoolCode;
     private String global_schlID;
     private String global_userID;

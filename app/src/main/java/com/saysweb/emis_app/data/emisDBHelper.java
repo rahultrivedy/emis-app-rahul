@@ -323,39 +323,60 @@ public class emisDBHelper extends SQLiteOpenHelper {
 
         // INSERT DATA INTO GRADES TABLE
         values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "ELE-1");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "Elementary - 1");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "COM");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "Commission");
         values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
         values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
         values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "ELE");
+        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "COM");
 
         // Insert the new row, returning the primary key value of the new row
         db.insert(GradeEntry.TABLE_NAME, null, values);
 
         values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "ELE-2");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "Elementary - 2");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "ELEM");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "Elementary");
         values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
         values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
         values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "ELE");
+        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "ELEM");
         // Insert the new row, returning the primary key value of the new row
         db.insert(GradeEntry.TABLE_NAME, null, values);
 
         values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "ELE-3");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "Elementary - 3");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "NHS");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "NHS");
         values.put(GradeEntry.COLUMN_NAME_ACTIVE, "N");
         values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
         values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "ELE");
+        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "NHS");
         // Insert the new row, returning the primary key value of the new row
         db.insert(GradeEntry.TABLE_NAME, null, values);
 
         values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "GR-1");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "GRADE I");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "PHS");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "PHS");
+        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
+        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
+        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "PHS");
+        // Insert the new row, returning the primary key value of the new row
+        db.insert(GradeEntry.TABLE_NAME, null, values);
+
+//        values = new ContentValues();
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "PHS");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "PHS");
+//        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
+//        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
+//        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "PHS");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(GradeEntry.TABLE_NAME, null, values);
+
+
+        values = new ContentValues();
+        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "PRI");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "PRIMARY");
         values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
         values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
         values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
@@ -364,293 +385,272 @@ public class emisDBHelper extends SQLiteOpenHelper {
         db.insert(GradeEntry.TABLE_NAME, null, values);
 
         values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "GR-2");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "GRADE II");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "SEC");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "SECONDARY");
         values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
         values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
         values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(GradeEntry.TABLE_NAME, null, values);
-
-
-        values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "GR-3");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "GRADE III");
-        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
-        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
+        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "SEC");
         // Insert the new row, returning the primary key value of the new row
         db.insert(GradeEntry.TABLE_NAME, null, values);
 
         values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "GR-4");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "GRADE IV");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "VOC");
+        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "VOCATIONAL");
         values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
         values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
         values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(GradeEntry.TABLE_NAME, null, values);
-
-        values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "GR-5");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "GRADE V");
-        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
-        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
+        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "VOC");
         // Insert the new row, returning the primary key value of the new row
         db.insert(GradeEntry.TABLE_NAME, null, values);
 
 
         // INSERT DATA INTO SCHOOLS
         //---------------------------------------School Entry - 01-------------------------------
-        values = new ContentValues();
-        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 101);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 110101);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Abau Island Primary School");
-        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
-        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
-        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
-        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1101");
-        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "11");
-        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 110103);
-        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "aips@emis.com");
-        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
-        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
-        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
-        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
-        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
-
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(SchoolEntry.TABLE_NAME, null, values);
-
-        //---------------------------------------School Entry - 02-------------------------------
-        values = new ContentValues();
-        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 102);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 120202);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Oriropetana Elementary School");
-        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
-        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
-        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
-        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1202");
-        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
-        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 120203);
-        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "oes@emis.com");
-        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
-        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
-        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
-        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "ELE");
-        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(SchoolEntry.TABLE_NAME, null, values);
-
-
-        //---------------------------------------School Entry - 03-------------------------------
-        values = new ContentValues();
-        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 103);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 130104);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Waro Elementary School");
-        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
-        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
-        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
-        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1301");
-        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
-        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 130103);
-        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "wps@emis.com");
-        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
-        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
-        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
-        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "ELE");
-        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(SchoolEntry.TABLE_NAME, null, values);
-
-
-        //---------------------------------------School Entry - 04-------------------------------
-        values = new ContentValues();
-        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 104);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 110204);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Woitape Primary School");
-        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
-        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
-        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
-        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1102");
-        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "11");
-        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 110203);
-        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "wtps@emis.com");
-        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
-        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
-        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
-        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
-        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(SchoolEntry.TABLE_NAME, null, values);
-
-        //---------------------------------------School Entry - 05-------------------------------
-        values = new ContentValues();
-        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 105);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 110904);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Sirinumu Primary School");
-        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
-        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
-        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
-        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1102");
-        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "11");
-        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 110903);
-        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "wtps@emis.com");
-        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
-        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
-        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
-        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
-        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(SchoolEntry.TABLE_NAME, null, values);
-
-        //---------------------------------------School Entry - 06-------------------------------
-        values = new ContentValues();
-        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 106);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 131106);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Sogeri Elementary School");
-        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
-        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
-        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
-        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1311");
-        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
-        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
-        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "ses@emis.com");
-        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
-        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
-        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
-        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "ELE");
-        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(SchoolEntry.TABLE_NAME, null, values);
-
-
-        //---------------------------------------School Entry - 07-------------------------------
-        values = new ContentValues();
-        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 107);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 131107);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Sogeri Primary School");
-        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
-        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
-        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
-        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1311");
-        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
-        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
-        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "sps@emis.com");
-        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
-        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
-        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
-        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
-        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(SchoolEntry.TABLE_NAME, null, values);
-
-        //---------------------------------------School Entry - 08-------------------------------
-        values = new ContentValues();
-        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 108);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 110303);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "St John's Primary School");
-        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
-        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
-        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
-        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1103");
-        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "11");
-        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
-        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "stjps@emis.com");
-        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
-        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
-        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
-        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
-        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(SchoolEntry.TABLE_NAME, null, values);
-
-        //---------------------------------------School Entry - 09-------------------------------
-        values = new ContentValues();
-        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 109);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 120106);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Tagana Elementary School");
-        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
-        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
-        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
-        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1201");
-        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
-        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
-        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "tes@emis.com");
-        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
-        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
-        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
-        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "ELE");
-        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(SchoolEntry.TABLE_NAME, null, values);
-
-        //---------------------------------------School Entry - 10-------------------------------
-        values = new ContentValues();
-        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 110);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 120246);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "St Theresa Primary School");
-        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
-        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
-        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
-        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1202");
-        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
-        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
-        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "tes@emis.com");
-        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
-        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
-        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
-        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
-        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(SchoolEntry.TABLE_NAME, null, values);
-
-        //---------------------------------------School Entry - 11-------------------------------
-        values = new ContentValues();
-        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 111);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 120129);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Tabunomu Elementary School");
-        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
-        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
-        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
-        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1201");
-        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
-        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
-        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "tbes@emis.com");
-        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
-        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
-        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
-        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "ELE");
-        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(SchoolEntry.TABLE_NAME, null, values);
-
-        //---------------------------------------School Entry - 12-------------------------------
-        values = new ContentValues();
-        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 112);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 131102);
-        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "St Rock Maipa Primary School");
-        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
-        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
-        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
-        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1311");
-        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "13");
-        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
-        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "strmps@emis.com");
-        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
-        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
-        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
-        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
-        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(SchoolEntry.TABLE_NAME, null, values);
-
-
+//        values = new ContentValues();
+//        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 9299);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 9299);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Abau Island Primary School");
+//        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
+//        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
+//        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
+//        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1101");
+//        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "11");
+//        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 110103);
+//        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "aips@emis.com");
+//        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
+//        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
+//        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
+//        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
+//        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
+//
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(SchoolEntry.TABLE_NAME, null, values);
+//
+//        //---------------------------------------School Entry - 02-------------------------------
+//        values = new ContentValues();
+//        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 8862);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 8862);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Oriropetana Elementary School");
+//        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
+//        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
+//        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
+//        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1202");
+//        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
+//        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 120203);
+//        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "oes@emis.com");
+//        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
+//        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
+//        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
+//        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "ELE");
+//        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(SchoolEntry.TABLE_NAME, null, values);
+//
+//
+//        //---------------------------------------School Entry - 03-------------------------------
+//        values = new ContentValues();
+//        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 2112);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 2112);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "NIHON ELEMENTARY SCHOOL");
+//        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
+//        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
+//        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
+//        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1301");
+//        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
+//        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 130103);
+//        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "wps@emis.com");
+//        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
+//        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
+//        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
+//        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "ELE");
+//        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(SchoolEntry.TABLE_NAME, null, values);
+//
+//
+//        //---------------------------------------School Entry - 04-------------------------------
+//        values = new ContentValues();
+//        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 2113);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 2113);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "RABAULU Primary School");
+//        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
+//        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
+//        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
+//        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1102");
+//        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "11");
+//        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 110203);
+//        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "wtps@emis.com");
+//        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
+//        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
+//        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
+//        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
+//        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(SchoolEntry.TABLE_NAME, null, values);
+//
+//        //---------------------------------------School Entry - 05-------------------------------
+//        values = new ContentValues();
+//        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 9313);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 9313);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Sirinumu Primary School");
+//        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
+//        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
+//        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
+//        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1102");
+//        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "11");
+//        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 110903);
+//        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "wtps@emis.com");
+//        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
+//        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
+//        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
+//        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
+//        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(SchoolEntry.TABLE_NAME, null, values);
+//
+//        //---------------------------------------School Entry - 06-------------------------------
+//        values = new ContentValues();
+//        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 6658);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 6658);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Sogeri Elementary School");
+//        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
+//        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
+//        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
+//        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1311");
+//        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
+//        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
+//        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "ses@emis.com");
+//        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
+//        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
+//        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
+//        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "ELE");
+//        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(SchoolEntry.TABLE_NAME, null, values);
+//
+//
+//        //---------------------------------------School Entry - 07-------------------------------
+//        values = new ContentValues();
+//        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 5566);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 5566);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Sogeri Primary School");
+//        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
+//        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
+//        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
+//        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1311");
+//        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
+//        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
+//        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "sps@emis.com");
+//        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
+//        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
+//        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
+//        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
+//        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(SchoolEntry.TABLE_NAME, null, values);
+//
+//        //---------------------------------------School Entry - 08-------------------------------
+//        values = new ContentValues();
+//        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 2111);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 2111);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "KALAPE ELEMENTARY SCHOOL");
+//        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
+//        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
+//        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
+//        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1103");
+//        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "11");
+//        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
+//        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "stjps@emis.com");
+//        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
+//        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
+//        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
+//        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
+//        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(SchoolEntry.TABLE_NAME, null, values);
+//
+//        //---------------------------------------School Entry - 09-------------------------------
+//        values = new ContentValues();
+//        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 109);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 120106);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "Tagana Elementary School");
+//        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
+//        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
+//        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
+//        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1201");
+//        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
+//        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
+//        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "tes@emis.com");
+//        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
+//        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
+//        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
+//        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "ELE");
+//        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(SchoolEntry.TABLE_NAME, null, values);
+//
+//        //---------------------------------------School Entry - 10-------------------------------
+//        values = new ContentValues();
+//        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 2114);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 2114);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "ZENGARING Primary School");
+//        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
+//        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
+//        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
+//        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1202");
+//        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
+//        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
+//        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "tes@emis.com");
+//        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
+//        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
+//        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
+//        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
+//        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(SchoolEntry.TABLE_NAME, null, values);
+//
+//        //---------------------------------------School Entry - 11-------------------------------
+//        values = new ContentValues();
+//        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 2115);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 2115);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "DIGAM Elementary School");
+//        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
+//        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
+//        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
+//        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1201");
+//        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "12");
+//        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
+//        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "tbes@emis.com");
+//        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
+//        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
+//        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
+//        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "ELE");
+//        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(SchoolEntry.TABLE_NAME, null, values);
+//
+//        //---------------------------------------School Entry - 12-------------------------------
+//        values = new ContentValues();
+//        values.put(SchoolEntry.COLUMN_NAME_SCHL_ID, 2720);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_CODE, 2720);
+//        values.put(SchoolEntry.COLUMN_NAME_SCHOOL_NAME, "TADUP Primary School");
+//        values.put(SchoolEntry.COLUMN_NAME_ADDRESS, "Address");
+//        values.put(SchoolEntry.COLUMN_NAME_BOARDING_STATUS, "Yes");
+//        values.put(SchoolEntry.COLUMN_NAME_CENSUS_YEAR, 2017);
+//        values.put(SchoolEntry.COLUMN_NAME_DISTRICT_CODE, "1311");
+//        values.put(SchoolEntry.COLUMN_NAME_PROVINCE_CODE, "13");
+//        values.put(SchoolEntry.COLUMN_NAME_LLGV_CODE, 131106);
+//        values.put(SchoolEntry.COLUMN_NAME_EMAIL, "strmps@emis.com");
+//        values.put(SchoolEntry.COLUMN_NAME_FAX, "760906454");
+//        values.put(SchoolEntry.COLUMN_NAME_LOCALITY, "Locality");
+//        values.put(SchoolEntry.COLUMN_NAME_PHONE, "0652-72509");
+//        values.put(SchoolEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
+//        values.put(SchoolEntry.COLUMN_NAME_WARD_CODE, "ward-code");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(SchoolEntry.TABLE_NAME, null, values);
+//
+//
     }
 
      /*

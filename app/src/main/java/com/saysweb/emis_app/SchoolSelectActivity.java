@@ -60,14 +60,17 @@ public class SchoolSelectActivity extends AppCompatActivity {
     /*RELATED TO BROADCASTING DATA TO SERVER*/
 
 //    public static final String URL_SYNC_EBG = "http://192.168.0.3/SqliteSync/syncEBG.php";
-    public static final String URL_SYNC_EBG = "http://devloved.com/SqliteSync/syncEBG.php";
+//    public static final String URL_SYNC_EBG = "http://devloved.com/SqliteSync/syncEBG.php";
+    public static final String URL_SYNC_EBG = "http://172.16.41.39:90/SqliteSync/syncEBG.php";
 //    public static final String URL_SYNC_GCC = "http://doedbs03.educationpng.gov.pg/SqliteSync/syncGCC.php";
-    public static final String URL_SYNC_GCC = "http://devloved.com/SqliteSync/syncGCC.php";
-    public static final String URL_SYNC_EB = "http://devloved.com/SqliteSync/syncEB.php";
+//    public static final String URL_SYNC_GCC = "http://devloved.com/SqliteSync/syncGCC.php";
+    public static final String URL_SYNC_GCC = "http://172.16.41.39:90/SqliteSync/syncGCC.php";
+//    public static final String URL_SYNC_EB = "http://devloved.com/SqliteSync/syncEB.php";
+    public static final String URL_SYNC_EB = "http://172.16.41.39:90/SqliteSync/syncEB.php";
     public static final String URL_GET_FROM_SQL = "http://devloved.com/SqliteSync/";
     public static final int SYNCED_WITH_SERVER = 1;
     public static final int NOT_SYNCED_WITH_SERVER = 0;
-    ProgressDialog prgDialog;
+//    ProgressDialog prgDialog;
 
     //Broadcast receiver to know the sync status
     private BroadcastReceiver broadcastReceiver;
@@ -112,8 +115,6 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
         helper = new emisDBHelper(this);
 
-
-//
         /*GETTING THE INTENT from Main Activity*/
 
         // Get the Intent that started this activity and extract the string
@@ -126,7 +127,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
             MyApplication myApplication = (MyApplication) getApplication();
             String autocompleteString = myApplication.getGlobal_autocompleteString();
 
-            if(autocompleteString.length()!=0 ){
+            if(autocompleteString.length()!=0){
                 AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(school_code);
                 autoCompleteTextView.setText(autocompleteString);
                 autoCompleteTextView.clearFocus();
@@ -308,10 +309,9 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
         if(checkNetworkConnection()) {
 
-           // syncEBGToServer();
+            syncEBGToServer();
             syncGCCToServer();
-         //   syncEBToServer();
-
+            syncEBToServer();
 
         }else {
 
@@ -459,7 +459,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
                             if (!obj.getBoolean("error")) {
                                 //updating the status in sqlite
                                 emisDBHelper.updateGCC(id, SYNCED_WITH_SERVER, db1);
-                                Toast toast = Toast.makeText(SchoolSelectActivity.this, "Sync Successfull !", Toast.LENGTH_LONG);
+                                Toast toast = Toast.makeText(SchoolSelectActivity.this, "Sync Successful !", Toast.LENGTH_LONG);
                                 toast.show();
 
 
