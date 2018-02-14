@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -59,6 +60,10 @@ public class GradeClassCount extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
+
         setContentView(R.layout.activity_grade_class_count);
 
 
@@ -188,13 +193,15 @@ public class GradeClassCount extends AppCompatActivity {
         // Preparing Key - Value pair for Spinner - Grade Name and Grade Code
 
         String[] spinnerArray = new String[grades.length + 1];
+        String[] spinnerArrayGradeNames = new String[grades.length + 1];
 
         int j;
         spinnerArray[0] = "--SELECT--";
-        for (j = 0; j < grades.length; j++)
+        for (j = 0; j < grade_codes.length; j++)
         {
             spinnerMap.put(j+1,grade_codes[j]);
-            spinnerArray[j+1] = grades[j];
+            spinnerArray[j+1] = grade_codes[j];
+            spinnerArrayGradeNames[j+1] = grades[j];
         }
 
         int key = 0;
@@ -217,6 +224,7 @@ public class GradeClassCount extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 grade_sent = adapterView.getItemAtPosition(i).toString();
+                flag = 0;
             }
 
             @Override
@@ -228,17 +236,17 @@ public class GradeClassCount extends AppCompatActivity {
 
     }// Closes Main Activity
 
-    /*ONCLICK of EDIT BUTTON - GOTO EDIT GradeClassCount PAGE*/
-
-    public void onEditGcc(View vEdit) {
-
-        if (vEdit.getId() == R.id.edit_button) {
-            Intent intent = new Intent(this, EditGradeClassCount.class);
-            intent.putExtra("SchoolID", school_id);
-            startActivity(intent);
-        }
-
-    }
+//    /*ONCLICK of EDIT BUTTON - GOTO EDIT GradeClassCount PAGE*/
+//
+//    public void onEditGcc(View vEdit) {
+//
+//        if (vEdit.getId() == R.id.edit_button) {
+//            Intent intent = new Intent(this, EditGradeClassCount.class);
+//            intent.putExtra("SchoolID", school_id);
+//            startActivity(intent);
+//        }
+//
+//    }
 
 
     /*ONCLICK of SAVE BUTTON - GOTO METHOD BELOW - EXTRACT & INSERT VALUES TO  GradeCLassCount TABLE*/
@@ -252,11 +260,10 @@ public class GradeClassCount extends AppCompatActivity {
 
 
         Spinner gradeEntrySpinner = (Spinner) findViewById(R.id.grade_gcc);
-
-
         String gradeSpinner = gradeEntrySpinner.getSelectedItem().toString();
         if (!gradeSpinner.equals("--SELECT--")) {
-            grade_code = spinnerMap.get(spinner.getSelectedItemPosition());
+//            grade_code = spinnerMap.get(spinner.getSelectedItemPosition());
+            grade_code = gradeSpinner;
         }else if (gradeSpinner.equals("--SELECT--")){
             gradeEntrySpinner.requestFocus();
             TextView errorText = (TextView)gradeEntrySpinner.getSelectedView();

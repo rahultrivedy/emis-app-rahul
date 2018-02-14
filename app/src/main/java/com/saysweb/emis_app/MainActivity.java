@@ -28,7 +28,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
             EditText pwd = (EditText) findViewById(R.id.password);
             String password = pwd.getText().toString();
+//            String passMd5 = convertPassMd5(password);
 
             String entered_password = mDbHelper.searchPass(userName); // Method call to return password for the username provided -Goes to emisDBHelper.java
 
@@ -222,16 +226,71 @@ public class MainActivity extends AppCompatActivity {
 //                db.insert(SchoolEntry.TABLE_NAME, null, values);
                             long newRowId = db_insert.insert(emisContract.SchoolEntry.TABLE_NAME, null, values);
 
-                            Log.d("EntryInfo", "Just Created: " + data);
+                            Log.d("MainActivity", "Just Created: " + data);
 
 
                         }
                         db_insert.close();
                     } catch (IOException e) {
-                        Log.wtf("EntryInfo", "Error reading data file on line" + line, e);
+                        Log.wtf("MainActivity", "Error reading data file on line" + line, e);
                         e.printStackTrace();
                     }
 
+
+                    /*Import Grades Table from Csv */
+
+                    List<GradesData> gradesDatas = new ArrayList<>();
+
+
+                    InputStream is1 = getResources().openRawResource(R.raw.grades);
+                    BufferedReader reader1 = new BufferedReader(
+                            new InputStreamReader(is1, Charset.forName("UTF-8"))
+                    );
+                    SQLiteDatabase db_insert1 = mDbHelper.getWritableDatabase();
+                    String line1 = "";
+                    try {
+                        reader1.readLine();
+                        while ((line1 = reader1.readLine()) != null){
+                            // Split by ","
+
+                            String[] tokens = line1.split(",");
+
+                            //Read the data
+
+                            GradesData data1 = new GradesData();
+                            data1.setGrade_code(tokens[0]);
+                            data1.setGrade_name(tokens[1]);
+                            data1.setSector_code(tokens[2]);
+                            if(!tokens[3].equals("")){
+                                data1.setGrade_sort(Integer.parseInt(tokens[3]));
+                            }
+                            if(!tokens[4].equals("")) {
+                                data1.setPk_code(Integer.parseInt(tokens[4]));
+                            }
+                            data1.setActive(tokens[5]);
+                            gradesDatas.add(data1);
+
+                            ContentValues values1 = new ContentValues();
+                            values1.put(emisContract.GradeEntry.COLUMN_NAME_GRADE_CODE, tokens[0]);
+                            values1.put(emisContract.GradeEntry.COLUMN_NAME_GRADE_NAME, tokens[1]
+                            );
+                            values1.put(emisContract.GradeEntry.COLUMN_NAME_SECTOR_CODE, tokens[2]);
+                            values1.put(emisContract.GradeEntry.COLUMN_NAME_GRADE_SORT, tokens[3]);
+                            values1.put(emisContract.GradeEntry.COLUMN_NAME_ACTIVE, tokens[4]);
+                            values1.put(emisContract.GradeEntry.COLUMN_NAME_PK_CODE, tokens[5]);
+                            long newRowId = db_insert1.insert(emisContract.GradeEntry.TABLE_NAME, null, values1);
+
+                            Log.d("MainActivity", "Just Created: " + data1);
+
+
+                        }
+//                        db_insert1.close();
+                    } catch (IOException e) {
+                        Log.wtf("MainActivity", "Error reading data file on line" + line1, e);
+                        e.printStackTrace();
+                    }
+
+//END IMPORT GRADES TABLE FROM CSV
 
                     settings = getSharedPreferences("PREFS_NAME", 0);
                     SharedPreferences.Editor editor = settings.edit();
@@ -244,7 +303,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
 
-            } else {
+            } else if (userName.equals("")){
+
+                Toast toast_fail_empty = Toast.makeText(this, "User Name cannot be Blank", Toast.LENGTH_SHORT);
+                toast_fail_empty.show();
+            }else {
                 Toast toast_fail = Toast.makeText(this, "User Name and Password do not match", Toast.LENGTH_SHORT);
                 toast_fail.show();
             }
@@ -260,6 +323,23 @@ public class MainActivity extends AppCompatActivity {
         android.os.Process.killProcess(android.os.Process.myPid());
 
 
+    }
+
+    public static String convertPassMd5(String pass) {
+        String password = null;
+        MessageDigest mdEnc;
+        try {
+            mdEnc = MessageDigest.getInstance("MD5");
+            mdEnc.update(pass.getBytes(), 0, pass.length());
+            pass = new BigInteger(1, mdEnc.digest()).toString(16);
+            while (pass.length() < 32) {
+                pass = "0" + pass;
+            }
+            password = pass;
+        } catch (NoSuchAlgorithmException e1) {
+            e1.printStackTrace();
+        }
+        return password;
     }
 
 

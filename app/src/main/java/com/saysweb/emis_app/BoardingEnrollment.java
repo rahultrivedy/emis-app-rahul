@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -53,6 +54,10 @@ public class BoardingEnrollment extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
+
         setContentView(R.layout.activity_boarding_enrollment);
 
          /* Actionbar*/
@@ -156,13 +161,15 @@ public class BoardingEnrollment extends AppCompatActivity {
         // Preparing Key - Value pair for Spinner - Grade Name and Grade Code
 
         String[] spinnerArray = new String[grades.length+1];
+        String[] spinnerArrayGradeNames = new String[grades.length + 1];
 
         int j;
         spinnerArray[0] = "--SELECT--";
         for (j = 0; j < grades.length; j++)
         {
             spinnerMap.put(j+1 , grade_codes[j]);
-            spinnerArray[j+1] = grades[j];
+            spinnerArrayGradeNames[j+1] = grades[j];
+            spinnerArray[j+1] = grade_codes[j];
         }
 
 
@@ -186,6 +193,7 @@ public class BoardingEnrollment extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 grade_sent = adapterView.getItemAtPosition(i).toString();
+                flag = 0;
             }
 
             @Override
@@ -199,17 +207,17 @@ public class BoardingEnrollment extends AppCompatActivity {
     }// ENd of OnCreate Method
 
 
-  /*ONCLICK of EDIT BUTTON - GOTO EDIT Drade Class Count PAGE*/ //TODO add edit code for gradeclass count here
-    public void onEditBE(View vEdit) { //TODO : Uncomment the edit code. changes have already been made
-
-        if (vEdit.getId() == R.id.edit_button) {
-            Intent intent = new Intent(this, EditBoardingEnrollment.class);
-            intent.putExtra("SchoolID", school_id);
-            startActivity(intent);
-
-        }
-
-    }
+//  /*ONCLICK of EDIT BUTTON - GOTO EDIT Drade Class Count PAGE*/ //TODO add edit code for gradeclass count here
+//    public void onEditBE(View vEdit) { //TODO : Uncomment the edit code. changes have already been made
+//
+//        if (vEdit.getId() == R.id.edit_button) {
+//            Intent intent = new Intent(this, EditBoardingEnrollment.class);
+//            intent.putExtra("SchoolID", school_id);
+//            startActivity(intent);
+//
+//        }
+//
+//    }
 
 
 
@@ -223,7 +231,8 @@ public class BoardingEnrollment extends AppCompatActivity {
 
         String gradeSpinner = gradeEntrySpinner.getSelectedItem().toString();
         if (!gradeSpinner.equals("--SELECT--")) {
-            grade_code = spinnerMap.get(spinner.getSelectedItemPosition());
+//            grade_code = spinnerMap.get(spinner.getSelectedItemPosition());
+            grade_code = gradeSpinner;
         }else if (gradeSpinner.equals("--SELECT--")){
             gradeEntrySpinner.requestFocus();
             TextView errorText = (TextView)gradeEntrySpinner.getSelectedView();

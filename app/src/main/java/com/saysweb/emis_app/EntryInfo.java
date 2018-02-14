@@ -10,11 +10,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -39,7 +41,9 @@ import java.util.List;
 
 import static android.text.TextUtils.split;
 import static com.saysweb.emis_app.R.id.school_search;
+import static com.saysweb.emis_app.R.id.text;
 import static com.saysweb.emis_app.R.id.titleGCC;
+import static com.saysweb.emis_app.R.id.visible;
 
 public class EntryInfo extends AppCompatActivity {
 
@@ -99,6 +103,23 @@ public class EntryInfo extends AppCompatActivity {
         tableGCC();
         tableEB();
 
+//        textView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                textView.setCursorVisible(true);
+//            }
+////            @Override
+////            public boolean onTouch(View v, MotionEvent event) {
+////
+////                textView.setFocusableInTouchMode(true);
+////
+////                return false;
+////            }
+//        });
+
+
+
+
         /*Implementing AutoComplete through ArrayAdapter*/
         Cursor schoolCodesCursor;
 
@@ -124,9 +145,24 @@ public class EntryInfo extends AppCompatActivity {
         }
 
         textView = findViewById(school_search);
+
+        // Make Cursor Visible when edit text - school search is touched
+        textView.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                textView.setCursorVisible(true);
+
+                return false;
+            }
+
+        });
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, spinnerArray);
         textView.setThreshold(2);
         textView.setAdapter(adapter);
+
+
 
         textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -134,6 +170,12 @@ public class EntryInfo extends AppCompatActivity {
 
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(arg1.getApplicationWindowToken(), 0);
+
+                EditText mEdit = (EditText) findViewById(R.id.school_search); // Disable the search edittext after autocomplete is selected
+                mEdit.setEnabled(false);
+
+                Button button = (Button) findViewById(R.id.reset_button); // Make 'Reset' button visible
+                button.setVisibility(View.VISIBLE);
 
                 SQLiteDatabase db = mDbHelper.getReadableDatabase();
                 String school_code_send;
@@ -198,6 +240,9 @@ public class EntryInfo extends AppCompatActivity {
             String sortOrder = EnrollmentByGradesEntry.COLUMN_NAME_UPDATED_DATE + " DESC";
 
             cursor = db.query(EnrollmentByGradesEntry.TABLE_NAME, projection, null, null, null, null, sortOrder);
+
+            TableLayout tableLayout = (TableLayout) findViewById(R.id.maintable);
+            tableLayout.removeAllViews();
 
         }
 
@@ -446,6 +491,9 @@ public class EntryInfo extends AppCompatActivity {
                 cursor = db.query(GradeClassCountEntry.TABLE_NAME, projection,
                         null, null, null, null, sortOrder);
 
+            TableLayout tableLayout = (TableLayout) findViewById(R.id.maintableGCC);
+            tableLayout.removeAllViews();
+
             }
 
         int cursorLength = cursor.getCount();
@@ -676,6 +724,10 @@ public class EntryInfo extends AppCompatActivity {
 
             cursor = db.query(EnrollmentByBoardingEntry.TABLE_NAME, projection,
                     null, null, null, null, sortOrder);
+
+            TableLayout tableLayout = (TableLayout) findViewById(R.id.maintableEB);
+
+            tableLayout.removeAllViews();
         }
 
         int cursorLength = cursor.getCount();
@@ -954,7 +1006,6 @@ public class EntryInfo extends AppCompatActivity {
 
     public void onClickEB(View v) {
 
-
         TableLayout tableLayout = (TableLayout) findViewById(R.id.maintableEB);
         tableLayout.setVisibility(tableLayout.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
 
@@ -970,7 +1021,27 @@ public class EntryInfo extends AppCompatActivity {
 
     }
 
+    public void onReset(View vReset){
+
+        school_id = null;
+        textView = findViewById(school_search);
+        textView.setText("");
+
+        tableEBG();
+        tableGCC();
+        tableEB();
 
 
+        Button button = (Button) findViewById(R.id.reset_button); // Make 'Reset' button visible
+        button.setVisibility(View.GONE);
 
+        EditText mEdit = (EditText) findViewById(R.id.school_search);
+        mEdit.setEnabled(true);
+        mEdit.setCursorVisible(false);
+
+    }
+
+//    public void onSchoolSearch(View vSearch){
+//        textView.setCursorVisible(true);
+//    }
 }

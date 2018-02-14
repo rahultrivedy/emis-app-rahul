@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -31,11 +32,15 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 public class EnrollmentByGrade extends AppCompatActivity {
 
     Spinner spinner;
     String grade_sent;
     private emisDBHelper mDbHelper;
+    Spinner spinner_by;
+    ArrayAdapter<CharSequence> adapter;
 
     int numberMale=0;
     int numberFemale=0;
@@ -49,15 +54,20 @@ public class EnrollmentByGrade extends AppCompatActivity {
     String grade_code;
     String cursor_id;
     String year;
+    String birthString;
     int censusYear = 0;
     String school_id;
     int flag = 0;
     HashMap<Integer,String> spinnerMap = new HashMap<Integer, String>();
     String ebgGradeString = "empty";
+    String ebgBirthYearString = "empty";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_enrollment_by_grade);
 
         MyApplication myApplication = (MyApplication) getApplication();
@@ -98,16 +108,20 @@ public class EnrollmentByGrade extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top);
 
             ebgGradeString = intent.getStringExtra("Grade");
-            String ebgBirthYearString = intent.getStringExtra("Birth Year");
+            ebgBirthYearString = intent.getStringExtra("Birth Year");
             String ebgFemaleCountString = intent.getStringExtra("Female Count");
             String ebgMaleCountString = intent.getStringExtra("Male Count");
 
-            TextView textView = (TextView) findViewById(R.id.birth_year_entry);
-            textView.setText(ebgBirthYearString );
-            textView.setEnabled(false);
+//            TextView textView = (TextView) findViewById(R.id.birth_year_entry);
+//            textView.setText(ebgBirthYearString );
+//            textView.setEnabled(false);
+
+            Spinner spinner1 = (Spinner)findViewById(R.id.birth_year_entry);
+            spinner1.setEnabled(false);
 
             TextView textView1 = (TextView) findViewById(R.id.female_entry);
             textView1.setText(ebgFemaleCountString);
+
 
             Spinner spinner = (Spinner)findViewById(R.id.grade);
             spinner.setEnabled(false);
@@ -165,6 +179,28 @@ public class EnrollmentByGrade extends AppCompatActivity {
 
          /*-----------------------------------------------------------*/
 
+         /* BIRTH YEAR Spinner Code*/
+
+        spinner_by = (Spinner) findViewById(R.id.birth_year_entry);
+        adapter = ArrayAdapter.createFromResource(this, R.array.birth_year, android.R.layout.simple_spinner_item); //note : birth_year linked to strings.xml
+        adapter.setDropDownViewResource(R.layout.spinner_layout);
+        spinner_by.setAdapter(adapter);
+        spinner_by.setSelection(getIndex(spinner_by, ebgBirthYearString));
+        spinner_by.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                birthString = adapterView.getItemAtPosition(i).toString();
+                flag = 0;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    /* Birth Year Spinner Code End */
+
 
         /* GRADES SPINNER CODE - with data from Grades table*/
 
@@ -180,18 +216,22 @@ public class EnrollmentByGrade extends AppCompatActivity {
         }
         grades_array.close(); // Closing the cursor Cursor1 from find_grades method returned as grades_array.
 
+
         // Preparing Key - Value pair for Spinner - Grade Name and Grade Code
 
         String[] spinnerArray = new String[grades.length + 1];
+        String[] spinnerArrayGradeNames = new String[grades.length + 1];
 
         spinnerArray[0] = "--SELECT--";
         int j;
-        for (j = 0; j < grades.length; j++)
+        for (j = 0; j < grade_codes.length; j++)
         {
             spinnerMap.put(j+1 , grade_codes[j]);
-            spinnerArray[j+1] = grades[j];
+            spinnerArrayGradeNames[j+1] = grades[j];
+            spinnerArray[j+1] = grade_codes[j];
         }
 
+        //Getting KEY value of set Grade for Grades spinner for editEBG
         int key = 0;
         if(!ebgGradeString.equals("empty")) {
             Object key_obj = getKeyFromValue(spinnerMap, ebgGradeString);
@@ -200,35 +240,18 @@ public class EnrollmentByGrade extends AppCompatActivity {
             }
         }
 
-
-
-
-
-//        if(ebgGradeString != "empty"){
-//            String compareValue = "some value";
-//            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.select_state, android.R.layout.simple_spinner_item);
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//            mSpinner.setAdapter(adapter);
-//            if (!compareValue.equals(null)) {
-//                int spinnerPosition = adapter.getPosition(compareValue);
-//                mSpinner.setSelection(spinnerPosition);
-//            }
-//        }
-
-//        TextView textView = (TextView) findViewById(R.id.hello);
-//        textView.setText("hello" +" "+ grades_array[0]+" " + grades_array[1]+ " " +grades_array[2]);
-
         spinner = (Spinner)findViewById(R.id.grade);
         ArrayAdapter<String> gradeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerArray);
         gradeAdapter.setDropDownViewResource(R.layout.spinner_layout);
         spinner.setAdapter(gradeAdapter);
-        if(key != 0){
+        if(key != 0){   //Setting Default value of Grades spinner for editEBG
                 spinner.setSelection(key);
             }
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 grade_sent = adapterView.getItemAtPosition(i).toString();
+                flag = 0;
             }
 
             @Override
@@ -241,24 +264,24 @@ public class EnrollmentByGrade extends AppCompatActivity {
 
 
 
-    /*ONCLICK of EDIT BUTTON - GOTO EDIT ENROLLMENT PAGE*/
-
-    public void onEditEbg(View vEdit) {
-
-        if (vEdit.getId() == R.id.edit_button) {
-            Intent intent = new Intent(this, EditEnrollmentByGrade.class);
-            intent.putExtra("SchoolID", school_id);
-            startActivity(intent);
-        }
-
-    }
+//    /*ONCLICK of EDIT BUTTON - GOTO EDIT ENROLLMENT PAGE*/
+//
+//    public void onEditEbg(View vEdit) {
+//
+//        if (vEdit.getId() == R.id.edit_button) {
+//            Intent intent = new Intent(this, EditEnrollmentByGrade.class);
+//            intent.putExtra("SchoolID", school_id);
+//            startActivity(intent);
+//        }
+//
+//    }
 
 
 
     /*ONCLICK of SAVE BUTTON - GOTO METHOD BELOW - EXTRACT & INSERT VALUES TO  EnrollmentByGrades TABLE*/
 
     public void onSaveEbg(View vSave) {
-        String birthString = new String();
+//        String birthString = new String();
         int birthYear = 0;
         int age = 0;
         String grade = new String();
@@ -266,26 +289,32 @@ public class EnrollmentByGrade extends AppCompatActivity {
         int females= 0;
         String total= null;
 
-        EditText birthYearTexView = (EditText) findViewById(R.id.birth_year_entry);
+//        EditText birthYearTexView = (EditText) findViewById(R.id.birth_year_entry);
 
-        birthString = birthYearTexView.getText().toString();
-        if (birthString.length() != 0) {
+//        birthString = birthYearTexView.getText().toString();
+        Spinner birthYearSpinner = (Spinner) findViewById(R.id.birth_year_entry);
+        String birthSpinner = birthYearSpinner.getSelectedItem().toString();
+        if (!birthSpinner.equals("--SELECT--")) {
             birthYear = Integer.parseInt(birthString);
             Calendar calendar = Calendar.getInstance(); // to find the current year
             int currentYear = calendar.get(Calendar.YEAR);
             age = currentYear - birthYear;
         }else{
-            EditText editText = (EditText) findViewById(R.id.birth_year_entry);
-            editText.setError("Required");
+            Spinner spinner_by = (Spinner) findViewById(R.id.birth_year_entry);
+            spinner_by.requestFocus();
+            TextView errorText = (TextView)spinner_by.getSelectedView();
+            errorText.setError("");
+            errorText.setTextColor(Color.RED);//just to highlight that this is an error
+            errorText.setText("Required");//changes the selected item text to this
             return;
         }
+
 //
         Spinner gradeEntrySpinner = (Spinner) findViewById(R.id.grade);
-
-
         String gradeSpinner = gradeEntrySpinner.getSelectedItem().toString();
         if (!gradeSpinner.equals("--SELECT--")) {
-            grade_code = spinnerMap.get(spinner.getSelectedItemPosition());
+//            grade_code = spinnerMap.get(spinner.getSelectedItemPosition());
+            grade_code = gradeSpinner;
         }else if (gradeSpinner.equals("--SELECT--")){
             gradeEntrySpinner.requestFocus();
             TextView errorText = (TextView)gradeEntrySpinner.getSelectedView();
@@ -412,7 +441,7 @@ public class EnrollmentByGrade extends AppCompatActivity {
                     "CANCEL",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            dialog.dismiss();
+                            dialog.cancel();
                         }
                     });
 
@@ -477,7 +506,7 @@ public class EnrollmentByGrade extends AppCompatActivity {
                 "NO",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
+                        dialog.cancel();
                     }
                 });
 
@@ -594,6 +623,18 @@ public class EnrollmentByGrade extends AppCompatActivity {
             }
         }
     };
+
+    private int getIndex(Spinner spinner, String myString){
+
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(myString)){
+                index = i;
+            }
+        }
+        return index;
+    }
 
 
     public static Object getKeyFromValue(Map hm, Object value) {

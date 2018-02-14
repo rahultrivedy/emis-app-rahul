@@ -33,28 +33,15 @@
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="Boarding ENROLMENT"
                 android:textStyle="bold"
                 android:layout_weight="2"
+                android:gravity="center_horizontal"
                 android:textSize="20sp"
                 android:textAllCaps="true"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="10dp"
                 />
-
-            <Button
-                android:id="@+id/edit_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:onClick="onEditBE"
-                android:text="EDIT"
-                android:textColor="#fff" />
 
 
         </LinearLayout>

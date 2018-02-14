@@ -321,47 +321,47 @@ public class emisDBHelper extends SQLiteOpenHelper {
 //        // Insert the new row, returning the primary key value of the new row
 //        db.insert(DistrictEntry.TABLE_NAME, null, values);
 
-        // INSERT DATA INTO GRADES TABLE
-        values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "COM");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "Commission");
-        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
-        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "COM");
-
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(GradeEntry.TABLE_NAME, null, values);
-
-        values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "ELEM");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "Elementary");
-        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
-        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "ELEM");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(GradeEntry.TABLE_NAME, null, values);
-
-        values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "NHS");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "NHS");
-        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "N");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
-        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "NHS");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(GradeEntry.TABLE_NAME, null, values);
-
-        values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "PHS");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "PHS");
-        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
-        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "PHS");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(GradeEntry.TABLE_NAME, null, values);
+//        // INSERT DATA INTO GRADES TABLE
+//        values = new ContentValues();
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "COM");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "Commission");
+//        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
+//        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
+//        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "COM");
+//
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(GradeEntry.TABLE_NAME, null, values);
+//
+//        values = new ContentValues();
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "ELEM");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "Elementary");
+//        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
+//        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
+//        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "ELEM");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(GradeEntry.TABLE_NAME, null, values);
+//
+//        values = new ContentValues();
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "NHS");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "NHS");
+//        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "N");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
+//        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
+//        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "NHS");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(GradeEntry.TABLE_NAME, null, values);
+//
+//        values = new ContentValues();
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "PHS");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "PHS");
+//        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
+//        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
+//        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "PHS");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(GradeEntry.TABLE_NAME, null, values);
 
 //        values = new ContentValues();
 //        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "PHS");
@@ -374,35 +374,35 @@ public class emisDBHelper extends SQLiteOpenHelper {
 //        db.insert(GradeEntry.TABLE_NAME, null, values);
 
 
-        values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "PRI");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "PRIMARY");
-        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
-        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(GradeEntry.TABLE_NAME, null, values);
-
-        values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "SEC");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "SECONDARY");
-        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
-        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "SEC");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(GradeEntry.TABLE_NAME, null, values);
-
-        values = new ContentValues();
-        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "VOC");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "VOCATIONAL");
-        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
-        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
-        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
-        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "VOC");
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(GradeEntry.TABLE_NAME, null, values);
+//        values = new ContentValues();
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "PRI");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "PRIMARY");
+//        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
+//        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
+//        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "PRI");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(GradeEntry.TABLE_NAME, null, values);
+//
+//        values = new ContentValues();
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "SEC");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "SECONDARY");
+//        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
+//        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
+//        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "SEC");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(GradeEntry.TABLE_NAME, null, values);
+//
+//        values = new ContentValues();
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_CODE, "VOC");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_NAME, "VOCATIONAL");
+//        values.put(GradeEntry.COLUMN_NAME_ACTIVE, "Y");
+//        values.put(GradeEntry.COLUMN_NAME_GRADE_SORT, 1);
+//        values.put(GradeEntry.COLUMN_NAME_PK_CODE, 1);
+//        values.put(GradeEntry.COLUMN_NAME_SECTOR_CODE, "VOC");
+//        // Insert the new row, returning the primary key value of the new row
+//        db.insert(GradeEntry.TABLE_NAME, null, values);
 
 
         // INSERT DATA INTO SCHOOLS

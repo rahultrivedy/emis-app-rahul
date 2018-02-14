@@ -189,8 +189,6 @@
             android:layout_below="@id/census"/>
 
 
-        <!--Rahul Branch-->
-
     </RelativeLayout>
 
 </ScrollView>

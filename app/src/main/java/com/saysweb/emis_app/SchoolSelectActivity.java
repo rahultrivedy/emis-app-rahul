@@ -14,12 +14,16 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,13 +64,13 @@ public class SchoolSelectActivity extends AppCompatActivity {
     /*RELATED TO BROADCASTING DATA TO SERVER*/
 
 //    public static final String URL_SYNC_EBG = "http://192.168.0.3/SqliteSync/syncEBG.php";
-//    public static final String URL_SYNC_EBG = "http://devloved.com/SqliteSync/syncEBG.php";
-    public static final String URL_SYNC_EBG = "http://172.16.41.39:90/SqliteSync/syncEBG.php";
+    public static final String URL_SYNC_EBG = "http://devloved.com/SqliteSync/syncEBG.php";
+//    public static final String URL_SYNC_EBG = "http://172.16.41.39:90/SqliteSync/syncEBG.php";
 //    public static final String URL_SYNC_GCC = "http://doedbs03.educationpng.gov.pg/SqliteSync/syncGCC.php";
-//    public static final String URL_SYNC_GCC = "http://devloved.com/SqliteSync/syncGCC.php";
-    public static final String URL_SYNC_GCC = "http://172.16.41.39:90/SqliteSync/syncGCC.php";
-//    public static final String URL_SYNC_EB = "http://devloved.com/SqliteSync/syncEB.php";
-    public static final String URL_SYNC_EB = "http://172.16.41.39:90/SqliteSync/syncEB.php";
+    public static final String URL_SYNC_GCC = "http://devloved.com/SqliteSync/syncGCC.php";
+//    public static final String URL_SYNC_GCC = "http://172.16.41.39:90/SqliteSync/syncGCC.php";
+    public static final String URL_SYNC_EB = "http://devloved.com/SqliteSync/syncEB.php";
+//    public static final String URL_SYNC_EB = "http://172.16.41.39:90/SqliteSync/syncEB.php";
     public static final String URL_GET_FROM_SQL = "http://devloved.com/SqliteSync/";
     public static final int SYNCED_WITH_SERVER = 1;
     public static final int NOT_SYNCED_WITH_SERVER = 0;
@@ -143,6 +147,12 @@ public class SchoolSelectActivity extends AppCompatActivity {
                 View view2 = findViewById(R.id.grade_class_count);
                 view2.setVisibility(View.VISIBLE);
 
+                EditText mEdit = (EditText) findViewById(R.id.school_code); // Disable the search edittext after autocomplete is selected
+                mEdit.setEnabled(false);
+
+                Button button = (Button) findViewById(R.id.reset_school); // Make 'School-Reset' button visible
+                button.setVisibility(View.VISIBLE);
+
 
             }
 
@@ -199,7 +209,21 @@ public class SchoolSelectActivity extends AppCompatActivity {
         }
 
 
-        textView = (AutoCompleteTextView) findViewById(school_code);
+        textView = findViewById(school_code);
+
+        // Make Cursor Visible when edit text - school search is touched
+        textView.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                textView.setCursorVisible(true);
+
+                return false;
+            }
+
+        });
+
+        // Autocomplete item click listener
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, spinnerArray);
         textView.setThreshold(2);
         textView.setAdapter(adapter);
@@ -221,6 +245,12 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
                     View view2 = findViewById(R.id.grade_class_count);
                     view2.setVisibility(View.VISIBLE);
+
+                    EditText mEdit = (EditText) findViewById(R.id.school_code); // Disable the search edittext after autocomplete is selected
+                    mEdit.setEnabled(false);
+
+                    Button button = (Button) findViewById(R.id.reset_school); // Make 'School-Reset' button visible
+                    button.setVisibility(View.VISIBLE);
 
             }
         });
@@ -806,7 +836,7 @@ public class SchoolSelectActivity extends AppCompatActivity {
 
                     emisDBHelper.insertUser(queryValues, db);
 
-                    Toast toast = Toast.makeText(SchoolSelectActivity.this, "Downloaded data successfully", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(SchoolSelectActivity.this, "Updated Data successfully from SERVER", Toast.LENGTH_LONG);
                     toast.show();
 //                    HashMap<String, String> map = new HashMap<String, String>();
 
@@ -888,7 +918,29 @@ public class SchoolSelectActivity extends AppCompatActivity {
          return true;
      }
 
+    public void onClickResetSchool(View vResetSchool){
+        textView = findViewById(R.id.school_code);
+        textView.setText("");
 
+        View view = findViewById(R.id.enrollment_by_grade);
+        view.setVisibility(View.GONE);
+
+
+        View view1 = findViewById(R.id.boarding_enrollment);
+        view1.setVisibility(View.GONE);
+
+
+        View view2 = findViewById(R.id.grade_class_count);
+        view2.setVisibility(View.GONE);
+
+        // Disable the search edittext after autocomplete is selected
+        textView.setEnabled(true);
+        textView.setCursorVisible(false);
+
+        Button button = (Button) findViewById(R.id.reset_school); // Make 'School-Reset' button visible
+        button.setVisibility(View.GONE);
+
+    }
 
 }
 
